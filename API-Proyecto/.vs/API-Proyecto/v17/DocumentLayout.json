@@ -1,105 +1,12 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{DFB73D3A-E828-4B38-81F8-46651BCFC4D5}|API-Proyecto\\API-Proyecto.csproj|c:\\users\\usuario\\documents\\github\\erp-sistemas-grupo5\\api-proyecto\\api-proyecto\\api-proyecto.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{DFB73D3A-E828-4B38-81F8-46651BCFC4D5}|API-Proyecto\\API-Proyecto.csproj|solutionrelative:api-proyecto\\api-proyecto.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{355D952D-5DE2-46EC-BA01-58A1EBE120C4}|CompositionRoot\\CompositionRoot.csproj|c:\\users\\usuario\\documents\\github\\erp-sistemas-grupo5\\api-proyecto\\compositionroot\\compositionroot.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{355D952D-5DE2-46EC-BA01-58A1EBE120C4}|CompositionRoot\\CompositionRoot.csproj|solutionrelative:compositionroot\\compositionroot.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DADF4FB3-ECA0-447A-85BF-B8608915BFE9}|Domain\\Domain.csproj|c:\\users\\usuario\\documents\\github\\erp-sistemas-grupo5\\api-proyecto\\domain\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DADF4FB3-ECA0-447A-85BF-B8608915BFE9}|Domain\\Domain.csproj|solutionrelative:domain\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9054455B-49D3-4DEE-B4B6-668BFC10A2BA}|Data\\Data.csproj|c:\\users\\usuario\\documents\\github\\erp-sistemas-grupo5\\api-proyecto\\data\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9054455B-49D3-4DEE-B4B6-668BFC10A2BA}|Data\\Data.csproj|solutionrelative:data\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{355D952D-5DE2-46EC-BA01-58A1EBE120C4}|CompositionRoot\\CompositionRoot.csproj|c:\\users\\usuario\\documents\\github\\erp-sistemas-grupo5\\api-proyecto\\compositionroot\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{355D952D-5DE2-46EC-BA01-58A1EBE120C4}|CompositionRoot\\CompositionRoot.csproj|solutionrelative:compositionroot\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "WorkspaceRootPath": "C:\\Users\\juanl\\OneDrive\\Escritorio\\2_DAW\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\",
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "API-Proyecto",
-              "DocumentMoniker": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\API-Proyecto\\API-Proyecto.csproj",
-              "RelativeDocumentMoniker": "API-Proyecto\\API-Proyecto.csproj",
-              "ToolTip": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\API-Proyecto\\API-Proyecto.csproj",
-              "RelativeToolTip": "API-Proyecto\\API-Proyecto.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-02-08T11:57:27.668Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CompositionRoot",
-              "DocumentMoniker": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\CompositionRoot\\CompositionRoot.csproj",
-              "RelativeDocumentMoniker": "CompositionRoot\\CompositionRoot.csproj",
-              "ToolTip": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\CompositionRoot\\CompositionRoot.csproj",
-              "RelativeToolTip": "CompositionRoot\\CompositionRoot.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-02-08T11:54:17.23Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Domain\\Class1.cs",
-              "RelativeDocumentMoniker": "Domain\\Class1.cs",
-              "ToolTip": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Domain\\Class1.cs",
-              "RelativeToolTip": "Domain\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-08T11:56:30.589Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Data\\Class1.cs",
-              "RelativeDocumentMoniker": "Data\\Class1.cs",
-              "ToolTip": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Data\\Class1.cs",
-              "RelativeToolTip": "Data\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-08T11:56:17.421Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\CompositionRoot\\Class1.cs",
-              "RelativeDocumentMoniker": "CompositionRoot\\Class1.cs",
-              "ToolTip": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\CompositionRoot\\Class1.cs",
-              "RelativeToolTip": "CompositionRoot\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-08T11:54:09.649Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }
