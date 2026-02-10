@@ -24,6 +24,9 @@
         // Observaciones adicionales del pedido
         private string observaciones;
 
+        //campo para saber si el pedido ha sido archivado o no
+        private bool archivado;
+
         /// <summary>
         /// Constructor de la entidad Pedido.
         /// </summary>
@@ -33,8 +36,9 @@
         /// <param name="fechaPedido">Fecha del pedido</param>
         /// <param name="estado">Estado del pedido (pedido/enviado/entregado)</param>
         /// <param name="observaciones">Observaciones del pedido</param>
+        /// <param name="archivado">Para saber si el pedido ha sido archivado o no</param>
         public Pedido(int idPedido, int idUsuario, int idProveedor,
-            DateTime fechaPedido, string estado, string observaciones)
+            DateTime fechaPedido, string estado, string observaciones, bool archivado)
         {
             this.idPedido = idPedido;
             this.idUsuario = idUsuario;
@@ -42,6 +46,7 @@
             this.fechaPedido = fechaPedido;
             this.estado = estado;
             this.observaciones = observaciones;
+            this.archivado = archivado;
         }
 
         // Getters públicos
@@ -82,6 +87,13 @@
         /// <returns>Observaciones del pedido</returns>
         public string getObservaciones() { return observaciones; }
 
+        /// <summary>
+        /// Obtiene el estado del pedido referente a de si está
+        /// archivado o no
+        /// </summary>
+        /// <returns>Observaciones del pedido</returns>
+        public bool getArchivado() { return archivado; }
+
         // Setters públicos (no incluye idPedido porque es solo lectura)
 
         /// <summary>
@@ -113,6 +125,12 @@
         /// </summary>
         /// <param name="observaciones">Nuevas observaciones del pedido</param>
         public void setObservaciones(string observaciones) { this.observaciones = observaciones; }
+
+        /// <summary>
+        /// Establece si el pedido está archivado.
+        /// </summary>
+        /// <param name="isArchivado">El nuevo estado de archivado del pedido</param>
+        public void setArchivado(bool isArchivado) { this.archivado = isArchivado; }
 
     }
 }

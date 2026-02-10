@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\juanl\\OneDrive\\Escritorio\\2_DAW\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Data\\Data.csproj": {}
+    "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Data\\Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\juanl\\OneDrive\\Escritorio\\2_DAW\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Data\\Data.csproj": {
+    "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\juanl\\OneDrive\\Escritorio\\2_DAW\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Data\\Data.csproj",
+        "projectUniqueName": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Data\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "C:\\Users\\juanl\\OneDrive\\Escritorio\\2_DAW\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Data\\Data.csproj",
-        "packagesPath": "C:\\Users\\juanl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\juanl\\OneDrive\\Escritorio\\2_DAW\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Data\\obj\\",
+        "projectPath": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Data\\Data.csproj",
+        "packagesPath": "C:\\Users\\USUARIO\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\juanl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\USUARIO\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -33,8 +33,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\juanl\\OneDrive\\Escritorio\\2_DAW\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\juanl\\OneDrive\\Escritorio\\2_DAW\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Domain\\Domain.csproj"
+              "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Domain\\Domain.csproj"
               }
             }
           }
@@ -70,24 +70,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\juanl\\OneDrive\\Escritorio\\2_DAW\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Domain\\Domain.csproj": {
+    "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\juanl\\OneDrive\\Escritorio\\2_DAW\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\juanl\\OneDrive\\Escritorio\\2_DAW\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\juanl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\juanl\\OneDrive\\Escritorio\\2_DAW\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\USUARIO\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\USUARIO\\Documents\\GitHub\\ERP-SISTEMAS-GRUPO5\\API-Proyecto\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\juanl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\USUARIO\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -136,7 +136,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
