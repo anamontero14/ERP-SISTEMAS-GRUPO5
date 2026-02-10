@@ -1,0 +1,19 @@
+﻿using Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Domain.Interfaces.UseCases
+{
+    public interface IUsuarioUseCase
+    {
+        List<Usuario> GetListaUsuarios();
+        Usuario GetUsuarioPorId(int idUsuario);
+        Usuario ValidarCredenciales(string nombre);
+        int CrearUsuario(Usuario usuarioNuevo);
+        int ActualizarUsuario(int idUsuario, Usuario usuario);
+        int EliminarUsuario(int idUsuario);
+    }
+}
