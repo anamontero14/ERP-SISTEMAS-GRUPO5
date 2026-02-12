@@ -1,12 +1,11 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.UseCases;
-using Interfaces.Repositories;
 using System.Collections.Generic;
 
 namespace UseCases
 {
-    public class ProveedorUseCase : IProovedorUseCase
+    public class ProveedorUseCase : IProveedorUseCase
     {
         private readonly IProveedorRepository _proveedorRepository;
 

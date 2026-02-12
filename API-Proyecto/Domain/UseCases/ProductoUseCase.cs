@@ -1,7 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.UseCases;
-using Interfaces.Repositories;
 using System.Collections.Generic;
 
 namespace UseCases
