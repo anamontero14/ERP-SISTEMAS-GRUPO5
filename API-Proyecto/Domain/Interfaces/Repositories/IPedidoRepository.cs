@@ -31,8 +31,8 @@ namespace Domain.Interfaces.Repositories
         /// Obtiene un pedido por su identificador.
         /// </summary>
         /// <param name="idPedido">ID del pedido a buscar</param>
-        /// <returns>Pedido encontrado</returns>
-        Pedido GetPedidoPorId(int idPedido);
+        /// <returns>Pedido encontrado o null si no existe</returns>
+        Pedido? GetPedidoPorId(int idPedido);
 
         /// <summary>
         /// Crea un nuevo pedido.
@@ -58,7 +58,7 @@ namespace Domain.Interfaces.Repositories
         int CambiarEstadoPedido(int idPedido, string nuevoEstado);
 
         /// <summary>
-        /// Elimina un pedido por su identificador.
+        /// Elimina un pedido por su identificador (actualiza campo Archivado a true).
         /// </summary>
         /// <param name="idPedido">ID del pedido a eliminar</param>
         /// <returns>Número de filas afectadas</returns>

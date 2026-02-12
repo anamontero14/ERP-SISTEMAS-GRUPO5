@@ -17,36 +17,14 @@ namespace Domain.Interfaces.Repositories
         /// Obtiene un usuario por su identificador.
         /// </summary>
         /// <param name="idUsuario">ID del usuario a buscar</param>
-        /// <returns>Usuario encontrado</returns>
-        Usuario GetUsuarioPorId(int idUsuario);
+        /// <returns>Usuario encontrado o null si no existe</returns>
+        Usuario? GetUsuarioPorId(int idUsuario);
 
         /// <summary>
         /// Obtiene un usuario por su nombre.
         /// </summary>
         /// <param name="nombre">Nombre del usuario a buscar</param>
-        /// <returns>Usuario encontrado</returns>
-        Usuario GetUsuarioPorNombre(string nombre);
-
-        /// <summary>
-        /// Crea un nuevo usuario.
-        /// </summary>
-        /// <param name="usuarioNuevo">Usuario a crear</param>
-        /// <returns>Número de filas afectadas</returns>
-        int CrearUsuario(Usuario usuarioNuevo);
-
-        /// <summary>
-        /// Actualiza un usuario existente.
-        /// </summary>
-        /// <param name="idUsuario">ID del usuario a actualizar</param>
-        /// <param name="usuario">Datos actualizados del usuario</param>
-        /// <returns>Número de filas afectadas</returns>
-        int ActualizarUsuario(int idUsuario, Usuario usuario);
-
-        /// <summary>
-        /// Elimina un usuario por su identificador.
-        /// </summary>
-        /// <param name="idUsuario">ID del usuario a eliminar</param>
-        /// <returns>Número de filas afectadas</returns>
-        int EliminarUsuario(int idUsuario);
+        /// <returns>Usuario encontrado o null si no existe</returns>
+        Usuario? GetUsuarioPorNombre(string nombre);
     }
 }

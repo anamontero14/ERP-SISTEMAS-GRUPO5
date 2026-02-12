@@ -12,8 +12,5 @@ namespace Domain.Interfaces.UseCases
         List<Usuario> GetListaUsuarios();
         Usuario GetUsuarioPorId(int idUsuario);
         Usuario ValidarCredenciales(string nombre);
-        int CrearUsuario(Usuario usuarioNuevo);
-        int ActualizarUsuario(int idUsuario, Usuario usuario);
-        int EliminarUsuario(int idUsuario);
     }
 }
