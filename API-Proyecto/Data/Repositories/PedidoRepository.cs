@@ -12,11 +12,11 @@ namespace Data.Repositories
         // Lista estática en memoria que simula la tabla PEDIDO
         private static List<Pedido> listaPedidos = new List<Pedido>
         {
-            new Pedido(1, 1, 1, new DateTime(2025, 1, 15), "pedido", "Pedido urgente de tornillos"),
-            new Pedido(2, 1, 2, new DateTime(2025, 1, 20), "enviado", "Herramientas para taller"),
-            new Pedido(3, 2, 3, new DateTime(2025, 2, 1), "entregado", "Material de construcción"),
-            new Pedido(4, 2, 4, new DateTime(2025, 2, 5), "pedido", "Suministros de oficina"),
-            new Pedido(5, 3, 5, new DateTime(2025, 2, 8), "enviado", "Repuestos de maquinaria")
+            new Pedido(1, 1, 1, new DateTime(2025, 1, 15), "pedido", "Pedido urgente de tornillos", false),
+            new Pedido(2, 1, 2, new DateTime(2025, 1, 20), "enviado", "Herramientas para taller", false),
+            new Pedido(3, 2, 3, new DateTime(2025, 2, 1), "entregado", "Material de construcción", false),
+            new Pedido(4, 2, 4, new DateTime(2025, 2, 5), "pedido", "Suministros de oficina", true),
+            new Pedido(5, 3, 5, new DateTime(2025, 2, 8), "enviado", "Repuestos de maquinaria", false)
         };
 
         // Contador para generar IDs automáticamente
@@ -74,7 +74,8 @@ namespace Data.Repositories
                 pedidoNuevo.getIdProveedor(),
                 pedidoNuevo.getFechaPedido(),
                 pedidoNuevo.getEstado(),
-                pedidoNuevo.getObservaciones()
+                pedidoNuevo.getObservaciones(),
+                pedidoNuevo.getArchivado()
             );
             listaPedidos.Add(pedido);
             return 1;
