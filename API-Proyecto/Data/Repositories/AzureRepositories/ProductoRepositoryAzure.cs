@@ -29,7 +29,7 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "SELECT ID, Nombre, Descripcion, Precio, Stock, Procedencia FROM PRODUCTO";
+                miComando.CommandText = "SELECT idProducto, nombreProducto, descripcionProducto, precioProducto, stockProducto, procedenciaProducto FROM PRODUCTO";
                 miComando.Connection = miConexion;
 
                 miLector = miComando.ExecuteReader();
@@ -38,14 +38,15 @@ namespace Data.Repositories.AzureRepositories
                 {
                     while (miLector.Read())
                     {
-                        Producto producto = new Producto(
-                            (int)miLector["ID"],
-                            (string)miLector["Nombre"],
-                            (string)miLector["Descripcion"],
-                            (decimal)miLector["Precio"],
-                            (int)miLector["Stock"],
-                            (string)miLector["Procedencia"]
-                        );
+                        Producto producto = new Producto
+                        {
+                            IdProducto = (int)miLector["idProducto"],
+                            NombreProducto = (string)miLector["nombreProducto"],
+                            DescripcionProducto = (string)miLector["descripcionProducto"],
+                            PrecioProducto = (decimal)miLector["precioProducto"],
+                            StockProducto = (int)miLector["stockProducto"],
+                            ProcedenciaProducto = (string)miLector["procedenciaProducto"]
+                        };
 
                         listaProductos.Add(producto);
                     }
@@ -87,22 +88,23 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "SELECT ID, Nombre, Descripcion, Precio, Stock, Procedencia FROM PRODUCTO WHERE ID = @ID";
+                miComando.CommandText = "SELECT idProducto, nombreProducto, descripcionProducto, precioProducto, stockProducto, procedenciaProducto FROM PRODUCTO WHERE idProducto = @idProducto";
                 miComando.Connection = miConexion;
-                miComando.Parameters.AddWithValue("@ID", idProducto);
+                miComando.Parameters.AddWithValue("@idProducto", idProducto);
 
                 miLector = miComando.ExecuteReader();
 
                 if (miLector.Read())
                 {
-                    producto = new Producto(
-                        (int)miLector["ID"],
-                        (string)miLector["Nombre"],
-                        (string)miLector["Descripcion"],
-                        (decimal)miLector["Precio"],
-                        (int)miLector["Stock"],
-                        (string)miLector["Procedencia"]
-                    );
+                    producto = new Producto
+                    {
+                        IdProducto = (int)miLector["idProducto"],
+                        NombreProducto = (string)miLector["nombreProducto"],
+                        DescripcionProducto = (string)miLector["descripcionProducto"],
+                        PrecioProducto = (decimal)miLector["precioProducto"],
+                        StockProducto = (int)miLector["stockProducto"],
+                        ProcedenciaProducto = (string)miLector["procedenciaProducto"]
+                    };
                 }
             }
             catch (SqlException)
