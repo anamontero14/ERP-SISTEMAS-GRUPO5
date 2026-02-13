@@ -6,61 +6,39 @@
     /// </summary>
     public class Usuario
     {
-        // Identificador único del usuario (autogenerado en BBDD)
-        private int idUsuario;
+        /// <summary>
+        /// Identificador único del usuario (autogenerado en BBDD)
+        /// </summary>
+        public int IdUsuario { get; set; }
 
-        // Nombre del usuario (único, máximo 50 caracteres)
-        private string nombre;
+        /// <summary>
+        /// Nombre del usuario (único, máximo 50 caracteres)
+        /// </summary>
+        public string Nombre { get; set; }
 
-        // Email del usuario (máximo 50 caracteres)
-        private string email;
+        /// <summary>
+        /// Email del usuario (máximo 50 caracteres)
+        /// </summary>
+        public string Email { get; set; }
 
         /// <summary>
         /// Constructor de la entidad Usuario.
+        /// </summary>
+        public Usuario()
+        {
+        }
+
+        /// <summary>
+        /// Constructor de la entidad Usuario con parámetros.
         /// </summary>
         /// <param name="idUsuario">ID del usuario</param>
         /// <param name="nombre">Nombre del usuario</param>
         /// <param name="email">Email del usuario</param>
         public Usuario(int idUsuario, string nombre, string email)
         {
-            this.idUsuario = idUsuario;
-            this.nombre = nombre;
-            this.email = email;
+            IdUsuario = idUsuario;
+            Nombre = nombre;
+            Email = email;
         }
-
-        // Getters públicos
-
-        /// <summary>
-        /// Obtiene el ID del usuario.
-        /// </summary>
-        /// <returns>ID del usuario</returns>
-        public int getIdUsuario() { return idUsuario; }
-
-        /// <summary>
-        /// Obtiene el nombre del usuario.
-        /// </summary>
-        /// <returns>Nombre del usuario</returns>
-        public string getNombre() { return nombre; }
-
-        /// <summary>
-        /// Obtiene el email del usuario.
-        /// </summary>
-        /// <returns>Email del usuario</returns>
-        public string getEmail() { return email; }
-
-        // Setters públicos (no incluye idUsuario porque es solo lectura)
-
-        /// <summary>
-        /// Establece el nombre del usuario.
-        /// </summary>
-        /// <param name="nombre">Nuevo nombre del usuario</param>
-        public void setNombre(string nombre) { this.nombre = nombre; }
-
-        /// <summary>
-        /// Establece el email del usuario.
-        /// </summary>
-        /// <param name="email">Nuevo email del usuario</param>
-        public void setEmail(string email) { this.email = email; }
-
     }
 }

@@ -29,7 +29,7 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "SELECT ID, Nombre, Email FROM USUARIO";
+                miComando.CommandText = "SELECT idUsuario, nombre, email FROM USUARIO";
                 miComando.Connection = miConexion;
 
                 miLector = miComando.ExecuteReader();
@@ -38,11 +38,12 @@ namespace Data.Repositories.AzureRepositories
                 {
                     while (miLector.Read())
                     {
-                        Usuario usuario = new Usuario(
-                            (int)miLector["ID"],
-                            (string)miLector["Nombre"],
-                            (string)miLector["Email"]
-                        );
+                        Usuario usuario = new Usuario
+                        {
+                            IdUsuario = (int)miLector["idUsuario"],
+                            Nombre = (string)miLector["nombre"],
+                            Email = (string)miLector["email"]
+                        };
 
                         listaUsuarios.Add(usuario);
                     }
@@ -84,19 +85,20 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "SELECT ID, Nombre, Email FROM USUARIO WHERE ID = @ID";
+                miComando.CommandText = "SELECT idUsuario, nombre, email FROM USUARIO WHERE idUsuario = @idUsuario";
                 miComando.Connection = miConexion;
-                miComando.Parameters.AddWithValue("@ID", idUsuario);
+                miComando.Parameters.AddWithValue("@idUsuario", idUsuario);
 
                 miLector = miComando.ExecuteReader();
 
                 if (miLector.Read())
                 {
-                    usuario = new Usuario(
-                        (int)miLector["ID"],
-                        (string)miLector["Nombre"],
-                        (string)miLector["Email"]
-                    );
+                    usuario = new Usuario
+                    {
+                        IdUsuario = (int)miLector["idUsuario"],
+                        Nombre = (string)miLector["nombre"],
+                        Email = (string)miLector["email"]
+                    };
                 }
             }
             catch (SqlException)
@@ -135,19 +137,20 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "SELECT ID, Nombre, Email FROM USUARIO WHERE Nombre = @Nombre";
+                miComando.CommandText = "SELECT idUsuario, nombre, email FROM USUARIO WHERE nombre = @nombre";
                 miComando.Connection = miConexion;
-                miComando.Parameters.AddWithValue("@Nombre", nombre);
+                miComando.Parameters.AddWithValue("@nombre", nombre);
 
                 miLector = miComando.ExecuteReader();
 
                 if (miLector.Read())
                 {
-                    usuario = new Usuario(
-                        (int)miLector["ID"],
-                        (string)miLector["Nombre"],
-                        (string)miLector["Email"]
-                    );
+                    usuario = new Usuario
+                    {
+                        IdUsuario = (int)miLector["idUsuario"],
+                        Nombre = (string)miLector["nombre"],
+                        Email = (string)miLector["email"]
+                    };
                 }
             }
             catch (SqlException)

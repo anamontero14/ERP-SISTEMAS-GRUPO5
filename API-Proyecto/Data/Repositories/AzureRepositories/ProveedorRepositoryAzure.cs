@@ -29,7 +29,7 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "SELECT ID, CIF, Nombre, Telefono, Email, Direccion FROM PROVEEDOR";
+                miComando.CommandText = "SELECT idProveedor, cifProveedor, nombreProveedor, telefonoProveedor, emailProveedor, direccionProveedor FROM PROVEEDOR";
                 miComando.Connection = miConexion;
 
                 miLector = miComando.ExecuteReader();
@@ -38,14 +38,15 @@ namespace Data.Repositories.AzureRepositories
                 {
                     while (miLector.Read())
                     {
-                        Proveedor proveedor = new Proveedor(
-                            (int)miLector["ID"],
-                            (string)miLector["CIF"],
-                            (string)miLector["Nombre"],
-                            (string)miLector["Telefono"],
-                            (string)miLector["Email"],
-                            (string)miLector["Direccion"]
-                        );
+                        Proveedor proveedor = new Proveedor
+                        {
+                            IdProveedor = (int)miLector["idProveedor"],
+                            CifProveedor = (string)miLector["cifProveedor"],
+                            NombreProveedor = (string)miLector["nombreProveedor"],
+                            TelefonoProveedor = (string)miLector["telefonoProveedor"],
+                            EmailProveedor = (string)miLector["emailProveedor"],
+                            DireccionProveedor = (string)miLector["direccionProveedor"]
+                        };
 
                         listaProveedores.Add(proveedor);
                     }
@@ -87,22 +88,23 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "SELECT ID, CIF, Nombre, Telefono, Email, Direccion FROM PROVEEDOR WHERE ID = @ID";
+                miComando.CommandText = "SELECT idProveedor, cifProveedor, nombreProveedor, telefonoProveedor, emailProveedor, direccionProveedor FROM PROVEEDOR WHERE idProveedor = @idProveedor";
                 miComando.Connection = miConexion;
-                miComando.Parameters.AddWithValue("@ID", idProveedor);
+                miComando.Parameters.AddWithValue("@idProveedor", idProveedor);
 
                 miLector = miComando.ExecuteReader();
 
                 if (miLector.Read())
                 {
-                    proveedor = new Proveedor(
-                        (int)miLector["ID"],
-                        (string)miLector["CIF"],
-                        (string)miLector["Nombre"],
-                        (string)miLector["Telefono"],
-                        (string)miLector["Email"],
-                        (string)miLector["Direccion"]
-                    );
+                    proveedor = new Proveedor
+                    {
+                        IdProveedor = (int)miLector["idProveedor"],
+                        CifProveedor = (string)miLector["cifProveedor"],
+                        NombreProveedor = (string)miLector["nombreProveedor"],
+                        TelefonoProveedor = (string)miLector["telefonoProveedor"],
+                        EmailProveedor = (string)miLector["emailProveedor"],
+                        DireccionProveedor = (string)miLector["direccionProveedor"]
+                    };
                 }
             }
             catch (SqlException)

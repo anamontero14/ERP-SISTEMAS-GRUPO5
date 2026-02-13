@@ -30,9 +30,9 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "SELECT IDPedido, IDProducto, Cantidad, PrecioUnitario FROM DETALLE_PEDIDO WHERE IDPedido = @IDPedido";
+                miComando.CommandText = "SELECT idPedido, idProducto, cantidad, precioUnitario FROM DETALLE_PEDIDO WHERE idPedido = @idPedido";
                 miComando.Connection = miConexion;
-                miComando.Parameters.AddWithValue("@IDPedido", idPedido);
+                miComando.Parameters.AddWithValue("@idPedido", idPedido);
 
                 miLector = miComando.ExecuteReader();
 
@@ -40,12 +40,13 @@ namespace Data.Repositories.AzureRepositories
                 {
                     while (miLector.Read())
                     {
-                        DetallePedido detalle = new DetallePedido(
-                            (int)miLector["IDPedido"],
-                            (int)miLector["IDProducto"],
-                            (int)miLector["Cantidad"],
-                            (decimal)miLector["PrecioUnitario"]
-                        );
+                        DetallePedido detalle = new DetallePedido
+                        {
+                            IdPedido = (int)miLector["idPedido"],
+                            IdProducto = (int)miLector["idProducto"],
+                            Cantidad = (int)miLector["cantidad"],
+                            PrecioUnitario = (decimal)miLector["precioUnitario"]
+                        };
 
                         listaDetalles.Add(detalle);
                     }
@@ -85,10 +86,10 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = @"SELECT d.IDPedido, d.IDProducto, d.Cantidad, d.PrecioUnitario 
+                miComando.CommandText = @"SELECT d.idPedido, d.idProducto, d.cantidad, d.precioUnitario 
                                           FROM DETALLE_PEDIDO d
-                                          INNER JOIN PEDIDO p ON d.IDPedido = p.ID
-                                          WHERE p.Archivado = 0";
+                                          INNER JOIN PEDIDO p ON d.idPedido = p.idPedido
+                                          WHERE p.archivado = 0";
                 miComando.Connection = miConexion;
 
                 miLector = miComando.ExecuteReader();
@@ -97,12 +98,13 @@ namespace Data.Repositories.AzureRepositories
                 {
                     while (miLector.Read())
                     {
-                        DetallePedido detalle = new DetallePedido(
-                            (int)miLector["IDPedido"],
-                            (int)miLector["IDProducto"],
-                            (int)miLector["Cantidad"],
-                            (decimal)miLector["PrecioUnitario"]
-                        );
+                        DetallePedido detalle = new DetallePedido
+                        {
+                            IdPedido = (int)miLector["idPedido"],
+                            IdProducto = (int)miLector["idProducto"],
+                            Cantidad = (int)miLector["cantidad"],
+                            PrecioUnitario = (decimal)miLector["precioUnitario"]
+                        };
 
                         listaDetalles.Add(detalle);
                     }
@@ -145,21 +147,22 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "SELECT IDPedido, IDProducto, Cantidad, PrecioUnitario FROM DETALLE_PEDIDO WHERE IDPedido = @IDPedido AND IDProducto = @IDProducto";
+                miComando.CommandText = "SELECT idPedido, idProducto, cantidad, precioUnitario FROM DETALLE_PEDIDO WHERE idPedido = @idPedido AND idProducto = @idProducto";
                 miComando.Connection = miConexion;
-                miComando.Parameters.AddWithValue("@IDPedido", idPedido);
-                miComando.Parameters.AddWithValue("@IDProducto", idProducto);
+                miComando.Parameters.AddWithValue("@idPedido", idPedido);
+                miComando.Parameters.AddWithValue("@idProducto", idProducto);
 
                 miLector = miComando.ExecuteReader();
 
                 if (miLector.Read())
                 {
-                    detalle = new DetallePedido(
-                        (int)miLector["IDPedido"],
-                        (int)miLector["IDProducto"],
-                        (int)miLector["Cantidad"],
-                        (decimal)miLector["PrecioUnitario"]
-                    );
+                    detalle = new DetallePedido
+                    {
+                        IdPedido = (int)miLector["idPedido"],
+                        IdProducto = (int)miLector["idProducto"],
+                        Cantidad = (int)miLector["cantidad"],
+                        PrecioUnitario = (decimal)miLector["precioUnitario"]
+                    };
                 }
             }
             catch (SqlException)
@@ -197,13 +200,13 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "INSERT INTO DETALLE_PEDIDO (IDPedido, IDProducto, Cantidad, PrecioUnitario) VALUES (@IDPedido, @IDProducto, @Cantidad, @PrecioUnitario)";
+                miComando.CommandText = "INSERT INTO DETALLE_PEDIDO (idPedido, idProducto, cantidad, precioUnitario) VALUES (@idPedido, @idProducto, @cantidad, @precioUnitario)";
                 miComando.Connection = miConexion;
 
-                miComando.Parameters.AddWithValue("@IDPedido", detallePedidoNuevo.getIdPedido());
-                miComando.Parameters.AddWithValue("@IDProducto", detallePedidoNuevo.getIdProducto());
-                miComando.Parameters.AddWithValue("@Cantidad", detallePedidoNuevo.getCantidad());
-                miComando.Parameters.AddWithValue("@PrecioUnitario", detallePedidoNuevo.getPrecioUnitario());
+                miComando.Parameters.AddWithValue("@idPedido", detallePedidoNuevo.IdPedido);
+                miComando.Parameters.AddWithValue("@idProducto", detallePedidoNuevo.IdProducto);
+                miComando.Parameters.AddWithValue("@cantidad", detallePedidoNuevo.Cantidad);
+                miComando.Parameters.AddWithValue("@precioUnitario", detallePedidoNuevo.PrecioUnitario);
 
                 filasAfectadas = miComando.ExecuteNonQuery();
             }
@@ -243,13 +246,13 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "UPDATE DETALLE_PEDIDO SET Cantidad = @Cantidad, PrecioUnitario = @PrecioUnitario WHERE IDPedido = @IDPedido AND IDProducto = @IDProducto";
+                miComando.CommandText = "UPDATE DETALLE_PEDIDO SET cantidad = @cantidad, precioUnitario = @precioUnitario WHERE idPedido = @idPedido AND idProducto = @idProducto";
                 miComando.Connection = miConexion;
 
-                miComando.Parameters.AddWithValue("@IDPedido", idPedido);
-                miComando.Parameters.AddWithValue("@IDProducto", idProducto);
-                miComando.Parameters.AddWithValue("@Cantidad", detallePedido.getCantidad());
-                miComando.Parameters.AddWithValue("@PrecioUnitario", detallePedido.getPrecioUnitario());
+                miComando.Parameters.AddWithValue("@idPedido", idPedido);
+                miComando.Parameters.AddWithValue("@idProducto", idProducto);
+                miComando.Parameters.AddWithValue("@cantidad", detallePedido.Cantidad);
+                miComando.Parameters.AddWithValue("@precioUnitario", detallePedido.PrecioUnitario);
 
                 filasAfectadas = miComando.ExecuteNonQuery();
             }
@@ -290,10 +293,10 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "DELETE FROM DETALLE_PEDIDO WHERE IDPedido = @IDPedido AND IDProducto = @IDProducto";
+                miComando.CommandText = "DELETE FROM DETALLE_PEDIDO WHERE idPedido = @idPedido AND idProducto = @idProducto";
                 miComando.Connection = miConexion;
-                miComando.Parameters.AddWithValue("@IDPedido", idPedido);
-                miComando.Parameters.AddWithValue("@IDProducto", idProducto);
+                miComando.Parameters.AddWithValue("@idPedido", idPedido);
+                miComando.Parameters.AddWithValue("@idProducto", idProducto);
 
                 numeroFilasAfectadas = miComando.ExecuteNonQuery();
             }

@@ -29,7 +29,7 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "SELECT ID, IDUsuario, IDProveedor, FechaPedido, Estado, Observaciones, Archivado FROM PEDIDO";
+                miComando.CommandText = "SELECT idPedido, idUsuario, idProveedor, fechaPedido, estado, observaciones, archivado FROM PEDIDO";
                 miComando.Connection = miConexion;
 
                 miLector = miComando.ExecuteReader();
@@ -38,15 +38,16 @@ namespace Data.Repositories.AzureRepositories
                 {
                     while (miLector.Read())
                     {
-                        Pedido pedido = new Pedido(
-                            (int)miLector["ID"],
-                            (int)miLector["IDUsuario"],
-                            (int)miLector["IDProveedor"],
-                            (DateTime)miLector["FechaPedido"],
-                            (string)miLector["Estado"],
-                            (string)miLector["Observaciones"],
-                            (bool)miLector["Archivado"]
-                        );
+                        Pedido pedido = new Pedido
+                        {
+                            IdPedido = (int)miLector["idPedido"],
+                            IdUsuario = (int)miLector["idUsuario"],
+                            IdProveedor = (int)miLector["idProveedor"],
+                            FechaPedido = (DateTime)miLector["fechaPedido"],
+                            Estado = (string)miLector["estado"],
+                            Observaciones = (string)miLector["observaciones"],
+                            Archivado = (bool)miLector["archivado"]
+                        };
 
                         listaPedidos.Add(pedido);
                     }
@@ -87,9 +88,9 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "SELECT ID, IDUsuario, IDProveedor, FechaPedido, Estado, Observaciones, Archivado FROM PEDIDO WHERE IDUsuario = @IDUsuario";
+                miComando.CommandText = "SELECT idPedido, idUsuario, idProveedor, fechaPedido, estado, observaciones, archivado FROM PEDIDO WHERE idUsuario = @idUsuario";
                 miComando.Connection = miConexion;
-                miComando.Parameters.AddWithValue("@IDUsuario", idUsuario);
+                miComando.Parameters.AddWithValue("@idUsuario", idUsuario);
 
                 miLector = miComando.ExecuteReader();
 
@@ -97,15 +98,16 @@ namespace Data.Repositories.AzureRepositories
                 {
                     while (miLector.Read())
                     {
-                        Pedido pedido = new Pedido(
-                            (int)miLector["ID"],
-                            (int)miLector["IDUsuario"],
-                            (int)miLector["IDProveedor"],
-                            (DateTime)miLector["FechaPedido"],
-                            (string)miLector["Estado"],
-                            (string)miLector["Observaciones"],
-                            (bool)miLector["Archivado"]
-                        );
+                        Pedido pedido = new Pedido
+                        {
+                            IdPedido = (int)miLector["idPedido"],
+                            IdUsuario = (int)miLector["idUsuario"],
+                            IdProveedor = (int)miLector["idProveedor"],
+                            FechaPedido = (DateTime)miLector["fechaPedido"],
+                            Estado = (string)miLector["estado"],
+                            Observaciones = (string)miLector["observaciones"],
+                            Archivado = (bool)miLector["archivado"]
+                        };
 
                         listaPedidos.Add(pedido);
                     }
@@ -146,9 +148,9 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "SELECT ID, IDUsuario, IDProveedor, FechaPedido, Estado, Observaciones, Archivado FROM PEDIDO WHERE IDProveedor = @IDProveedor";
+                miComando.CommandText = "SELECT idPedido, idUsuario, idProveedor, fechaPedido, estado, observaciones, archivado FROM PEDIDO WHERE idProveedor = @idProveedor";
                 miComando.Connection = miConexion;
-                miComando.Parameters.AddWithValue("@IDProveedor", idProveedor);
+                miComando.Parameters.AddWithValue("@idProveedor", idProveedor);
 
                 miLector = miComando.ExecuteReader();
 
@@ -156,15 +158,16 @@ namespace Data.Repositories.AzureRepositories
                 {
                     while (miLector.Read())
                     {
-                        Pedido pedido = new Pedido(
-                            (int)miLector["ID"],
-                            (int)miLector["IDUsuario"],
-                            (int)miLector["IDProveedor"],
-                            (DateTime)miLector["FechaPedido"],
-                            (string)miLector["Estado"],
-                            (string)miLector["Observaciones"],
-                            (bool)miLector["Archivado"]
-                        );
+                        Pedido pedido = new Pedido
+                        {
+                            IdPedido = (int)miLector["idPedido"],
+                            IdUsuario = (int)miLector["idUsuario"],
+                            IdProveedor = (int)miLector["idProveedor"],
+                            FechaPedido = (DateTime)miLector["fechaPedido"],
+                            Estado = (string)miLector["estado"],
+                            Observaciones = (string)miLector["observaciones"],
+                            Archivado = (bool)miLector["archivado"]
+                        };
 
                         listaPedidos.Add(pedido);
                     }
@@ -206,23 +209,24 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "SELECT ID, IDUsuario, IDProveedor, FechaPedido, Estado, Observaciones, Archivado FROM PEDIDO WHERE ID = @ID";
+                miComando.CommandText = "SELECT idPedido, idUsuario, idProveedor, fechaPedido, estado, observaciones, archivado FROM PEDIDO WHERE idPedido = @idPedido";
                 miComando.Connection = miConexion;
-                miComando.Parameters.AddWithValue("@ID", idPedido);
+                miComando.Parameters.AddWithValue("@idPedido", idPedido);
 
                 miLector = miComando.ExecuteReader();
 
                 if (miLector.Read())
                 {
-                    pedido = new Pedido(
-                        (int)miLector["ID"],
-                        (int)miLector["IDUsuario"],
-                        (int)miLector["IDProveedor"],
-                        (DateTime)miLector["FechaPedido"],
-                        (string)miLector["Estado"],
-                        (string)miLector["Observaciones"],
-                        (bool)miLector["Archivado"]
-                    );
+                    pedido = new Pedido
+                    {
+                        IdPedido = (int)miLector["idPedido"],
+                        IdUsuario = (int)miLector["idUsuario"],
+                        IdProveedor = (int)miLector["idProveedor"],
+                        FechaPedido = (DateTime)miLector["fechaPedido"],
+                        Estado = (string)miLector["estado"],
+                        Observaciones = (string)miLector["observaciones"],
+                        Archivado = (bool)miLector["archivado"]
+                    };
                 }
             }
             catch (SqlException)
@@ -260,15 +264,15 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "INSERT INTO PEDIDO (IDUsuario, IDProveedor, FechaPedido, Estado, Observaciones, Archivado) VALUES (@IDUsuario, @IDProveedor, @FechaPedido, @Estado, @Observaciones, @Archivado)";
+                miComando.CommandText = "INSERT INTO PEDIDO (idUsuario, idProveedor, fechaPedido, estado, observaciones, archivado) VALUES (@idUsuario, @idProveedor, @fechaPedido, @estado, @observaciones, @archivado)";
                 miComando.Connection = miConexion;
 
-                miComando.Parameters.AddWithValue("@IDUsuario", pedidoNuevo.getIdUsuario());
-                miComando.Parameters.AddWithValue("@IDProveedor", pedidoNuevo.getIdProveedor());
-                miComando.Parameters.AddWithValue("@FechaPedido", pedidoNuevo.getFechaPedido());
-                miComando.Parameters.AddWithValue("@Estado", pedidoNuevo.getEstado());
-                miComando.Parameters.AddWithValue("@Observaciones", pedidoNuevo.getObservaciones());
-                miComando.Parameters.AddWithValue("@Archivado", pedidoNuevo.getArchivado());
+                miComando.Parameters.AddWithValue("@idUsuario", pedidoNuevo.IdUsuario);
+                miComando.Parameters.AddWithValue("@idProveedor", pedidoNuevo.IdProveedor);
+                miComando.Parameters.AddWithValue("@fechaPedido", pedidoNuevo.FechaPedido);
+                miComando.Parameters.AddWithValue("@estado", pedidoNuevo.Estado);
+                miComando.Parameters.AddWithValue("@observaciones", pedidoNuevo.Observaciones);
+                miComando.Parameters.AddWithValue("@archivado", pedidoNuevo.Archivado);
 
                 filasAfectadas = miComando.ExecuteNonQuery();
             }
@@ -307,15 +311,15 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "UPDATE PEDIDO SET IDUsuario = @IDUsuario, IDProveedor = @IDProveedor, FechaPedido = @FechaPedido, Estado = @Estado, Observaciones = @Observaciones WHERE ID = @ID";
+                miComando.CommandText = "UPDATE PEDIDO SET idUsuario = @idUsuario, idProveedor = @idProveedor, fechaPedido = @fechaPedido, estado = @estado, observaciones = @observaciones WHERE idPedido = @idPedido";
                 miComando.Connection = miConexion;
 
-                miComando.Parameters.AddWithValue("@ID", idPedido);
-                miComando.Parameters.AddWithValue("@IDUsuario", pedido.getIdUsuario());
-                miComando.Parameters.AddWithValue("@IDProveedor", pedido.getIdProveedor());
-                miComando.Parameters.AddWithValue("@FechaPedido", pedido.getFechaPedido());
-                miComando.Parameters.AddWithValue("@Estado", pedido.getEstado());
-                miComando.Parameters.AddWithValue("@Observaciones", pedido.getObservaciones());
+                miComando.Parameters.AddWithValue("@idPedido", idPedido);
+                miComando.Parameters.AddWithValue("@idUsuario", pedido.IdUsuario);
+                miComando.Parameters.AddWithValue("@idProveedor", pedido.IdProveedor);
+                miComando.Parameters.AddWithValue("@fechaPedido", pedido.FechaPedido);
+                miComando.Parameters.AddWithValue("@estado", pedido.Estado);
+                miComando.Parameters.AddWithValue("@observaciones", pedido.Observaciones);
 
                 filasAfectadas = miComando.ExecuteNonQuery();
             }
@@ -354,11 +358,11 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "UPDATE PEDIDO SET Estado = @Estado WHERE ID = @ID";
+                miComando.CommandText = "UPDATE PEDIDO SET estado = @estado WHERE idPedido = @idPedido";
                 miComando.Connection = miConexion;
 
-                miComando.Parameters.AddWithValue("@ID", idPedido);
-                miComando.Parameters.AddWithValue("@Estado", nuevoEstado);
+                miComando.Parameters.AddWithValue("@idPedido", idPedido);
+                miComando.Parameters.AddWithValue("@estado", nuevoEstado);
 
                 filasAfectadas = miComando.ExecuteNonQuery();
             }
@@ -397,9 +401,9 @@ namespace Data.Repositories.AzureRepositories
                 miConexion = connection.getConnection();
 
                 miComando = new SqlCommand();
-                miComando.CommandText = "UPDATE PEDIDO SET Archivado = 1 WHERE ID = @ID";
+                miComando.CommandText = "UPDATE PEDIDO SET archivado = 1 WHERE idPedido = @idPedido";
                 miComando.Connection = miConexion;
-                miComando.Parameters.AddWithValue("@ID", idPedido);
+                miComando.Parameters.AddWithValue("@idPedido", idPedido);
 
                 filasAfectadas = miComando.ExecuteNonQuery();
             }
