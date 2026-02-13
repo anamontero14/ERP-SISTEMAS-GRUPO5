@@ -1,43 +1,67 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using Domain.Entities;
+using Domain.Interfaces.UseCases;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API_Proyecto.Controllers.API
 {
+    /// <summary>
+    /// Controlador API para gestionar usuarios.
+    /// Solo permite operaciones de lectura (GET).
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        // GET: api/<UsuarioController>
+        // Caso de uso de usuario inyectado por dependencias
+        private readonly IUsuarioUseCase _usuarioUseCase;
+
+        /// <summary>
+        /// Constructor del controlador de usuarios.
+        /// </summary>
+        /// <param name="usuarioUseCase">Caso de uso de usuario</param>
+        public UsuarioController(IUsuarioUseCase usuarioUseCase)
+        {
+            _usuarioUseCase = usuarioUseCase;
+        }
+
+        /// <summary>
+        /// Obtiene la lista completa de usuarios.
+        /// </summary>
+        /// <returns>Lista de usuarios</returns>
+        // GET: api/Usuario
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult GetListaUsuarios()
         {
-            return new string[] { "value1", "value2" };
+            List<Usuario> usuarios = _usuarioUseCase.GetListaUsuarios();
+            return Ok(usuarios);
         }
 
-        // GET api/<UsuarioController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        /// <summary>
+        /// Obtiene un usuario por su identificador.
+        /// </summary>
+        /// <param name="idUsuario">ID del usuario a buscar</param>
+        /// <returns>Usuario encontrado o 404 si no existe</returns>
+        // GET: api/Usuario/5
+        [HttpGet("{idUsuario}")]
+        public IActionResult GetUsuarioPorId(int idUsuario)
         {
-            return "value";
+            Usuario usuario = _usuarioUseCase.GetUsuarioPorId(idUsuario);
+            if (usuario == null) return NotFound();
+            return Ok(usuario);
         }
 
-        // POST api/<UsuarioController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        /// <summary>
+        /// Valida las credenciales de un usuario por su nombre.
+        /// </summary>
+        /// <param name="nombre">Nombre del usuario a validar</param>
+        /// <returns>Usuario encontrado o 404 si no existe</returns>
+        // GET: api/Usuario/validar/Juan
+        [HttpGet("validar/{nombre}")]
+        public IActionResult ValidarCredenciales(string nombre)
         {
-        }
-
-        // PUT api/<UsuarioController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<UsuarioController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            Usuario usuario = _usuarioUseCase.ValidarCredenciales(nombre);
+            if (usuario == null) return NotFound();
+            return Ok(usuario);
         }
     }
 }

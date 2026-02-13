@@ -1,43 +1,53 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using Domain.Entities;
+using Domain.Interfaces.UseCases;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API_Proyecto.Controllers.API
 {
+    /// <summary>
+    /// Controlador API para gestionar proveedores.
+    /// Solo permite operaciones de lectura (GET).
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ProveedorController : ControllerBase
     {
-        // GET: api/<ProveedorController>
+        // Caso de uso de proveedor inyectado por dependencias
+        private readonly IProveedorUseCase _proveedorUseCase;
+
+        /// <summary>
+        /// Constructor del controlador de proveedores.
+        /// </summary>
+        /// <param name="proveedorUseCase">Caso de uso de proveedor</param>
+        public ProveedorController(IProveedorUseCase proveedorUseCase)
+        {
+            _proveedorUseCase = proveedorUseCase;
+        }
+
+        /// <summary>
+        /// Obtiene la lista completa de proveedores.
+        /// </summary>
+        /// <returns>Lista de proveedores</returns>
+        // GET: api/Proveedor
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult GetListaProveedores()
         {
-            return new string[] { "value1", "value2" };
+            List<Proveedor> proveedores = _proveedorUseCase.GetListaProveedores();
+            return Ok(proveedores);
         }
 
-        // GET api/<ProveedorController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        /// <summary>
+        /// Obtiene un proveedor por su identificador.
+        /// </summary>
+        /// <param name="idProveedor">ID del proveedor a buscar</param>
+        /// <returns>Proveedor encontrado o 404 si no existe</returns>
+        // GET: api/Proveedor/5
+        [HttpGet("{idProveedor}")]
+        public IActionResult GetProveedorPorId(int idProveedor)
         {
-            return "value";
-        }
-
-        // POST api/<ProveedorController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<ProveedorController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ProveedorController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            Proveedor proveedor = _proveedorUseCase.GetProveedorPorId(idProveedor);
+            if (proveedor == null) return NotFound();
+            return Ok(proveedor);
         }
     }
 }
