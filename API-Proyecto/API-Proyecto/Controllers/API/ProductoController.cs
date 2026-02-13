@@ -1,43 +1,53 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using Domain.Entities;
+using Domain.Interfaces.UseCases;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API_Proyecto.Controllers.API
 {
+    /// <summary>
+    /// Controlador API para gestionar productos.
+    /// Solo permite operaciones de lectura (GET).
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ProductoController : ControllerBase
     {
-        // GET: api/<ProductoController>
+        // Caso de uso de producto inyectado por dependencias
+        private readonly IProductoUseCase _productoUseCase;
+
+        /// <summary>
+        /// Constructor del controlador de productos.
+        /// </summary>
+        /// <param name="productoUseCase">Caso de uso de producto</param>
+        public ProductoController(IProductoUseCase productoUseCase)
+        {
+            _productoUseCase = productoUseCase;
+        }
+
+        /// <summary>
+        /// Obtiene la lista completa de productos.
+        /// </summary>
+        /// <returns>Lista de productos</returns>
+        // GET: api/Producto
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult GetListaProductos()
         {
-            return new string[] { "value1", "value2" };
+            List<Producto> productos = _productoUseCase.GetListaProductos();
+            return Ok(productos);
         }
 
-        // GET api/<ProductoController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        /// <summary>
+        /// Obtiene un producto por su identificador.
+        /// </summary>
+        /// <param name="idProducto">ID del producto a buscar</param>
+        /// <returns>Producto encontrado o 404 si no existe</returns>
+        // GET: api/Producto/5
+        [HttpGet("{idProducto}")]
+        public IActionResult GetProductoPorId(int idProducto)
         {
-            return "value";
-        }
-
-        // POST api/<ProductoController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<ProductoController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ProductoController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            Producto producto = _productoUseCase.GetProductoPorId(idProducto);
+            if (producto == null) return NotFound();
+            return Ok(producto);
         }
     }
 }
