@@ -1,0 +1,28 @@
+## Visual Studio: Archivos temporales y de configuración de usuario
+.vs/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+## Resultados de compilación (binarios)
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+
+## Archivos de base de datos temporales (SQLite, etc.)
+*.db-shm
+*.db-wal
+
+## NuGet: Paquetes (se restauran automáticamente, no se suben)
+*.nupkg
+**/packages/*
+!**/packages/repositories.config
+
+## VS Code (si alguien lo usa en el equipo)
+.vscode/

@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿/*using Domain.Entities;
 using Domain.Interfaces.Repositories;
 
 namespace Data.Repositories
@@ -130,3 +130,4 @@ namespace Data.Repositories
         }
     }
 }
+*/

@@ -15,12 +15,18 @@ namespace Domain.Interfaces.Repositories
         List<DetallePedido> GetListaDetallesPorPedido(int idPedido);
 
         /// <summary>
+        /// Obtiene todos los detalles de pedidos activos (no archivados).
+        /// </summary>
+        /// <returns>Lista de detalles de pedidos activos</returns>
+        List<DetallePedido> GetListaDetallesPedidosActivos();
+
+        /// <summary>
         /// Obtiene un detalle de pedido por su clave compuesta.
         /// </summary>
         /// <param name="idPedido">ID del pedido</param>
         /// <param name="idProducto">ID del producto</param>
-        /// <returns>Detalle del pedido encontrado</returns>
-        DetallePedido GetDetallePedidoPorId(int idPedido, int idProducto);
+        /// <returns>Detalle del pedido encontrado o null si no existe</returns>
+        DetallePedido? GetDetallePedidoPorId(int idPedido, int idProducto);
 
         /// <summary>
         /// Crea un nuevo detalle de pedido.

@@ -6,26 +6,45 @@
     /// </summary>
     public class Producto
     {
-        // Identificador único del producto (autogenerado en BBDD)
-        private int idProducto;
+        /// <summary>
+        /// Identificador único del producto (autogenerado en BBDD)
+        /// </summary>
+        public int IdProducto { get; set; }
 
-        // Nombre del producto
-        private string nombreProducto;
+        /// <summary>
+        /// Nombre del producto
+        /// </summary>
+        public string NombreProducto { get; set; }
 
-        // Descripción del producto
-        private string descripcionProducto;
+        /// <summary>
+        /// Descripción del producto
+        /// </summary>
+        public string DescripcionProducto { get; set; }
 
-        // Precio del producto
-        private decimal precioProducto;
+        /// <summary>
+        /// Precio del producto
+        /// </summary>
+        public decimal PrecioProducto { get; set; }
 
-        // Stock disponible del producto
-        private int stockProducto;
+        /// <summary>
+        /// Stock disponible del producto
+        /// </summary>
+        public int StockProducto { get; set; }
 
-        // Procedencia/origen del producto
-        private string procedenciaProducto;
+        /// <summary>
+        /// Procedencia/origen del producto
+        /// </summary>
+        public string ProcedenciaProducto { get; set; }
 
         /// <summary>
         /// Constructor de la entidad Producto.
+        /// </summary>
+        public Producto()
+        {
+        }
+
+        /// <summary>
+        /// Constructor de la entidad Producto con parámetros.
         /// </summary>
         /// <param name="idProducto">ID del producto</param>
         /// <param name="nombreProducto">Nombre del producto</param>
@@ -36,83 +55,12 @@
         public Producto(int idProducto, string nombreProducto, string descripcionProducto,
             decimal precioProducto, int stockProducto, string procedenciaProducto)
         {
-            this.idProducto = idProducto;
-            this.nombreProducto = nombreProducto;
-            this.descripcionProducto = descripcionProducto;
-            this.precioProducto = precioProducto;
-            this.stockProducto = stockProducto;
-            this.procedenciaProducto = procedenciaProducto;
+            IdProducto = idProducto;
+            NombreProducto = nombreProducto;
+            DescripcionProducto = descripcionProducto;
+            PrecioProducto = precioProducto;
+            StockProducto = stockProducto;
+            ProcedenciaProducto = procedenciaProducto;
         }
-
-        // Getters públicos
-
-        /// <summary>
-        /// Obtiene el ID del producto.
-        /// </summary>
-        /// <returns>ID del producto</returns>
-        public int getIdProducto() { return idProducto; }
-
-        /// <summary>
-        /// Obtiene el nombre del producto.
-        /// </summary>
-        /// <returns>Nombre del producto</returns>
-        public string getNombreProducto() { return nombreProducto; }
-
-        /// <summary>
-        /// Obtiene la descripción del producto.
-        /// </summary>
-        /// <returns>Descripción del producto</returns>
-        public string getDescripcionProducto() { return descripcionProducto; }
-
-        /// <summary>
-        /// Obtiene el precio del producto.
-        /// </summary>
-        /// <returns>Precio del producto</returns>
-        public decimal getPrecioProducto() { return precioProducto; }
-
-        /// <summary>
-        /// Obtiene el stock del producto.
-        /// </summary>
-        /// <returns>Stock disponible</returns>
-        public int getStockProducto() { return stockProducto; }
-
-        /// <summary>
-        /// Obtiene la procedencia del producto.
-        /// </summary>
-        /// <returns>Procedencia del producto</returns>
-        public string getProcedenciaProducto() { return procedenciaProducto; }
-
-        // Setters públicos (no incluye idProducto porque es solo lectura)
-
-        /// <summary>
-        /// Establece el nombre del producto.
-        /// </summary>
-        /// <param name="nombreProducto">Nuevo nombre del producto</param>
-        public void setNombreProducto(string nombreProducto) { this.nombreProducto = nombreProducto; }
-
-        /// <summary>
-        /// Establece la descripción del producto.
-        /// </summary>
-        /// <param name="descripcionProducto">Nueva descripción del producto</param>
-        public void setDescripcionProducto(string descripcionProducto) { this.descripcionProducto = descripcionProducto; }
-
-        /// <summary>
-        /// Establece el precio del producto.
-        /// </summary>
-        /// <param name="precioProducto">Nuevo precio del producto</param>
-        public void setPrecioProducto(decimal precioProducto) { this.precioProducto = precioProducto; }
-
-        /// <summary>
-        /// Establece el stock del producto.
-        /// </summary>
-        /// <param name="stockProducto">Nuevo stock disponible</param>
-        public void setStockProducto(int stockProducto) { this.stockProducto = stockProducto; }
-
-        /// <summary>
-        /// Establece la procedencia del producto.
-        /// </summary>
-        /// <param name="procedenciaProducto">Nueva procedencia del producto</param>
-        public void setProcedenciaProducto(string procedenciaProducto) { this.procedenciaProducto = procedenciaProducto; }
-
     }
 }

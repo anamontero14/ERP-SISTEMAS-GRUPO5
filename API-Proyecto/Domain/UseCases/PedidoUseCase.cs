@@ -37,7 +37,7 @@ namespace UseCases
 
         public int CrearPedido(Pedido pedidoNuevo)
         {
-            pedidoNuevo.setArchivado(false);
+            pedidoNuevo.Archivado = false;
             return _pedidoRepository.CrearPedido(pedidoNuevo);
         }
 
@@ -50,18 +50,18 @@ namespace UseCases
                 return 0;
             }
 
-            if (pedidoActual.getEstado() != "entregado")
+            if (pedidoActual.Estado != "entregado")
             {
                 return 0;
             }
 
             // Actualizamos solo los campos modificables
-            pedido.setIdUsuario(pedido.getIdUsuario());
-            pedido.setIdProveedor(pedido.getIdProveedor());
-            pedido.setFechaPedido(pedido.getFechaPedido());
-            pedido.setEstado(pedido.getEstado());
-            pedido.setObservaciones(pedido.getObservaciones());
-            pedido.setArchivado(pedido.getArchivado());
+            pedido.IdUsuario = pedido.IdUsuario;
+            pedido.IdProveedor = pedido.IdProveedor;
+            pedido.FechaPedido = pedido.FechaPedido;
+            pedido.Estado = pedido.Estado;
+            pedido.Observaciones = pedido.Observaciones;
+            pedido.Archivado = pedido.Archivado;
 
             return _pedidoRepository.ActualizarPedido(idPedido, pedido);
         }
@@ -75,7 +75,7 @@ namespace UseCases
                 return 0;
             }
 
-            pedidoActual.setEstado(nuevoEstado);
+            pedidoActual.Estado = nuevoEstado;
             return _pedidoRepository.CambiarEstadoPedido(idPedido, nuevoEstado);
         }
 
@@ -88,13 +88,13 @@ namespace UseCases
                 return 0;
             }
 
-            if (pedidoActual.getEstado() != "entregado")
+            if (pedidoActual.Estado != "entregado")
             {
                 return 0;
             }
 
             // Soft delete: solo actualizamos el campo "archivado"
-            pedidoActual.setArchivado(true);
+            pedidoActual.Archivado = true;
             return _pedidoRepository.EliminarPedido(idPedido);
         }
     }

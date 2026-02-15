@@ -28,20 +28,5 @@ namespace UseCases
         {
             return _usuarioRepository.GetUsuarioPorNombre(nombre);
         }
-
-        public int CrearUsuario(Usuario usuarioNuevo)
-        {
-            return _usuarioRepository.CrearUsuario(usuarioNuevo);
-        }
-
-        public int ActualizarUsuario(int idUsuario, Usuario usuario)
-        {
-            return _usuarioRepository.ActualizarUsuario(idUsuario, usuario);
-        }
-
-        public int EliminarUsuario(int idUsuario)
-        {
-            return _usuarioRepository.EliminarUsuario(idUsuario);
-        }
     }
 }
