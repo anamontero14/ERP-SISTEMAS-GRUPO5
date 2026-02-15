@@ -19,6 +19,11 @@ namespace UseCases
             return _detallePedidoRepository.GetListaDetallesPorPedido(idPedido);
         }
 
+        public List<DetallePedido> GetListaDetallesPedidosActivos()
+        {
+            return _detallePedidoRepository.GetListaDetallesPedidosActivos();
+        }
+
         public DetallePedido GetDetallePedidoPorId(int idPedido, int idProducto)
         {
             return _detallePedidoRepository.GetDetallePedidoPorId(idPedido, idProducto);

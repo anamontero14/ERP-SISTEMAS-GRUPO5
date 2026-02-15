@@ -1,136 +1,30 @@
 ﻿namespace Domain.Entities
 {
-    /// <summary>
-    /// Entidad que representa un pedido en el sistema ERP.
-    /// Corresponde a la tabla PEDIDO de la base de datos.
-    /// </summary>
     public class Pedido
     {
-        // Identificador único del pedido (autogenerado en BBDD)
-        private int idPedido;
+        public int IdPedido { get; set; }
+        public int IdUsuario { get; set; }
+        public int IdProveedor { get; set; }
+        public DateTime FechaPedido { get; set; }
+        public string Estado { get; set; } = string.Empty;
+        public string Observaciones { get; set; } = string.Empty;
+        public bool Archivado { get; set; }
 
-        // ID del usuario que realiza el pedido (FK a USUARIO)
-        private int idUsuario;
+        public Pedido()
+        {
+            FechaPedido = DateTime.MinValue;
+        }
 
-        // ID del proveedor al que se le hace el pedido (FK a PROVEEDOR)
-        private int idProveedor;
-
-        // Fecha en la que se realizó el pedido
-        private DateTime fechaPedido { get; set; }
-
-        // Estado del pedido: 'pedido', 'enviado' o 'entregado'
-        private string estado;
-
-        // Observaciones adicionales del pedido
-        private string observaciones;
-
-        //campo para saber si el pedido ha sido archivado o no
-        private bool archivado;
-
-        /// <summary>
-        /// Constructor de la entidad Pedido.
-        /// </summary>
-        /// <param name="idPedido">ID del pedido</param>
-        /// <param name="idUsuario">ID del usuario que realiza el pedido</param>
-        /// <param name="idProveedor">ID del proveedor</param>
-        /// <param name="fechaPedido">Fecha del pedido</param>
-        /// <param name="estado">Estado del pedido (pedido/enviado/entregado)</param>
-        /// <param name="observaciones">Observaciones del pedido</param>
-        /// <param name="archivado">Para saber si el pedido ha sido archivado o no</param>
         public Pedido(int idPedido, int idUsuario, int idProveedor,
             DateTime fechaPedido, string estado, string observaciones, bool archivado)
         {
-            this.idPedido = idPedido;
-            this.idUsuario = idUsuario;
-            this.idProveedor = idProveedor;
-            this.fechaPedido = fechaPedido;
-            this.estado = estado;
-            this.observaciones = observaciones;
-            this.archivado = archivado;
+            IdPedido = idPedido;
+            IdUsuario = idUsuario;
+            IdProveedor = idProveedor;
+            FechaPedido = fechaPedido;
+            Estado = estado ?? string.Empty;
+            Observaciones = observaciones ?? string.Empty;
+            Archivado = archivado;
         }
-
-        // Getters públicos
-
-        /// <summary>
-        /// Obtiene el ID del pedido.
-        /// </summary>
-        /// <returns>ID del pedido</returns>
-        public int getIdPedido() { return idPedido; }
-
-        /// <summary>
-        /// Obtiene el ID del usuario del pedido.
-        /// </summary>
-        /// <returns>ID del usuario</returns>
-        public int getIdUsuario() { return idUsuario; }
-
-        /// <summary>
-        /// Obtiene el ID del proveedor del pedido.
-        /// </summary>
-        /// <returns>ID del proveedor</returns>
-        public int getIdProveedor() { return idProveedor; }
-
-        /// <summary>
-        /// Obtiene la fecha del pedido.
-        /// </summary>
-        /// <returns>Fecha del pedido</returns>
-        public DateTime getFechaPedido() { return fechaPedido; }
-
-        /// <summary>
-        /// Obtiene el estado del pedido.
-        /// </summary>
-        /// <returns>Estado del pedido</returns>
-        public string getEstado() { return estado; }
-
-        /// <summary>
-        /// Obtiene las observaciones del pedido.
-        /// </summary>
-        /// <returns>Observaciones del pedido</returns>
-        public string getObservaciones() { return observaciones; }
-
-        /// <summary>
-        /// Obtiene el estado del pedido referente a de si está
-        /// archivado o no
-        /// </summary>
-        /// <returns>Observaciones del pedido</returns>
-        public bool getArchivado() { return archivado; }
-
-        // Setters públicos (no incluye idPedido porque es solo lectura)
-
-        /// <summary>
-        /// Establece el ID del usuario del pedido.
-        /// </summary>
-        /// <param name="idUsuario">Nuevo ID del usuario</param>
-        public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
-
-        /// <summary>
-        /// Establece el ID del proveedor del pedido.
-        /// </summary>
-        /// <param name="idProveedor">Nuevo ID del proveedor</param>
-        public void setIdProveedor(int idProveedor) { this.idProveedor = idProveedor; }
-
-        /// <summary>
-        /// Establece la fecha del pedido.
-        /// </summary>
-        /// <param name="fechaPedido">Nueva fecha del pedido</param>
-        public void setFechaPedido(DateTime fechaPedido) { this.fechaPedido = fechaPedido; }
-
-        /// <summary>
-        /// Establece el estado del pedido.
-        /// </summary>
-        /// <param name="estado">Nuevo estado (pedido/enviado/entregado)</param>
-        public void setEstado(string estado) { this.estado = estado; }
-
-        /// <summary>
-        /// Establece las observaciones del pedido.
-        /// </summary>
-        /// <param name="observaciones">Nuevas observaciones del pedido</param>
-        public void setObservaciones(string observaciones) { this.observaciones = observaciones; }
-
-        /// <summary>
-        /// Establece si el pedido está archivado.
-        /// </summary>
-        /// <param name="isArchivado">El nuevo estado de archivado del pedido</param>
-        public void setArchivado(bool isArchivado) { this.archivado = isArchivado; }
-
     }
 }
