@@ -42,13 +42,5 @@ namespace Domain.Interfaces.UseCases
         /// <param name="detallePedido">Datos actualizados del detalle</param>
         /// <returns>Número de filas afectadas</returns>
         int ActualizarDetallePedido(int idPedido, int idProducto, DetallePedido detallePedido);
-
-        /// <summary>
-        /// Elimina un detalle de pedido.
-        /// </summary>
-        /// <param name="idPedido">ID del pedido</param>
-        /// <param name="idProducto">ID del producto</param>
-        /// <returns>Número de filas afectadas</returns>
-        int EliminarDetallePedido(int idPedido, int idProducto);
     }
 }
