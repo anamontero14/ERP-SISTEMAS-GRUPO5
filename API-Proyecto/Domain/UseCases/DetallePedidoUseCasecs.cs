@@ -73,16 +73,5 @@ namespace UseCases
         {
             return _detallePedidoRepository.ActualizarDetallePedido(idPedido, idProducto, detallePedido);
         }
-
-        /// <summary>
-        /// Elimina un detalle de pedido del sistema.
-        /// </summary>
-        /// <param name="idPedido">ID del pedido</param>
-        /// <param name="idProducto">ID del producto</param>
-        /// <returns>Número de filas afectadas</returns>
-        public int EliminarDetallePedido(int idPedido, int idProducto)
-        {
-            return _detallePedidoRepository.EliminarDetallePedido(idPedido, idProducto);
-        }
     }
 }

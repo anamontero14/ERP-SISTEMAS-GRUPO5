@@ -6,8 +6,8 @@ namespace API_Proyecto.Controllers.API
 {
     /// <summary>
     /// Controlador API para gestionar detalles de pedidos.
-    /// Permite operaciones de lectura (GET), creación (POST),
-    /// actualización parcial (PATCH) y eliminación (DELETE).
+    /// Permite operaciones de lectura (GET), creación (POST)
+    /// y actualización parcial (PATCH).
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
@@ -79,21 +79,6 @@ namespace API_Proyecto.Controllers.API
         public IActionResult ActualizarDetallePedido(int idPedido, int idProducto, [FromBody] DetallePedido detallePedido)
         {
             int resultado = _detallesPedidoUseCase.ActualizarDetallePedido(idPedido, idProducto, detallePedido);
-            if (resultado == 0) return NotFound();
-            return Ok();
-        }
-
-        /// <summary>
-        /// Elimina un detalle de pedido por su clave compuesta.
-        /// </summary>
-        /// <param name="idPedido">ID del pedido</param>
-        /// <param name="idProducto">ID del producto</param>
-        /// <returns>200 si se eliminó, 404 si no se encontró</returns>
-        // DELETE: api/DetallesPedido/5/3
-        [HttpDelete("{idPedido}/{idProducto}")]
-        public IActionResult EliminarDetallePedido(int idPedido, int idProducto)
-        {
-            int resultado = _detallesPedidoUseCase.EliminarDetallePedido(idPedido, idProducto);
             if (resultado == 0) return NotFound();
             return Ok();
         }
