@@ -1,8 +1,10 @@
-import { IPedidoRepository } from '../../interfaces/repositories/IPedidoRepository';
-import { ICambiarEstadoPedidoUseCase } from '../../interfaces/usecases/pedido/ICambiarEstadoPedidoUseCase';
 
-export class CambiarEstadoPedidoUseCase implements ICambiarEstadoPedidoUseCase {
-  constructor(private pedidoRepository: IPedidoRepository) {}
+import { Injectable } from '@angular/core';
+import { PedidoRepository } from '../../../data/repositories/PedidoRepository';
+
+@Injectable({ providedIn: 'root' })
+export class CambiarEstadoPedidoUseCase {
+  constructor(private pedidoRepository: PedidoRepository) {}
 
   async cambiarEstadoPedido(idPedido: number, nuevoEstado: string): Promise<number> {
     const pedido = await this.pedidoRepository.getPedidoPorId(idPedido);
