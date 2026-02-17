@@ -5,5 +5,4 @@ export interface IDetallesPedidoRepository {
   getDetallePedidoPorId(idPedido: number, idProducto: number): Promise<clsDetallePedido>;
   crearDetallePedido(detallePedidoNuevo: clsDetallePedido): Promise<number>;
   actualizarDetallePedido(idPedido: number, idProducto: number, detallePedido: clsDetallePedido): Promise<number>;
-  eliminarDetallePedido(idPedido: number, idProducto: number): Promise<number>;
 }

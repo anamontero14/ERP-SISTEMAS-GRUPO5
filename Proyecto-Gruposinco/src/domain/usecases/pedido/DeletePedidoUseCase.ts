@@ -1,5 +1,5 @@
 import { IPedidoRepository } from '../../interfaces/repositories/IPedidoRepository';
-import { IDeletePedidoUseCase } from '../../interfaces/usecases/pedido/IDeletePedidoUseCase';
+import { IDeletePedidoUseCase } from '../../interfaces/usecases/Pedido/IDeletePedidoUseCase';
 
 export class DeletePedidoUseCase implements IDeletePedidoUseCase {
   constructor(private pedidoRepository: IPedidoRepository) {}

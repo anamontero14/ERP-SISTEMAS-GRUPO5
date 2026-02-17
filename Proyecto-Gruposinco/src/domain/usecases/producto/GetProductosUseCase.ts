@@ -1,6 +1,6 @@
 import { IProductoRepository } from '../../interfaces/repositories/IProductoRepository';
 import { clsProducto } from '../../entities/clsProducto';
-import { IGetProductosUseCase } from '../../interfaces/usecases/producto/IGetProductosUseCase';
+import { IGetProductosUseCase } from '../../interfaces/usecases/Producto/IGetProductosUseCase';
 
 export class GetProductosUseCase implements IGetProductosUseCase {
   constructor(private productoRepository: IProductoRepository) {}

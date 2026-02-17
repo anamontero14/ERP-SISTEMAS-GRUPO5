@@ -1,6 +1,6 @@
 import { IPedidoRepository } from '../../interfaces/repositories/IPedidoRepository';
 import { clsPedido } from '../../entities/clsPedido';
-import { IUpdatePedidoUseCase } from '../../interfaces/usecases/pedido/IUpdatePedidoUseCase';
+import { IUpdatePedidoUseCase } from '../../interfaces/usecases/Pedido/IUpdatePedidoUseCase';
 
 export class UpdatePedidoUseCase implements IUpdatePedidoUseCase {
   constructor(private pedidoRepository: IPedidoRepository) {}

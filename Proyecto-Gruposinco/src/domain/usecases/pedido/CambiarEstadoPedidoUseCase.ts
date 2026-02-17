@@ -1,5 +1,5 @@
 import { IPedidoRepository } from '../../interfaces/repositories/IPedidoRepository';
-import { ICambiarEstadoPedidoUseCase } from '../../interfaces/usecases/pedido/ICambiarEstadoPedidoUseCase';
+import { ICambiarEstadoPedidoUseCase } from '../../interfaces/usecases/Pedido/ICambiarEstadoPedidoUseCase';
 
 export class CambiarEstadoPedidoUseCase implements ICambiarEstadoPedidoUseCase {
   constructor(private pedidoRepository: IPedidoRepository) {}
