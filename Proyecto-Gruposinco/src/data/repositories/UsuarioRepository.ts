@@ -1,16 +1,14 @@
-import { inject, injectable } from "inversify";
-import { clsUsuario } from "../../domain/entities/clsUsuario";
-import { IUsuarioRepository } from "../../domain/interfaces/repositories/IUsuarioRepository";
-import { ApiConnection } from "../datasource/api/ApiConnection";
-import { TYPES } from "../../di/types";
+import { Injectable } from '@angular/core';
+import { clsUsuario } from '../../domain/entities/clsUsuario';
+import { IUsuarioRepository } from '../../domain/interfaces/repositories/IUsuarioRepository';
+import { ApiConnection } from '../datasource/api/ApiConnection';
 
-@injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UsuarioRepository implements IUsuarioRepository {
 
-  constructor(
-    @inject(TYPES.ApiConnection)
-    private api: ApiConnection
-  ) {}
+  constructor(private api: ApiConnection) {}
 
   // Mapper
   private mapToEntity(data: any): clsUsuario {

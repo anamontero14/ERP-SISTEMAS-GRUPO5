@@ -1,0 +1,9 @@
+<h2>Actualizar pedido #{{ pedido.IdPedido }}</h2>
+
+<label>Proveedor:</label>
+<input type="number" [(ngModel)]="pedido.IdProveedor">
+
+<label>Observaciones:</label>
+<textarea [(ngModel)]="pedido.Observaciones"></textarea>
+
+<button (click)="guardar()">Guardar cambios</button>

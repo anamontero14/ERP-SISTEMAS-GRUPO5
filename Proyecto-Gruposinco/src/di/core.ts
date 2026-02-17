@@ -104,8 +104,8 @@ container.bind<ICreateDetallePedidoUseCase>(TYPES.ICreateDetallePedidoUseCase)
   .to(CreateDetallePedidoUseCase);
 container.bind<IUpdateDetallePedidoUseCase>(TYPES.IUpdateDetallePedidoUseCase)
   .to(UpdateDetallePedidoUseCase);
-container.bind<IDeleteDetallePedidoUseCase>(TYPES.IDeleteDetallePedidoUseCase)
-  .to(DeleteDetallePedidoUseCase);
+/*container.bind<IDeleteDetallePedidoUseCase>(TYPES.IDeleteDetallePedidoUseCase)
+  .to(DeleteDetallePedidoUseCase);*/
 
 
 // Bind Viewmodels
