@@ -1,9 +1,11 @@
-import { IProductoRepository } from '../../interfaces/repositories/IProductoRepository';
-import { clsProducto } from '../../entities/clsProducto';
-import { IGetProductosUseCase } from '../../interfaces/usecases/producto/IGetProductosUseCase';
 
-export class GetProductosUseCase implements IGetProductosUseCase {
-  constructor(private productoRepository: IProductoRepository) {}
+import { Injectable } from '@angular/core';
+import { ProductoRepository } from '../../../data/repositories/ProductoRepository';
+import { clsProducto } from '../../entities/clsProducto';
+
+@Injectable({ providedIn: 'root' })
+export class GetProductosUseCase {
+  constructor(private productoRepository: ProductoRepository) {}
 
   async getListaProductos(): Promise<clsProducto[]> {
     return await this.productoRepository.getListaProductos();
