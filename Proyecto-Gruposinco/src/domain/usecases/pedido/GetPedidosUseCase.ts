@@ -1,9 +1,12 @@
-import { IPedidoRepository } from '../../interfaces/repositories/IPedidoRepository';
+
+import { Injectable } from '@angular/core';
+import { PedidoRepository } from '../../../data/repositories/PedidoRepository';
 import { clsPedido } from '../../entities/clsPedido';
 import { IGetPedidosUseCase } from '../../interfaces/usecases/Pedido/IGetPedidosUseCase';
 
-export class GetPedidosUseCase implements IGetPedidosUseCase {
-  constructor(private pedidoRepository: IPedidoRepository) {}
+@Injectable({ providedIn: 'root' })
+export class GetPedidosUseCase {
+  constructor(private pedidoRepository: PedidoRepository) {}
 
   async getListaPedidos(): Promise<clsPedido[]> {
     return await this.pedidoRepository.getListaPedidos();

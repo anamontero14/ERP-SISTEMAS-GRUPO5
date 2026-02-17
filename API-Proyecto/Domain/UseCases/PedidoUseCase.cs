@@ -1,14 +1,11 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.UseCases;
-using System;
-using System.Collections.Generic;
 
 namespace UseCases
 {
     /// <summary>
     /// Caso de uso que implementa la lógica de negocio para la gestión de pedidos.
-    /// Incluye validaciones y reglas de negocio antes de delegar al repositorio.
     /// </summary>
     public class PedidoUseCase : IPedidoUseCase
     {
@@ -56,52 +53,40 @@ namespace UseCases
         /// Obtiene un pedido específico por su identificador.
         /// </summary>
         /// <param name="idPedido">ID del pedido a buscar</param>
-        /// <returns>Pedido encontrado</returns>
-        public Pedido GetPedidoPorId(int idPedido)
+        /// <returns>Pedido encontrado o null si no existe</returns>
+        public Pedido? GetPedidoPorId(int idPedido)
         {
             return _pedidoRepository.GetPedidoPorId(idPedido);
         }
 
         /// <summary>
         /// Crea un nuevo pedido en el sistema.
-        /// Inicializa el campo Archivado como false automáticamente.
+        /// Inicializa el estado como "pedido" y Archivado como false automáticamente.
         /// </summary>
         /// <param name="pedidoNuevo">Pedido a crear</param>
         /// <returns>Número de filas afectadas</returns>
         public int CrearPedido(Pedido pedidoNuevo)
         {
+            pedidoNuevo.Estado = "pedido";
             pedidoNuevo.Archivado = false;
             return _pedidoRepository.CrearPedido(pedidoNuevo);
         }
 
         /// <summary>
         /// Actualiza un pedido existente.
-        /// Solo permite actualizar pedidos que no estén en estado "entregado".
+        /// Solo permite actualizar pedidos en estado "pedido".
         /// </summary>
         /// <param name="idPedido">ID del pedido a actualizar</param>
         /// <param name="pedido">Datos actualizados del pedido</param>
-        /// <returns>Número de filas afectadas, 0 si el pedido no existe o está entregado</returns>
+        /// <returns>1 si se actualizó, 0 si no existe, -1 si el estado no permite actualizar</returns>
         public int ActualizarPedido(int idPedido, Pedido pedido)
         {
-            Pedido pedidoActual = _pedidoRepository.GetPedidoPorId(idPedido);
+            Pedido? pedidoActual = _pedidoRepository.GetPedidoPorId(idPedido);
 
-            if (pedidoActual == null)
-            {
-                return 0;
-            }
+            if (pedidoActual == null) return 0;
 
-            if (pedidoActual.Estado != "entregado")
-            {
-                return 0;
-            }
-
-            // Actualizamos solo los campos modificables
-            pedido.IdUsuario = pedido.IdUsuario;
-            pedido.IdProveedor = pedido.IdProveedor;
-            pedido.FechaPedido = pedido.FechaPedido;
-            pedido.Estado = pedido.Estado;
-            pedido.Observaciones = pedido.Observaciones;
-            pedido.Archivado = pedido.Archivado;
+            // Solo se puede actualizar si el estado es "pedido"
+            if (pedidoActual.Estado != "pedido") return -1;
 
             return _pedidoRepository.ActualizarPedido(idPedido, pedido);
         }
@@ -111,42 +96,31 @@ namespace UseCases
         /// </summary>
         /// <param name="idPedido">ID del pedido</param>
         /// <param name="nuevoEstado">Nuevo estado del pedido</param>
-        /// <returns>Número de filas afectadas, 0 si el pedido no existe</returns>
+        /// <returns>1 si se cambió, 0 si no existe</returns>
         public int CambiarEstadoPedido(int idPedido, string nuevoEstado)
         {
-            Pedido pedidoActual = _pedidoRepository.GetPedidoPorId(idPedido);
+            Pedido? pedidoActual = _pedidoRepository.GetPedidoPorId(idPedido);
 
-            if (pedidoActual == null)
-            {
-                return 0;
-            }
+            if (pedidoActual == null) return 0;
 
-            pedidoActual.Estado = nuevoEstado;
             return _pedidoRepository.CambiarEstadoPedido(idPedido, nuevoEstado);
         }
 
         /// <summary>
-        /// Elimina (archiva) un pedido del sistema mediante soft delete.
-        /// Solo permite eliminar pedidos que no estén en estado "entregado".
+        /// Archiva un pedido del sistema (soft delete).
+        /// No se puede archivar un pedido que ya esté archivado.
         /// </summary>
-        /// <param name="idPedido">ID del pedido a eliminar</param>
-        /// <returns>Número de filas afectadas, 0 si el pedido no existe o está entregado</returns>
+        /// <param name="idPedido">ID del pedido a archivar</param>
+        /// <returns>1 si se archivó, 0 si no existe, -1 si ya estaba archivado</returns>
         public int EliminarPedido(int idPedido)
         {
-            Pedido pedidoActual = _pedidoRepository.GetPedidoPorId(idPedido);
+            Pedido? pedidoActual = _pedidoRepository.GetPedidoPorId(idPedido);
 
-            if (pedidoActual == null)
-            {
-                return 0;
-            }
+            if (pedidoActual == null) return 0;
 
-            if (pedidoActual.Estado != "entregado")
-            {
-                return 0;
-            }
+            // No se puede archivar un pedido que ya está archivado
+            if (pedidoActual.Archivado) return -1;
 
-            // Soft delete: solo actualizamos el campo "archivado"
-            pedidoActual.Archivado = true;
             return _pedidoRepository.EliminarPedido(idPedido);
         }
     }
