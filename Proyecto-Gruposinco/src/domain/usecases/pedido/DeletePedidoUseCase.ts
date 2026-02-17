@@ -1,3 +1,5 @@
+import { IPedidoRepository } from '../../interfaces/repositories/IPedidoRepository';
+import { IDeletePedidoUseCase } from '../../interfaces/usecases/Pedido/IDeletePedidoUseCase';
 
 import { Injectable } from '@angular/core';
 import { PedidoRepository } from '../../../data/repositories/PedidoRepository';
