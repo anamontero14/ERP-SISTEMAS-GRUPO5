@@ -271,50 +271,6 @@ namespace Data.Repositories.AzureRepositories
 
             return filasAfectadas;
         }
-
-        /// <summary>
-        /// PRE: El idPedido y el idProducto no pueden ser nulos
-        /// Elimina físicamente un detalle de pedido por su clave compuesta.
-        /// NOTA: Este método es solo para correcciones administrativas excepcionales.
-        /// Los detalles de pedidos archivados NO se eliminan, solo se filtran en consultas.
-        /// </summary>
-        /// <param name="idPedido">ID del pedido</param>
-        /// <param name="idProducto">ID del producto</param>
-        /// <returns>Número de filas afectadas</returns>
-        public int EliminarDetallePedido(int idPedido, int idProducto)
-        {
-            int numeroFilasAfectadas = 0;
-            SqlConnection? miConexion = null;
-            SqlCommand? miComando = null;
-            Connection connection = new Connection();
-
-            try
-            {
-                miConexion = connection.getConnection();
-
-                miComando = new SqlCommand();
-                miComando.CommandText = "DELETE FROM DETALLE_PEDIDO WHERE idPedido = @idPedido AND idProducto = @idProducto";
-                miComando.Connection = miConexion;
-                miComando.Parameters.AddWithValue("@idPedido", idPedido);
-                miComando.Parameters.AddWithValue("@idProducto", idProducto);
-
-                numeroFilasAfectadas = miComando.ExecuteNonQuery();
-            }
-            catch (SqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                if (miConexion != null) connection.closeConnection(ref miConexion);
-            }
-
-            return numeroFilasAfectadas;
-        }
         #endregion
     }
 }
