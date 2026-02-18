@@ -4,6 +4,7 @@ import { UpdatePedidoUseCase } from '../../domain/usecases/pedido/UpdatePedidoUs
 import { clsPedido } from '../../domain/entities/clsPedido';
 import { clsDetallePedido } from '../../domain/entities/clsDetallePedido';
 import { GetDetallesPedidoUseCase } from '../../domain/usecases/detallePedido/GetDetallesPedidoUseCase';
+import { UpdateDetallePedidoUseCase } from '../../domain/usecases/detallePedido/UpdateDetallePedidoUseCase';
 
 @Injectable({ providedIn: 'root' })
 export class UpdatePedidosProveedoresVM {
@@ -28,4 +29,6 @@ export class UpdatePedidosProveedoresVM {
   async actualizarPedido(idPedido: number, pedido: clsPedido) {
     await this.updatePedidoUC.actualizarPedido(idPedido, pedido);
   }
+  
+  
 }
