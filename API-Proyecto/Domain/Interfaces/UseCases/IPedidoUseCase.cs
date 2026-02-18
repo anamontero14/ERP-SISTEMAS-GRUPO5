@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.DTOs;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace Domain.Interfaces.UseCases
         /// </summary>
         /// <param name="pedidoNuevo">Pedido a crear</param>
         /// <returns>Número de filas afectadas</returns>
-        int CrearPedido(Pedido pedidoNuevo);
+        int CrearPedido(CrearPedidoDto pedidoNuevo);
 
         /// <summary>
         /// Actualiza un pedido existente.

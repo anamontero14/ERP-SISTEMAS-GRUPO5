@@ -54,20 +54,6 @@ namespace API_Proyecto.Controllers.API
         }
 
         /// <summary>
-        /// Crea un nuevo detalle de pedido.
-        /// </summary>
-        /// <param name="detallePedidoNuevo">Detalle de pedido a crear</param>
-        /// <returns>201 si se creó correctamente</returns>
-        // POST: api/DetallesPedido
-        [HttpPost]
-        public IActionResult CrearDetallePedido([FromBody] DetallePedido detallePedidoNuevo)
-        {
-            int resultado = _detallesPedidoUseCase.CrearDetallePedido(detallePedidoNuevo);
-            if (resultado == 0) return BadRequest();
-            return Created("", detallePedidoNuevo);
-        }
-
-        /// <summary>
         /// Actualiza un detalle de pedido existente.
         /// </summary>
         /// <param name="idPedido">ID del pedido</param>
@@ -80,6 +66,7 @@ namespace API_Proyecto.Controllers.API
         {
             int resultado = _detallesPedidoUseCase.ActualizarDetallePedido(idPedido, idProducto, detallePedido);
             if (resultado == 0) return NotFound();
+            if (resultado == -1) return BadRequest("El pedido no se puede modificar porque ya fue enviado o entregado.");
             return Ok();
         }
     }

@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.DTOs;
+using Domain.Entities;
 using Domain.Interfaces.UseCases;
 using Microsoft.AspNetCore.Mvc;
 
@@ -84,7 +85,7 @@ namespace API_Proyecto.Controllers.API
         /// <returns>201 si se creó correctamente, 400 si hubo error</returns>
         // POST: api/Pedido
         [HttpPost]
-        public IActionResult CrearPedido([FromBody] Pedido pedidoNuevo)
+        public IActionResult CrearPedido([FromBody] CrearPedidoDto pedidoNuevo)
         {
             if (pedidoNuevo == null) return BadRequest("Pedido vacío.");
             int resultado = _pedidoUseCase.CrearPedido(pedidoNuevo);
@@ -105,6 +106,7 @@ namespace API_Proyecto.Controllers.API
             if (pedido == null) return BadRequest("Pedido vacío.");
             int resultado = _pedidoUseCase.ActualizarPedido(idPedido, pedido);
             if (resultado == 0) return NotFound();
+            if (resultado == -1) return BadRequest("El pedido no se puede modificar porque ya fue enviado o entregado.");
             return Ok();
         }
 
@@ -134,6 +136,7 @@ namespace API_Proyecto.Controllers.API
         {
             int resultado = _pedidoUseCase.EliminarPedido(idPedido);
             if (resultado == 0) return NotFound();
+            if (resultado == -1) return BadRequest("El pedido ya está archivado.");
             return Ok();
         }
     }

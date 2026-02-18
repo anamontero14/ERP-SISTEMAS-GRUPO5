@@ -41,6 +41,8 @@ namespace Domain.Interfaces.Repositories
         /// <returns>Número de filas afectadas</returns>
         int CrearPedido(Pedido pedidoNuevo);
 
+        int CrearPedidoYObtenerID(Pedido pedidoNuevo);
+
         /// <summary>
         /// Actualiza un pedido existente.
         /// </summary>
