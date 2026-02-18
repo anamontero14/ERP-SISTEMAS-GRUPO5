@@ -1,37 +1,46 @@
+import { Injectable } from '@angular/core';
 import { clsProducto } from '../../domain/entities/clsProducto';
 import { IProductoRepository } from '../../domain/interfaces/repositories/IProductoRepository';
+import { ApiConnection } from '../datasource/api/ApiConnection';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class ProductoRepository implements IProductoRepository {
 
-    // Mock Productos
-    private readonly productosMock: clsProducto[] = [
-        new clsProducto(1, 'Laptop Pro 14', 'Portátil de alto rendimiento con 16GB RAM', 1200, 15, 'Importado'),
-        new clsProducto(2, 'Monitor 4K', 'Monitor ultra HD de 27 pulgadas', 350, 10, 'Nacional'),
-        new clsProducto(3, 'Teclado Mecánico', 'Teclado RGB con switches blue', 85, 50, 'Importado'),
-        new clsProducto(4, 'Mouse Ergonómico', 'Mouse inalámbrico con sensor óptico', 45, 100, 'Nacional'),
-        new clsProducto(5, 'Silla de Oficina', 'Silla ergonómica con soporte lumbar', 210, 8, 'Nacional'),
-        new clsProducto(6, 'Disco Duro SSD 1TB', 'Unidad de estado sólido alta velocidad', 110, 25, 'Importado'),
-        new clsProducto(7, 'Impresora Láser', 'Impresora blanco y negro multifunción', 180, 5, 'Importado'),
-        new clsProducto(8, 'Escritorio Elevable', 'Mesa con motor eléctrico para trabajar de pie', 450, 3, 'Nacional'),
-        new clsProducto(9, 'Auriculares Noise Cancelling', 'Auriculares con cancelación de ruido activa', 190, 12, 'Importado'),
-        new clsProducto(10, 'Webcam 1080p', 'Cámara para streaming con micrófono dual', 65, 30, 'Nacional')
-    ];
+  constructor(private api: ApiConnection) {}
 
-    // GetListado Productos
-    async getListaProductos(): Promise<clsProducto[]> {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(this.productosMock);
-            }, 100);
-        });
+  // Mapper
+  private mapToEntity(data: any): clsProducto {
+    return new clsProducto(
+      data.idProducto,
+      data.nombreProducto,
+      data.descripcionProducto,
+      data.precioProducto,
+      data.stockProducto,
+      data.procedenciaProducto
+    );
+  }
+
+  // GET listado productos
+  async getListaProductos(): Promise<clsProducto[]> {
+    const response = await this.api.getProductos<any[]>();
+
+    if (!response.success || !response.data) {
+      throw new Error(response.message);
     }
 
-    // GetPorId Productos
-    async getProductoPorId(idProducto: number): Promise<clsProducto> {
-        const producto = this.productosMock.find(p => p.IdProducto === idProducto);
-        if (!producto) {
-            throw new Error(`Producto con id ${idProducto} no encontrado`);
-        }
-        return Promise.resolve(producto);
+    return response.data.map(d => this.mapToEntity(d));
+  }
+
+  // GET producto por id
+  async getProductoPorId(idProducto: number): Promise<clsProducto> {
+    const response = await this.api.getProductoPorId<any>(idProducto);
+
+    if (!response.success || !response.data) {
+      throw new Error(response.message);
     }
+
+    return this.mapToEntity(response.data);
+  }
 }

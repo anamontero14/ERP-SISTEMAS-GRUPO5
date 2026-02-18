@@ -1,0 +1,14 @@
+<div class="login-container">
+  <h2>Iniciar sesión</h2>
+
+  <app-pa-escribir label="Email" [(model)]="vm.email"></app-pa-escribir>
+  <app-pa-escribir label="Contraseña" [(model)]="vm.password"></app-pa-escribir>
+
+  <app-button
+    text="Entrar"
+    [disabled]="vm.loading"
+    (click)="vm.login()">
+  </app-button>
+
+  <p class="error" *ngIf="vm.error">{{ vm.error }}</p>
+</div>

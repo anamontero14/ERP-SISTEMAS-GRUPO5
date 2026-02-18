@@ -1,3 +1,7 @@
+import { injectable } from "inversify";
+import { Injectable } from '@angular/core'; 
+
+
 export interface ApiResponse<T> {
   success: boolean;
   statusCode: number;
@@ -5,11 +9,12 @@ export interface ApiResponse<T> {
   data?: T;
 }
 
-const BASE_URL = "https://api-proyectogruposinco-cqazb6ebhubmeqd0.francecentral-01.azurewebsites.net/api/";
+const BASE_URL = "https://api-proyectogruposinco-cqazb6ebhubmeqd0.francecentral-01.azurewebsites.net/api";
 
+@Injectable({ providedIn: 'root' })
 export class ApiConnection {
 
-  private static async request<T>(
+  private async request<T>(
     endpoint: string,
     method: string = "GET",
     body?: any
@@ -50,67 +55,67 @@ export class ApiConnection {
     }
   }
 
-  static getUsuarios<T>() {
+  getUsuarios<T>() {
     return this.request<T>("Usuario");
   }
 
-  static getUsuarioPorId<T>(id: number) {
+  getUsuarioPorId<T>(id: number) {
     return this.request<T>(`Usuario/${id}`);
   }
 
-  static validarUsuario<T>(nombre: string) {
+  validarUsuario<T>(nombre: string) {
     return this.request<T>(`Usuario/validar/${nombre}`);
   }
 
-  static getProductos<T>() {
+  getProductos<T>() {
     return this.request<T>("Producto");
   }
 
-  static getProductoPorId<T>(id: number) {
+  getProductoPorId<T>(id: number) {
     return this.request<T>(`Producto/${id}`);
   }
 
-  static getProveedores<T>() {
+  getProveedores<T>() {
     return this.request<T>("Proveedor");
   }
 
-  static getProveedorPorId<T>(id: number) {
+  getProveedorPorId<T>(id: number) {
     return this.request<T>(`Proveedor/${id}`);
   }
 
-  static getPedidos<T>() {
+  getPedidos<T>() {
     return this.request<T>("Pedido");
   }
 
-  static getPedidoPorId<T>(id: number) {
+  getPedidoPorId<T>(id: number) {
     return this.request<T>(`Pedido/${id}`);
   }
 
-  static getPedidosPorUsuario<T>(idUsuario: number) {
+  getPedidosPorUsuario<T>(idUsuario: number) {
     return this.request<T>(`Pedido/usuario/${idUsuario}`);
   }
 
-  static crearPedido<T>(pedido: any) {
+  crearPedido<T>(pedido: any) {
     return this.request<T>("Pedido", "POST", pedido);
   }
 
-  static actualizarPedido<T>(id: number, pedido: any) {
+  actualizarPedido<T>(id: number, pedido: any) {
     return this.request<T>(`Pedido/${id}`, "PATCH", pedido);
   }
 
-  static eliminarPedido<T>(id: number) {
+  eliminarPedido<T>(id: number) {
     return this.request<T>(`Pedido/${id}`, "DELETE");
   }
 
-  static getDetallesPedido<T>(idPedido: number) {
+  getDetallesPedido<T>(idPedido: number) {
     return this.request<T>(`DetallesPedido/pedido/${idPedido}`);
   }
 
-  static crearDetallePedido<T>(detalle: any) {
+  crearDetallePedido<T>(detalle: any) {
     return this.request<T>("DetallesPedido", "POST", detalle);
   }
 
-  static actualizarDetallePedido<T>(
+  actualizarDetallePedido<T>(
     idPedido: number,
     idProducto: number,
     detalle: any

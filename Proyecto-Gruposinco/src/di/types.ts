@@ -1,44 +1,36 @@
-import { clsUsuario } from "../domain/entities/clsUsuario";
-import { clsProducto } from "../domain/entities/clsProducto";
-import { clsProveedor } from "../domain/entities/clsProveedor";
-import { clsPedido } from "../domain/entities/clsPedido";
-import { clsDetallePedido } from "../domain/entities/clsDetallePedido";
+export const TYPES = {
 
-// Interfaces de repositorios
-export interface IUsuarioRepository {
-  getListaUsuarios(): Promise<clsUsuario[]>;
-  getUsuarioPorId(idUsuario: number): Promise<clsUsuario>;
-  getUsuarioPorNombre(nombre: string): Promise<clsUsuario>;
-  crearUsuario(usuarioNuevo: clsUsuario): Promise<number>;
-  actualizarUsuario(idUsuario: number, usuario: clsUsuario): Promise<number>;
-  eliminarUsuario(idUsuario: number): Promise<number>;
-}
+  // DataSources
+  ApiConnection: Symbol.for("ApiConnection"),
 
-export interface IProductoRepository {
-  getListaProductos(): Promise<clsProducto[]>;
-  getProductoPorId(idProducto: number): Promise<clsProducto>;
-}
+  // Repositories
+  IProductoRepository: Symbol.for("IProductoRepository"),
+  IProveedorRepository: Symbol.for("IProveedorRepository"),
+  IPedidoRepository: Symbol.for("IPedidoRepository"),
+  IUsuarioRepository: Symbol.for("IUsuarioRepository"),
+  IDetallesPedidoRepository: Symbol.for("IDetallesPedidoRepository"),
 
-export interface IProveedorRepository {
-  getListaProveedores(): Promise<clsProveedor[]>;
-  getProveedorPorId(idProveedor: number): Promise<clsProveedor>;
-}
+  // UseCases
+  IGetProductosUseCase: Symbol.for("IGetProductosUseCase"),
+  IGetProveedoresUseCase: Symbol.for("IGetProveedoresUseCase"),
 
-export interface IPedidoRepository {
-  getListaPedidos(): Promise<clsPedido[]>;
-  getListaPedidosPorUsuario(idUsuario: number): Promise<clsPedido[]>;
-  getListaPedidosPorProveedor(idProveedor: number): Promise<clsPedido[]>;
-  getPedidoPorId(idPedido: number): Promise<clsPedido>;
-  crearPedido(pedidoNuevo: clsPedido): Promise<number>;
-  actualizarPedido(idPedido: number, pedido: clsPedido): Promise<number>;
-  cambiarEstadoPedido(idPedido: number, nuevoEstado: string): Promise<number>;
-  eliminarPedido(idPedido: number): Promise<number>;
-}
+  IGetPedidosUseCase: Symbol.for("IGetPedidosUseCase"),
+  ICreatePedidoUseCase: Symbol.for("ICreatePedidoUseCase"),
+  IUpdatePedidoUseCase: Symbol.for("IUpdatePedidoUseCase"),
+  ICambiarEstadoPedidoUseCase: Symbol.for("ICambiarEstadoPedidoUseCase"),
+  IDeletePedidoUseCase: Symbol.for("IDeletePedidoUseCase"),
 
-export interface IDetallesPedidoRepository {
-  getListaDetallesPorPedido(idPedido: number): Promise<clsDetallePedido[]>;
-  getDetallePedidoPorId(idPedido: number, idProducto: number): Promise<clsDetallePedido>;
-  crearDetallePedido(detallePedidoNuevo: clsDetallePedido): Promise<number>;
-  actualizarDetallePedido(idPedido: number, idProducto: number, detallePedido: clsDetallePedido): Promise<number>;
-  eliminarDetallePedido(idPedido: number, idProducto: number): Promise<number>;
-}
+  IGetDetallesPedidoUseCase: Symbol.for("IGetDetallesPedidoUseCase"),
+  ICreateDetallePedidoUseCase: Symbol.for("ICreateDetallePedidoUseCase"),
+  IUpdateDetallePedidoUseCase: Symbol.for("IUpdateDetallePedidoUseCase"),
+  IDeleteDetallePedidoUseCase: Symbol.for("IDeleteDetallePedidoUseCase"),
+
+  // Viewmodels
+  LoginViewModel: Symbol.for("LoginViewModel"),
+  ListadoPedidosProveedoresViewModel: Symbol.for("ListadoPedidosProveedoresViewModel"),
+  CreatePedidosProveedoresViewModel: Symbol.for("CreatePedidosProveedoresViewModel"),
+  DetailsPedidosProveedoresViewModel: Symbol.for("DetailsPedidosProveedoresViewModel"),
+  UpdatePedidosProveedoresViewModel: Symbol.for("UpdatePedidosProveedoresViewModel"),
+  ArchivadosVM: Symbol.for("ArchivadosVM"),
+
+};

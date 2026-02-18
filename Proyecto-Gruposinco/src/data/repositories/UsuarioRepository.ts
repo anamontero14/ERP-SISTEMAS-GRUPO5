@@ -1,40 +1,54 @@
+import { Injectable } from '@angular/core';
 import { clsUsuario } from '../../domain/entities/clsUsuario';
 import { IUsuarioRepository } from '../../domain/interfaces/repositories/IUsuarioRepository';
+import { ApiConnection } from '../datasource/api/ApiConnection';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class UsuarioRepository implements IUsuarioRepository {
-  
-    // Mock de Users
-    private readonly usuariosMock: clsUsuario[] = [
-        new clsUsuario(1, 'Alex Marin', 'alex@example.com'),
-        new clsUsuario(2, 'Beatriz Lopez', 'beatriz@example.com')
-    ];
 
-    // GetListado User
-    async getListaUsuarios(): Promise<clsUsuario[]> {
-        return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(this.usuariosMock);
-            }, 100);
-        });
+  constructor(private api: ApiConnection) {}
+
+  // Mapper
+  private mapToEntity(data: any): clsUsuario {
+    return new clsUsuario(
+      data.idUsuario,
+      data.nombre,
+      data.email
+    );
+  }
+
+  // GET listado usuarios
+  async getListaUsuarios(): Promise<clsUsuario[]> {
+    const response = await this.api.getUsuarios<any[]>();
+
+    if (!response.success || !response.data) {
+      throw new Error(response.message);
     }
 
-    // GetPorId User
-    async getUsuarioPorId(idUsuario: number): Promise<clsUsuario> {
-        const usuario = this.usuariosMock.find(u => u.IdUsuario === idUsuario);
-        if (!usuario) {
-            throw new Error(`Usuario con id ${idUsuario} no encontrado`);
-        }
-        return Promise.resolve(usuario);
+    return response.data.map(d => this.mapToEntity(d));
+  }
+
+  // GET usuario por id
+  async getUsuarioPorId(idUsuario: number): Promise<clsUsuario> {
+    const response = await this.api.getUsuarioPorId<any>(idUsuario);
+
+    if (!response.success || !response.data) {
+      throw new Error(response.message);
     }
 
-    // GetPorNombre User
-    async getUsuarioPorNombre(nombre: string): Promise<clsUsuario> {
-        const usuario = this.usuariosMock.find(
-        u => u.Nombre.toLowerCase().includes(nombre.toLowerCase())
-        );
-        if (!usuario) {
-            throw new Error(`Usuario con nombre ${nombre} no encontrado`);
-        }
-        return Promise.resolve(usuario);
+    return this.mapToEntity(response.data);
+  }
+
+  // GET usuario por nombre
+  async getUsuarioPorNombre(nombre: string): Promise<clsUsuario> {
+    const response = await this.api.validarUsuario<any>(nombre);
+
+    if (!response.success || !response.data) {
+      throw new Error(response.message);
     }
+
+    return this.mapToEntity(response.data);
+  }
 }
