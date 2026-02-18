@@ -1,4 +1,6 @@
 import { injectable } from "inversify";
+import { Injectable } from '@angular/core'; 
+
 
 export interface ApiResponse<T> {
   success: boolean;
@@ -7,9 +9,9 @@ export interface ApiResponse<T> {
   data?: T;
 }
 
-const BASE_URL = "https://api-proyectogruposinco-cqazb6ebhubmeqd0.francecentral-01.azurewebsites.net/api/";
+const BASE_URL = "https://api-proyectogruposinco-cqazb6ebhubmeqd0.francecentral-01.azurewebsites.net/api";
 
-@injectable()
+@Injectable({ providedIn: 'root' })
 export class ApiConnection {
 
   private async request<T>(

@@ -1,0 +1,17 @@
+<h2>Detalles del pedido #{{ idPedido }}</h2>
+
+<div *ngIf="vm.loading()">Cargando...</div>
+
+<div *ngIf="!vm.loading()">
+  <div *ngFor="let d of vm.detalles()">
+    <div class="detalle-card">
+      <p><strong>Producto:</strong> {{ d.IdProducto }}</p>
+      <p><strong>Cantidad:</strong> {{ d.Cantidad }}</p>
+      <p><strong>Precio Unitario:</strong> {{ d.PrecioUnitario }}</p>
+      <button [routerLink]="['/pedidos', idPedido, 'edit']">
+        Actualizar pedido
+      </button>
+
+    </div>
+  </div>
+</div>

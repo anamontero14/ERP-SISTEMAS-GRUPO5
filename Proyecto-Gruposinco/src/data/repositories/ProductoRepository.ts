@@ -1,16 +1,14 @@
-import { inject, injectable } from "inversify";
-import { clsProducto } from "../../domain/entities/clsProducto";
-import { IProductoRepository } from "../../domain/interfaces/repositories/IProductoRepository";
-import { ApiConnection } from "../datasource/api/ApiConnection";
-import { TYPES } from "../../di/types";
+import { Injectable } from '@angular/core';
+import { clsProducto } from '../../domain/entities/clsProducto';
+import { IProductoRepository } from '../../domain/interfaces/repositories/IProductoRepository';
+import { ApiConnection } from '../datasource/api/ApiConnection';
 
-@injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProductoRepository implements IProductoRepository {
 
-  constructor(
-    @inject(TYPES.ApiConnection)
-    private api: ApiConnection
-  ) {}
+  constructor(private api: ApiConnection) {}
 
   // Mapper
   private mapToEntity(data: any): clsProducto {

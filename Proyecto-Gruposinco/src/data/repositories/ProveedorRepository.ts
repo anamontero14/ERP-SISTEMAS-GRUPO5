@@ -1,16 +1,14 @@
-import { inject, injectable } from "inversify";
-import { clsProveedor } from "../../domain/entities/clsProveedor";
-import { IProveedorRepository } from "../../domain/interfaces/repositories/IProveedorRepository";
-import { ApiConnection } from "../datasource/api/ApiConnection";
-import { TYPES } from "../../di/types";
+import { Injectable } from '@angular/core';
+import { clsProveedor } from '../../domain/entities/clsProveedor';
+import { IProveedorRepository } from '../../domain/interfaces/repositories/IProveedorRepository';
+import { ApiConnection } from '../datasource/api/ApiConnection';
 
-@injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProveedorRepository implements IProveedorRepository {
 
-  constructor(
-    @inject(TYPES.ApiConnection)
-    private api: ApiConnection
-  ) {}
+  constructor(private api: ApiConnection) {}
 
   // Mapper
   private mapToEntity(data: any): clsProveedor {

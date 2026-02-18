@@ -1,0 +1,10 @@
+<h2>Mis pedidos</h2>
+
+<div *ngIf="vm.loading">Cargando...</div>
+
+<div *ngIf="!vm.loading">
+  <app-pedido-item
+    *ngFor="let p of vm.pedidos"
+    [pedido]="p">
+  </app-pedido-item>
+</div>

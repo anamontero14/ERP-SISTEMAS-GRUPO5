@@ -1,0 +1,45 @@
+`
+
+    <div class="create-pedido">
+      <h2>Crear pedido</h2>
+
+      <form (ngSubmit)="crear()">
+
+        <!-- PROVEEDOR -->
+        <label>
+          Proveedor
+          <select [(ngModel)]="idProveedor" name="idProveedor">
+            <option value="">Seleccione un proveedor</option>
+            <option *ngFor="let p of vm.proveedores()" [value]="p.IdProveedor">
+              {{ p.IdProveedor }}
+            </option>
+          </select>
+        </label>
+
+        <!-- PRODUCTO -->
+        <label>
+          Producto
+          <select [(ngModel)]="idProducto" name="idProducto" (change)="actualizarPrecio()">
+            <option value="">Seleccione un producto</option>
+            <option *ngFor="let prod of vm.productos()" [value]="prod.IdProducto">
+              {{ prod.NombreProducto }}
+            </option>
+          </select>
+        </label>
+
+        <!-- CANTIDAD -->
+        <label>
+          Cantidad
+          <input type="number" [(ngModel)]="cantidad" name="cantidad" min="1" (input)="actualizarPrecio()" />
+        </label>
+
+        <!-- OBSERVACIONES -->
+        <label>
+          Observaciones
+          <input type="text" [(ngModel)]="observaciones" name="observaciones" />
+        </label>
+
+        <button type="submit" [disabled]="vm.saving()">Guardar</button>
+      </form>
+    </div>
+  `

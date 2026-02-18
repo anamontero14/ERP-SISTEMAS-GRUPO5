@@ -1,22 +1,17 @@
-import { inject, injectable } from "inversify";
-import { clsDetallePedido } from "../../domain/entities/clsDetallePedido";
-import { IDetallesPedidoRepository } from "../../domain/interfaces/repositories/IDetallesPedidoRepository";
-import { ApiConnection } from "../datasource/api/ApiConnection";
-import { TYPES } from "../../di/types";
+import { Injectable } from '@angular/core';
+import { clsDetallePedido } from '../../domain/entities/clsDetallePedido';
+import { IDetallesPedidoRepository } from '../../domain/interfaces/repositories/IDetallesPedidoRepository';
+import { ApiConnection } from '../datasource/api/ApiConnection';
 
-@injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class DetallesPedidoRepository implements IDetallesPedidoRepository {
 
-  constructor(
-    @inject(TYPES.ApiConnection)
-    private api: ApiConnection
-  ) {}
+  constructor(private api: ApiConnection) {}
 
   // GET lista detalles por pedido
-  async getListaDetallesPorPedido(
-    idPedido: number
-  ): Promise<clsDetallePedido[]> {
-
+  async getListaDetallesPorPedido(idPedido: number): Promise<clsDetallePedido[]> {
     const response = await this.api.getDetallesPedido<any[]>(idPedido);
 
     if (!response.success || !response.data) {
@@ -34,31 +29,20 @@ export class DetallesPedidoRepository implements IDetallesPedidoRepository {
   }
 
   // GET detalle por id
-  async getDetallePedidoPorId(
-    idPedido: number,
-    idProducto: number
-  ): Promise<clsDetallePedido> {
-
+  async getDetallePedidoPorId(idPedido: number, idProducto: number): Promise<clsDetallePedido> {
     const lista = await this.getListaDetallesPorPedido(idPedido);
 
-    const detalle = lista.find(
-      d => d.IdProducto === idProducto
-    );
+    const detalle = lista.find(d => d.IdProducto === idProducto);
 
     if (!detalle) {
-      throw new Error(
-        `Detalle no encontrado para Pedido ${idPedido} y Producto ${idProducto}`
-      );
+      throw new Error(`Detalle no encontrado para Pedido ${idPedido} y Producto ${idProducto}`);
     }
 
     return detalle;
   }
 
   // CREATE
-  async crearDetallePedido(
-    detalle: clsDetallePedido
-  ): Promise<number> {
-
+  async crearDetallePedido(detalle: clsDetallePedido): Promise<number> {
     const response = await this.api.crearDetallePedido<number>({
       idPedido: detalle.IdPedido,
       idProducto: detalle.IdProducto,
@@ -70,12 +54,7 @@ export class DetallesPedidoRepository implements IDetallesPedidoRepository {
   }
 
   // UPDATE
-  async actualizarDetallePedido(
-    idPedido: number,
-    idProducto: number,
-    detalle: clsDetallePedido
-  ): Promise<number> {
-
+  async actualizarDetallePedido(idPedido: number, idProducto: number, detalle: clsDetallePedido): Promise<number> {
     const response = await this.api.actualizarDetallePedido<number>(
       idPedido,
       idProducto,
@@ -87,4 +66,5 @@ export class DetallesPedidoRepository implements IDetallesPedidoRepository {
 
     return response.success ? 1 : 0;
   }
+
 }

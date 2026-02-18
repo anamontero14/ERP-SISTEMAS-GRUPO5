@@ -1,16 +1,14 @@
-import { inject, injectable } from "inversify";
-import { clsPedido } from "../../domain/entities/clsPedido";
-import { IPedidoRepository } from "../../domain/interfaces/repositories/IPedidoRepository";
-import { ApiConnection } from "../datasource/api/ApiConnection";
-import { TYPES } from "../../di/types";
+import { Injectable } from '@angular/core';
+import { clsPedido } from '../../domain/entities/clsPedido';
+import { IPedidoRepository } from '../../domain/interfaces/repositories/IPedidoRepository';
+import { ApiConnection } from '../datasource/api/ApiConnection';
 
-@injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PedidoRepository implements IPedidoRepository {
 
-  constructor(
-    @inject(TYPES.ApiConnection)
-    private api: ApiConnection
-  ) {}
+  constructor(private api: ApiConnection) {}
 
   // Mapper
   private mapToEntity(data: any): clsPedido {
@@ -27,7 +25,6 @@ export class PedidoRepository implements IPedidoRepository {
 
   // GET listado pedidos
   async getListaPedidos(): Promise<clsPedido[]> {
-
     const response = await this.api.getPedidos<any[]>();
 
     if (!response.success || !response.data) {
@@ -38,10 +35,7 @@ export class PedidoRepository implements IPedidoRepository {
   }
 
   // GET pedidos por usuario
-  async getListaPedidosPorUsuario(
-    idUsuario: number
-  ): Promise<clsPedido[]> {
-
+  async getListaPedidosPorUsuario(idUsuario: number): Promise<clsPedido[]> {
     const response = await this.api.getPedidosPorUsuario<any[]>(idUsuario);
 
     if (!response.success || !response.data) {
@@ -52,20 +46,13 @@ export class PedidoRepository implements IPedidoRepository {
   }
 
   // GET por proveedor
-  async getListaPedidosPorProveedor(
-    idProveedor: number
-  ): Promise<clsPedido[]> {
-
+  async getListaPedidosPorProveedor(idProveedor: number): Promise<clsPedido[]> {
     const pedidos = await this.getListaPedidos();
-
-    return pedidos.filter(
-      p => p.IdProveedor === idProveedor
-    );
+    return pedidos.filter(p => p.IdProveedor === idProveedor);
   }
 
   // GET por id
   async getPedidoPorId(idPedido: number): Promise<clsPedido> {
-
     const response = await this.api.getPedidoPorId<any>(idPedido);
 
     if (!response.success || !response.data) {
@@ -77,7 +64,6 @@ export class PedidoRepository implements IPedidoRepository {
 
   // CREATE
   async crearPedido(pedido: clsPedido): Promise<number> {
-
     const response = await this.api.crearPedido<number>({
       idUsuario: pedido.IdUsuario,
       idProveedor: pedido.IdProveedor,
@@ -91,11 +77,7 @@ export class PedidoRepository implements IPedidoRepository {
   }
 
   // UPDATE
-  async actualizarPedido(
-    idPedido: number,
-    pedido: clsPedido
-  ): Promise<number> {
-
+  async actualizarPedido(idPedido: number, pedido: clsPedido): Promise<number> {
     const response = await this.api.actualizarPedido<number>(
       idPedido,
       {
@@ -127,9 +109,7 @@ export class PedidoRepository implements IPedidoRepository {
 
   // DELETE
   async eliminarPedido(idPedido: number): Promise<number> {
-
     const response = await this.api.eliminarPedido<number>(idPedido);
-
     return response.success ? 1 : 0;
   }
 }

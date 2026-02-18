@@ -6,7 +6,7 @@ import { DetallesPedidoRepository } from '../../../data/repositories/DetallesPed
 export class DeleteDetallePedidoUseCase {
   constructor(private detallesPedidoRepository: DetallesPedidoRepository) {}
 
-  async eliminarDetallePedido(idPedido: number, idProducto: number): Promise<number> {
+  /*async eliminarDetallePedido(idPedido: number, idProducto: number): Promise<number> {
     return await this.detallesPedidoRepository.eliminarDetallePedido(idPedido, idProducto);
-  }
+  }*/
 }
