@@ -17,17 +17,17 @@ import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/f
   ],
 })
 export class PaEscribirComponent implements ControlValueAccessor {
-  @Input() label = '';
-  @Input() type = 'text';
+  @Input() label: string = '';
+  @Input() type: string = 'text';
 
   value: any = '';
+  disabled = false;
 
-  // Métodos obligatorios del ControlValueAccessor
   onChange = (value: any) => {};
   onTouched = () => {};
 
   writeValue(value: any): void {
-    this.value = value;
+    this.value = value || '';
   }
 
   registerOnChange(fn: any): void {
@@ -38,10 +38,13 @@ export class PaEscribirComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  onInput(event: any) {
-    const value = event.target.value;
-    this.value = value;
-    this.onChange(value);
-    this.onTouched();
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
+  onInput(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.value = target.value;
+    this.onChange(this.value);
   }
 }

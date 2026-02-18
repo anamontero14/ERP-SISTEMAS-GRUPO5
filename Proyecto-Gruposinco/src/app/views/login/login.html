@@ -1,14 +1,40 @@
-<div class="login-container">
-  <h2>Iniciar sesión</h2>
+<div class="login-page">
+  <div class="login-card">
+    <div class="brand-section">
+      <div class="logo-circle">
+        <span>❤</span>
+      </div>
+      <h1>GrupoSincoERP</h1>
+      <p class="subtitle">Ingresa tus datos para continuar</p>
+    </div>
 
-  <app-pa-escribir label="Email" [(model)]="vm.email"></app-pa-escribir>
-  <app-pa-escribir label="Contraseña" [(model)]="vm.password"></app-pa-escribir>
+    <form class="login-form">
+      <app-pa-escribir
+        label="Correo Electrónico"
+        type="email"
+        [ngModel]="vm.email()"
+        (ngModelChange)="vm.email.set($event)"
+        name="email">
+      </app-pa-escribir>
 
-  <app-button
-    text="Entrar"
-    [disabled]="vm.loading"
-    (click)="vm.login()">
-  </app-button>
+      <app-pa-escribir
+        label="Contraseña"
+        type="password"
+        [ngModel]="vm.password()"
+        (ngModelChange)="vm.password.set($event)"
+        name="password">
+      </app-pa-escribir>
 
-  <p class="error" *ngIf="vm.error">{{ vm.error }}</p>
+      <app-button
+        [label]="vm.loading() ? 'Verificando...' : 'Iniciar Sesión'"
+        [disabled]="vm.loading()"
+        (clicked)="vm.login()">
+      </app-button>
+
+<div class="error-container" *ngIf="vm.error()">
+  <span class="error-icon">⚠</span>
+  <p class="error-msg">{{ vm.error() }}</p>
+</div>
+    </form>
+  </div>
 </div>
