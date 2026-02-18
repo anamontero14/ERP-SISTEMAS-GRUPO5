@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
-import { CreatePedidoUseCase } from '../../domain/usecases/pedido/CreatePedidoUseCase';
+import { CreatePedidoUseCase } from '../../domain/usecases/pedido_fix/CreatePedidoUseCase';
 import { GetProveedoresUseCase } from '../../domain/usecases/proveedor/GetProveedoresUseCase';
-import { GetProductosUseCase } from '../../domain/usecases/producto/GetProductosUseCase';
+import { GetProductosUseCase } from '../../domain/usecases/producto_fix/GetProductosUseCase';
 import { CreateDetallePedidoUseCase } from '../../domain/usecases/detallePedido/CreateDetallePedidoUseCase';
 import { clsPedido } from '../../domain/entities/clsPedido';
 import { clsProveedor } from '../../domain/entities/clsProveedor';

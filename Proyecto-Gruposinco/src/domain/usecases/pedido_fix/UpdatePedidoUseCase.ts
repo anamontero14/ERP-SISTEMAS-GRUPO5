@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { PedidoRepository } from '../../../data/repositories/PedidoRepository';
 import { clsPedido } from '../../entities/clsPedido';
-import { IUpdatePedidoUseCase } from '../../interfaces/usecases/pedido/IUpdatePedidoUseCase';
+import { IUpdatePedidoUseCase } from '../../interfaces/usecases/pedido_fix/IUpdatePedidoUseCase';
 
 @Injectable({ providedIn: 'root' })
 export class UpdatePedidoUseCase {
