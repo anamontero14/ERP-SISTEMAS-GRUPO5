@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.DTOs;
+using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.UseCases;
 
@@ -10,14 +11,16 @@ namespace UseCases
     public class PedidoUseCase : IPedidoUseCase
     {
         private readonly IPedidoRepository _pedidoRepository;
+        private readonly IDetallesPedidoRepository _detallesPedidoRepository;
 
         /// <summary>
         /// Constructor del caso de uso Pedido.
         /// </summary>
         /// <param name="pedidoRepository">Repositorio de pedidos</param>
-        public PedidoUseCase(IPedidoRepository pedidoRepository)
+        public PedidoUseCase(IPedidoRepository pedidoRepository, IDetallesPedidoRepository detallesPedidoRepository)
         {
             _pedidoRepository = pedidoRepository;
+            _detallesPedidoRepository = detallesPedidoRepository;
         }
 
         /// <summary>
@@ -65,11 +68,21 @@ namespace UseCases
         /// </summary>
         /// <param name="pedidoNuevo">Pedido a crear</param>
         /// <returns>Número de filas afectadas</returns>
-        public int CrearPedido(Pedido pedidoNuevo)
+        public int CrearPedido(CrearPedidoDto dto)
         {
-            pedidoNuevo.Estado = "pedido";
-            pedidoNuevo.Archivado = false;
-            return _pedidoRepository.CrearPedido(pedidoNuevo);
+            dto.Pedido.Estado = "pedido";
+            dto.Pedido.Archivado = false;
+
+            int idPedido = _pedidoRepository.CrearPedidoYObtenerID(dto.Pedido);
+            if (idPedido == 0) return 0;
+
+            foreach (var detalle in dto.Detalles)
+            {
+                detalle.IdPedido = idPedido;
+                _detallesPedidoRepository.CrearDetallePedido(detalle);
+            }
+
+            return idPedido;
         }
 
         /// <summary>
