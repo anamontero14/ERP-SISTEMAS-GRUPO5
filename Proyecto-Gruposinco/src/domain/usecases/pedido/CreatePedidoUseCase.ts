@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PedidoRepository } from '../../../data/repositories/PedidoRepository';
 import { CrearPedidoDto } from '../../dtos/CrearPedidoDto';
-import { ICreatePedidoUseCase } from '../../interfaces/usecases/Pedido/ICreatePedidoUseCase';
+import { ICreatePedidoUseCase } from '../../interfaces/usecases/pedido/ICreatePedidoUseCase';
 
 @Injectable({ providedIn: 'root' })
 export class CreatePedidoUseCase {
