@@ -10,46 +10,37 @@ import { clsPedido } from '../../../domain/entities/clsPedido';
   standalone: true,
   selector: 'app-create-pedidos-proveedores-screen',
   imports: [CommonModule, FormsModule],
-  templateUrl: './create-pedidos-proveedores.html',
+  templateUrl: './create-pedidos-proveedores.html'
 })
 export class CreatePedidosProveedoresScreen implements OnInit {
-  idProveedor!: number;
-  idProducto!: number;
-  cantidad: number = 1;
-  observaciones: string = '';
-  total: number = 0;
 
-  constructor(public vm: CreatePedidosProveedoresVM, private router: Router) {}
+  idProveedor = 0;
+  idProducto = 0;
+  cantidad = 1;
+  observaciones = "";
 
-  ngOnInit(): void {
-    this.vm.cargarDatos();
+  constructor(
+    public vm: CreatePedidosProveedoresVM,
+    private router: Router
+  ) {}
+
+  async ngOnInit() {
+    await this.vm.cargarDatos();
   }
 
-  actualizarPrecio() {
-    const producto = this.vm.productos().find(p => p.IdProducto === this.idProducto);
-    const precio = producto?.PrecioProducto ?? 0;
-    this.total = precio * this.cantidad;
+  agregar() {
+    this.vm.agregarDetalle(this.idProducto, this.cantidad);
   }
 
   async crear() {
-    const pedido = new clsPedido(
-      0,
-      1,
+    const idUsuario = 1; // o el que corresponda
+
+    const ok = await this.vm.crearPedidoCompleto(
+      idUsuario,
       this.idProveedor,
-      new Date(),
-      "pedido",
-      this.observaciones ?? "",
-      false
+      this.observaciones
     );
 
-    const id = await this.vm.crearPedidoConDetalle(
-      pedido,
-      this.idProducto,
-      this.cantidad
-    );
-
-    if (id) {
-      this.router.navigate(['/pedidos', id]);
-    }
+    if (ok) this.router.navigate(['/pedidos']);
   }
 }

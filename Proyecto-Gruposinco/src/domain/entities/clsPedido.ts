@@ -3,7 +3,7 @@ export class clsPedido {
   private idUsuario: number;
   private idProveedor: number;
   private fechaPedido: Date;
-  private estado: "pedido" | "en preparación" | "entregado";
+  private estado: "pedido" | "enviado" | "entregado";
   private observaciones: string;
   private archivado: boolean;
 
@@ -12,7 +12,7 @@ export class clsPedido {
     idUsuario: number,
     idProveedor: number,
     fechaPedido: Date,
-    estado: "pedido" | "en preparación" | "entregado",
+    estado: "pedido" | "enviado" | "entregado",
     observaciones: string,
     archivado: boolean,
   ) {
@@ -53,7 +53,7 @@ export class clsPedido {
   get Estado() {
     return this.estado;
   }
-  set Estado(v: "pedido" | "en preparación" | "entregado") {
+  set Estado(v: "pedido" | "enviado" | "entregado") {
     this.estado = v;
   }
 

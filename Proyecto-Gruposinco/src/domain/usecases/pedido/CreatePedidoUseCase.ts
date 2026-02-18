@@ -1,14 +1,13 @@
-
 import { Injectable } from '@angular/core';
 import { PedidoRepository } from '../../../data/repositories/PedidoRepository';
-import { clsPedido } from '../../entities/clsPedido';
+import { CrearPedidoDto } from '../../dtos/CrearPedidoDto';
 import { ICreatePedidoUseCase } from '../../interfaces/usecases/Pedido/ICreatePedidoUseCase';
 
 @Injectable({ providedIn: 'root' })
 export class CreatePedidoUseCase {
   constructor(private pedidoRepository: PedidoRepository) {}
 
-  async crearPedido(pedidoNuevo: clsPedido): Promise<number> {
+  async crearPedido(pedidoNuevo: CrearPedidoDto): Promise<number> {
     return await this.pedidoRepository.crearPedido(pedidoNuevo);
   }
 }

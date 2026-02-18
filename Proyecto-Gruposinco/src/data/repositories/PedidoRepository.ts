@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CrearPedidoDto } from '../../domain/dtos/CrearPedidoDto';
 import { clsPedido } from '../../domain/entities/clsPedido';
 import { IPedidoRepository } from '../../domain/interfaces/repositories/IPedidoRepository';
 import { ApiConnection } from '../datasource/api/ApiConnection';
@@ -63,15 +64,8 @@ export class PedidoRepository implements IPedidoRepository {
   }
 
   // CREATE
-  async crearPedido(pedido: clsPedido): Promise<number> {
-    const response = await this.api.crearPedido<number>({
-      idUsuario: pedido.IdUsuario,
-      idProveedor: pedido.IdProveedor,
-      fechaPedido: pedido.FechaPedido,
-      estado: pedido.Estado,
-      observaciones: pedido.Observaciones,
-      archivado: pedido.Archivado
-    });
+  async crearPedido(dto: CrearPedidoDto): Promise<number> {
+    const response = await this.api.crearPedido<number>(dto);
 
     return response.success ? 1 : 0;
   }

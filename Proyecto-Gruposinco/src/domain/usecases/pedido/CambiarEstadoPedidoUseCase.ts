@@ -18,7 +18,7 @@ export class CambiarEstadoPedidoUseCase {
     if (pedido.Estado === 'pedido' && nuevoEstado === 'en preparación') {
       return await this.pedidoRepository.cambiarEstadoPedido(idPedido, nuevoEstado);
     }
-    if (pedido.Estado === 'en preparación' && nuevoEstado === 'entregado') {
+    if (pedido.Estado === 'enviado' && nuevoEstado === 'entregado') {
       return await this.pedidoRepository.cambiarEstadoPedido(idPedido, nuevoEstado);
     }
     throw new Error('Transición de estado no permitida.');
