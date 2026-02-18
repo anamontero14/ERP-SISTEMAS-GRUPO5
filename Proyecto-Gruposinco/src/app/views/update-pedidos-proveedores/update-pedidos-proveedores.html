@@ -1,9 +1,41 @@
-<h2>Actualizar pedido #{{ pedido.IdPedido }}</h2>
+<h2>Actualizar pedido</h2>
 
-<label>Proveedor:</label>
-<input type="number" [(ngModel)]="pedido.IdProveedor">
+<div *ngIf="vm.loading()">Cargando...</div>
 
-<label>Observaciones:</label>
-<textarea [(ngModel)]="pedido.Observaciones"></textarea>
+<div *ngIf="!vm.loading() && vm.pedido() as p">
 
-<button (click)="guardar()">Guardar cambios</button>
+  <h3>Detalles del pedido</h3>
+
+  <table>
+    <tr>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Precio</th>
+      <th>Eliminar pedido</th>
+    </tr>
+
+    <tr *ngFor="let d of vm.detalles(); let i = index">
+      <td>{{ d.IdProducto }}</td>
+
+      <td>
+        <input type="number" [(ngModel)]="d.Cantidad" min="1">
+      </td>
+
+      <td>
+        <input type="number" [ngModel]="d.PrecioUnitario" readonly>
+      </td>
+
+      <td>
+        <button 
+          *ngIf="!p.Archivado"
+          (click)="eliminar(i)">
+          Eliminar pedidos
+        </button>
+      </td>
+
+    </tr>
+  </table>
+
+  <button (click)="guardar()" [disabled]="vm.saving()">Guardar cambios</button>
+
+</div>
