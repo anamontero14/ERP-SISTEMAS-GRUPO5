@@ -1,67 +1,52 @@
-<div *ngIf="pedido as p">
+<h2>Actualizar pedido</h2>
 
-  <h2>Actualizar pedido #{{ p.IdPedido }}</h2>
+<div *ngIf="vm.loading()">Cargando...</div>
 
-  <label>Proveedor:</label>
-  <input 
-    type="number" 
-    [(ngModel)]="p.IdProveedor"
-    [readonly]="!puedeEditar()"
-  >
-
-  <label>Observaciones:</label>
-  <textarea 
-    [(ngModel)]="p.Observaciones"
-    [readonly]="!puedeEditar()"
-  ></textarea>
-
-  <label>Estado:</label>
-  <select 
-    [(ngModel)]="p.Estado"
-    [disabled]="!puedeEditar()"
-  >
-    <option value="pedido">Pedido</option>
-    <option value="en preparación">En preparación</option>
-    <option value="entregado">Entregado</option>
-  </select>
-
-  <hr>
+<div *ngIf="!vm.loading() && vm.pedido() as p">
 
   <h3>Detalles del pedido</h3>
 
+  <!-- Mensaje si el pedido está archivado -->
+  <div *ngIf="p.Archivado" style="color: red; font-weight: bold; margin-bottom: 10px;">
+    Este pedido ya está archivado
+  </div>
+
   <table>
     <tr>
-      <th>ID Producto</th>
+      <th>Producto</th>
       <th>Cantidad</th>
-      <th>Precio unitario</th>
+      <th>Precio</th>
+      <th>Eliminar pedido</th>
     </tr>
 
-    <tr *ngFor="let d of detalles">
+    <tr *ngFor="let d of vm.detalles(); let i = index">
       <td>{{ d.IdProducto }}</td>
 
       <td>
-        <input 
-          type="number" 
-          [(ngModel)]="d.Cantidad"
-          [readonly]="!puedeEditar()"
-        >
+        <input type="number" [(ngModel)]="d.Cantidad" min="1">
       </td>
 
       <td>
-        <input 
-          type="number" 
-          [(ngModel)]="d.PrecioUnitario"
-          [readonly]="!puedeEditar()"
-        >
+        <input type="number" [ngModel]="d.PrecioUnitario" readonly>
       </td>
+
+      <td>
+        <!-- Botón solo si NO está archivado -->
+        <button 
+          *ngIf="!p.Archivado"
+          (click)="eliminar(i)">
+          Eliminar pedido
+        </button>
+
+        <!-- Texto si está archivado -->
+        <span *ngIf="p.Archivado" style="color: gray;">
+          Archivado
+        </span>
+      </td>
+
     </tr>
   </table>
 
-  <button 
-    (click)="guardar()" 
-    [disabled]="!puedeEditar()"
-  >
-    Guardar cambios
-  </button>
+  <button (click)="guardar()" [disabled]="vm.saving()">Guardar cambios</button>
 
 </div>

@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { ProductoRepository } from '../../../data/repositories/ProductoRepository';
 import { clsProducto } from '../../entities/clsProducto';
-import { IGetProductosUseCase } from '../../interfaces/usecases/Producto/IGetProductosUseCase';
+import { IGetProductosUseCase } from '../../interfaces/usecases/producto/IGetProductosUseCase';
 
 @Injectable({ providedIn: 'root' })
 export class GetProductosUseCase {

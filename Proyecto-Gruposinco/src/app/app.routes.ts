@@ -13,10 +13,27 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./views/welcome/welcome').then(m => m.WelcomeComponent),
   },
+
   {
-  path: 'pedidos',
+    path: 'proveedores',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./views/list-proveedores/list-proveedores')
+        .then(m => m.ListProveedoresScreen),
+  },
+
+  {
+  path: 'productos',
   canActivate: [authGuard],
-  children: [
+  loadComponent: () =>
+    import('./views/list-productos/list-productos')
+      .then(m => m.ListProductosScreen),
+  },
+
+  {
+    path: 'pedidos',
+    canActivate: [authGuard],
+    children: [
       {
         path: '',
         loadComponent: () =>
@@ -40,10 +57,9 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./views/update-pedidos-proveedores/update-pedidos-proveedores')
             .then(m => m.UpdatePedidosProveedoresScreen),
-},
-
-  ],
-},
+      },
+    ],
+  },
 
   {
     path: 'archivados',
@@ -52,6 +68,12 @@ export const routes: Routes = [
       import('./views/archivados/archivados').then(
         m => m.ArchivadosScreen
       ),
+  },
+  {
+    path: 'construccion',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./views/en-construccion/en-construccion').then(m => m.EnConstruccionComponent),
   },
   { path: '', pathMatch: 'full', redirectTo: 'welcome' },
   { path: '**', redirectTo: 'welcome' },

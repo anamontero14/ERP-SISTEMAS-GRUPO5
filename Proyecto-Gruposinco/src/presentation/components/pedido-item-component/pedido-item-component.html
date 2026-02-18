@@ -2,6 +2,7 @@
   <div class="pedido-info">
     <h3 class="pedido-id">Pedido #{{ pedido.IdPedido }}</h3>
     <p class="pedido-proveedor">Proveedor: {{ pedido.IdProveedor }}</p>
+    <p class="pedido-proveedor">Archivado: {{ pedido.Archivado }}</p>
     <p class="pedido-estado" [ngClass]="pedido.Estado.replace(' ', '-').toLowerCase()">
       Estado: {{ pedido.Estado }}
     </p>

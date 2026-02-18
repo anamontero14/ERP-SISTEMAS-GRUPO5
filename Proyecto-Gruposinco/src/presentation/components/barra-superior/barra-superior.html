@@ -1,10 +1,59 @@
-<nav class="navbar">
-  <div class="logo">Gruposinco</div>
+<!-- Overlay para cerrar al hacer clic fuera -->
+<div class="overlay" *ngIf="menuAbierto" (click)="cerrarMenu()"></div>
 
-  <ul class="nav-links">
-    <li><a routerLink="/welcome">Inicio</a></li>
-    <li><a routerLink="/pedidos">Pedidos</a></li>
-    <li><a routerLink="/archivados">Archivados</a></li>
-    <li><button class="logout-btn" (click)="logout()">Cerrar sesión</button></li>
-  </ul>
+<nav class="navbar">
+  <button class="hamburger" (click)="toggleMenu()" [class.active]="menuAbierto" aria-label="Menú">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="logo">Gruposinco</div>
 </nav>
+
+<!-- Drawer lateral izquierdo -->
+<aside class="drawer" [class.abierto]="menuAbierto">
+  <div class="drawer-header">
+    <span>Menú</span>
+    <button class="cerrar-btn" (click)="cerrarMenu()">✕</button>
+  </div>
+
+  <ul class="drawer-links">
+    <li>
+      <a routerLink="/welcome" (click)="cerrarMenu()">
+        <span class="icon">🏠</span> Inicio
+      </a>
+    </li>
+    <li>
+      <a routerLink="/pedidos" (click)="cerrarMenu()">
+        <span class="icon">📦</span> Pedidos
+      </a>
+    </li>
+    <li>
+      <a routerLink="/archivados" (click)="cerrarMenu()">
+        <span class="icon">🕛</span> Historial
+      </a>
+    </li>
+    <li>
+      <a routerLink="/construccion" (click)="cerrarMenu()">
+        <span class="icon">👥</span> Personal
+      </a>
+    </li>
+    <li>
+      <a routerLink="/construccion" (click)="cerrarMenu()">
+        <span class="icon">®️</span> Reporte
+      </a>
+    </li>
+    <li>
+      <a routerLink="/construccion" (click)="cerrarMenu()">
+        <span class="icon">🗂️</span> Inventario
+      </a>
+    </li>
+    <li class="separador"></li>
+    <li>
+      <button class="logout-btn" (click)="logout()">
+        <span class="icon">🚪</span> Cerrar sesión
+      </button>
+    </li>
+  </ul>
+</aside>

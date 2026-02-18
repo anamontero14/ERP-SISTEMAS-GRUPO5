@@ -1,45 +1,160 @@
 .navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 16px;
   padding: 14px 24px;
   background: #1e1e2f;
   color: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.nav-links {
-  list-style: none;
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.hamburger {
   display: flex;
-  gap: 24px;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
 }
 
-.nav-links a {
+.hamburger span {
+  display: block;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 200;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 260px;
+  background: #1e1e2f;
   color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.2s;
+  z-index: 300;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 16px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
 }
 
-.nav-links a:hover {
-  color: #4fc3f7;
+.drawer.abierto {
+  transform: translateX(0);
 }
-.logout-btn {
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.cerrar-btn {
   background: none;
   border: none;
   color: white;
+  font-size: 1.1rem;
   cursor: pointer;
-  font-size: 1rem;
-  padding: 0;
+  padding: 4px;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.cerrar-btn:hover {
+  opacity: 1;
+}
+
+.drawer-links {
+  list-style: none;
+  padding: 12px 0;
+  margin: 0;
+  flex: 1;
+}
+
+.drawer-links li a,
+.drawer-links li .logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 20px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+  width: 100%;
+  text-align: left;
+}
+
+.drawer-links li a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #4fc3f7;
+}
+
+.separador {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 8px 16px;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
   font-family: inherit;
-  position: relative;
-  transition: color 0.25s ease;
+  font-size: 0.95rem;
 }
 
 .logout-btn:hover {
-  color: #f74f4f;
+  background: rgba(247, 79, 79, 0.12) !important;
+  color: #f74f4f !important;
 }
 
-.logout-btn:hover::after {
-  width: 100%;
+.icon {
+  font-size: 1rem;
 }

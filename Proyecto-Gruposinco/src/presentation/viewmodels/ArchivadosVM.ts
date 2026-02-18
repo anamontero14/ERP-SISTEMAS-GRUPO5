@@ -13,7 +13,7 @@ export class ArchivadosVM {
     this.loading.set(true);
     try {
       const todos = await this.pedidoRepo.getListaPedidos();
-      this.archivados.set(todos.filter(p => p.Archivado));
+      this.archivados.set(todos);
     } finally {
       this.loading.set(false);
     }

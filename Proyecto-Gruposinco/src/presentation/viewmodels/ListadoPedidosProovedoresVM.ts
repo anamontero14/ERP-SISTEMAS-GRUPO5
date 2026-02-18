@@ -13,7 +13,7 @@ export class ListadoPedidosProveedoresVM {
     this.loading.set(true);
     try {
       const lista = await this.getPedidosUC.getListaPedidos();
-      this.pedidos.set(lista);
+      this.pedidos.set(lista.filter(p => !p.Archivado));
     } finally {
       this.loading.set(false);
     }
