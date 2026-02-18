@@ -1,6 +1,4 @@
-import { injectable } from "inversify";
 import { Injectable } from '@angular/core'; 
-
 
 export interface ApiResponse<T> {
   success: boolean;
