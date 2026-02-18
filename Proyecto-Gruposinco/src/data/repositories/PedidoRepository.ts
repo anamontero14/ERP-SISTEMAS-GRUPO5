@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CrearPedidoDto } from '../../domain/dtos/CrearPedidoDto';
 import { clsPedido } from '../../domain/entities/clsPedido';
 import { IPedidoRepository } from '../../domain/interfaces/repositories/IPedidoRepository';
 import { ApiConnection } from '../datasource/api/ApiConnection';
@@ -63,14 +64,23 @@ export class PedidoRepository implements IPedidoRepository {
   }
 
   // CREATE
-  async crearPedido(pedido: clsPedido): Promise<number> {
+  async crearPedido(pedidoNuevo: CrearPedidoDto): Promise<number> {
+    const pedido = pedidoNuevo.pedido;
     const response = await this.api.crearPedido<number>({
-      idUsuario: pedido.IdUsuario,
-      idProveedor: pedido.IdProveedor,
-      fechaPedido: pedido.FechaPedido,
-      estado: pedido.Estado,
-      observaciones: pedido.Observaciones,
-      archivado: pedido.Archivado
+      pedido: {
+        idUsuario: pedido.IdUsuario,
+        idProveedor: pedido.IdProveedor,
+        fechaPedido: pedido.FechaPedido,
+        estado: pedido.Estado,
+        observaciones: pedido.Observaciones,
+        archivado: pedido.Archivado
+      },
+      detalles: pedidoNuevo.detalles.map(detalle => ({
+        idPedido: detalle.IdPedido,
+        idProducto: detalle.IdProducto,
+        cantidad: detalle.Cantidad,
+        precioUnitario: detalle.PrecioUnitario
+      }))
     });
 
     return response.success ? 1 : 0;

@@ -1,5 +1,5 @@
-import { clsPedido } from '../../../entities/clsPedido';
+import { CrearPedidoDto } from '../../../dtos/CrearPedidoDto';
 
 export interface ICreatePedidoUseCase {
-  crearPedido(pedidoNuevo: clsPedido): Promise<number>;
+  crearPedido(pedidoNuevo: CrearPedidoDto): Promise<number>;
 }
