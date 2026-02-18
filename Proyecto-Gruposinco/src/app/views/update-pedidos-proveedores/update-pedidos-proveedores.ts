@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UpdatePedidosProveedoresVM } from '../../../presentation/viewmodels/UpdatePedidosProveedoresVM';
 import { clsPedido } from '../../../domain/entities/clsPedido';
+import { clsDetallePedido } from '../../../domain/entities/clsDetallePedido';
 
 @Component({
   standalone: true,
@@ -14,6 +15,7 @@ import { clsPedido } from '../../../domain/entities/clsPedido';
 export class UpdatePedidosProveedoresScreen implements OnInit {
 
   pedido!: clsPedido;
+  detalles: clsDetallePedido[] = [];
 
   constructor(
     public vm: UpdatePedidosProveedoresVM,
@@ -26,6 +28,11 @@ export class UpdatePedidosProveedoresScreen implements OnInit {
     await this.vm.cargarDatos(id);
 
     this.pedido = this.vm.pedido();
+    this.detalles = this.vm.detalles();
+  }
+
+  puedeEditar(): boolean {
+    return this.pedido.Estado === "pedido" || this.pedido.Estado === "enviado";
   }
 
   async guardar() {
@@ -33,3 +40,4 @@ export class UpdatePedidosProveedoresScreen implements OnInit {
     this.router.navigate(['/pedidos']);
   }
 }
+

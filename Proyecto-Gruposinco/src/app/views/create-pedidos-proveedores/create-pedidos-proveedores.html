@@ -1,45 +1,51 @@
-`
+<h2>Crear pedido</h2>
 
-    <div class="create-pedido">
-      <h2>Crear pedido</h2>
+<label>Proveedor:</label>
+<select [(ngModel)]="idProveedor">
+  <option value="">Seleccione proveedor</option>
+  <option *ngFor="let p of vm.proveedores()" [ngValue]="p.IdProveedor">
+    {{ p.NombreProveedor }}
+  </option>
+</select>
 
-      <form (ngSubmit)="crear()">
+<hr>
 
-        <!-- PROVEEDOR -->
-        <label>
-          Proveedor
-          <select [(ngModel)]="idProveedor" name="idProveedor">
-            <option value="">Seleccione un proveedor</option>
-            <option *ngFor="let p of vm.proveedores()" [value]="p.IdProveedor">
-              {{ p.IdProveedor }}
-            </option>
-          </select>
-        </label>
+<h3>Añadir productos</h3>
 
-        <!-- PRODUCTO -->
-        <label>
-          Producto
-          <select [(ngModel)]="idProducto" name="idProducto" (change)="actualizarPrecio()">
-            <option value="">Seleccione un producto</option>
-            <option *ngFor="let prod of vm.productos()" [value]="prod.IdProducto">
-              {{ prod.NombreProducto }}
-            </option>
-          </select>
-        </label>
+<select [(ngModel)]="idProducto">
+  <option value="">Seleccione producto</option>
+  <option *ngFor="let prod of vm.productos()" [ngValue]="prod.IdProducto">
+    {{ prod.NombreProducto }}
+  </option>
+</select>
 
-        <!-- CANTIDAD -->
-        <label>
-          Cantidad
-          <input type="number" [(ngModel)]="cantidad" name="cantidad" min="1" (input)="actualizarPrecio()" />
-        </label>
+<input type="number" [(ngModel)]="cantidad" min="1">
 
-        <!-- OBSERVACIONES -->
-        <label>
-          Observaciones
-          <input type="text" [(ngModel)]="observaciones" name="observaciones" />
-        </label>
+<button (click)="agregar()">Añadir</button>
 
-        <button type="submit" [disabled]="vm.saving()">Guardar</button>
-      </form>
-    </div>
-  `
+<hr>
+
+<h3>Detalles añadidos</h3>
+
+<table>
+  <tr>
+    <th>Producto</th>
+    <th>Cantidad</th>
+    <th>Precio</th>
+    <th></th>
+  </tr>
+
+  <tr *ngFor="let d of vm.detalles(); let i = index">
+    <td>{{ d.IdProducto }}</td>
+    <td>{{ d.Cantidad }}</td>
+    <td>{{ d.PrecioUnitario }}</td>
+    <td><button (click)="vm.eliminarDetalle(i)">X</button></td>
+  </tr>
+</table>
+
+<hr>
+
+<label>Observaciones:</label>
+<textarea [(ngModel)]="observaciones"></textarea>
+
+<button (click)="crear()" [disabled]="vm.saving()">Crear pedido</button>

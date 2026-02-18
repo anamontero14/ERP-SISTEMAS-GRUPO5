@@ -6,6 +6,7 @@ import { CreateDetallePedidoUseCase } from '../../domain/usecases/detallePedido/
 import { clsPedido } from '../../domain/entities/clsPedido';
 import { clsProveedor } from '../../domain/entities/clsProveedor';
 import { clsProducto } from '../../domain/entities/clsProducto';
+import { CrearPedidoDto } from '../../domain/dtos/CrearPedidoDto';
 import { clsDetallePedido } from '../../domain/entities/clsDetallePedido';
 
 @Injectable({ providedIn: 'root' })
@@ -13,13 +14,13 @@ export class CreatePedidosProveedoresVM {
 
   proveedores = signal<clsProveedor[]>([]);
   productos = signal<clsProducto[]>([]);
+  detalles = signal<clsDetallePedido[]>([]);
   saving = signal<boolean>(false);
 
   constructor(
     private createPedidoUC: CreatePedidoUseCase,
     private getProveedoresUC: GetProveedoresUseCase,
-    private getProductosUC: GetProductosUseCase,
-    private createDetalleUC: CreateDetallePedidoUseCase
+    private getProductosUC: GetProductosUseCase
   ) {}
 
   async cargarDatos() {
@@ -27,29 +28,55 @@ export class CreatePedidosProveedoresVM {
     this.productos.set(await this.getProductosUC.getListaProductos());
   }
 
-  async crearPedidoConDetalle(
-    pedido: clsPedido,
-    idProducto: number,
-    cantidad: number
+  agregarDetalle(idProducto: number, cantidad: number) {
+    const producto = this.productos().find(p => p.IdProducto === idProducto);
+    if (!producto) return;
+
+    const detalle = new clsDetallePedido(
+      0,
+      idProducto,
+      cantidad,
+      producto.PrecioProducto
+    );
+
+    this.detalles.update(list => [...list, detalle]);
+  }
+
+  eliminarDetalle(index: number) {
+    this.detalles.update(list => list.filter((_, i) => i !== index));
+  }
+
+  async crearPedidoCompleto(
+    idUsuario: number,
+    idProveedor: number,
+    observaciones: string
   ) {
     this.saving.set(true);
+
     try {
-      const idPedido = await this.createPedidoUC.crearPedido(pedido);
+      const dto: CrearPedidoDto = {
+  pedido: new clsPedido(
+    0,
+    idUsuario,
+    idProveedor,
+    new Date(),
+    "pedido",
+    observaciones,
+    false
+  ),
+  detalles: this.detalles().map(d =>
+    new clsDetallePedido(
+      0, // idPedido lo asigna el backend
+      d.IdProducto,
+      d.Cantidad,
+      d.PrecioUnitario
+    )
+  )
+};
 
-      // Obtener el producto para sacar su precio
-      const producto = this.productos().find(p => p.IdProducto === idProducto);
-      const precioUnitario = producto?.PrecioProducto ?? 0;
 
-      const detalle = new clsDetallePedido(
-        idPedido,
-        idProducto,
-        cantidad,
-        precioUnitario
-      );
+      return await this.createPedidoUC.crearPedido(dto);
 
-      await this.createDetalleUC.crearDetallePedido(detalle);
-
-      return idPedido;
     } finally {
       this.saving.set(false);
     }

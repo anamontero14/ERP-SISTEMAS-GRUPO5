@@ -1,9 +1,67 @@
-<h2>Actualizar pedido #{{ pedido.IdPedido }}</h2>
+<div *ngIf="pedido as p">
 
-<label>Proveedor:</label>
-<input type="number" [(ngModel)]="pedido.IdProveedor">
+  <h2>Actualizar pedido #{{ p.IdPedido }}</h2>
 
-<label>Observaciones:</label>
-<textarea [(ngModel)]="pedido.Observaciones"></textarea>
+  <label>Proveedor:</label>
+  <input 
+    type="number" 
+    [(ngModel)]="p.IdProveedor"
+    [readonly]="!puedeEditar()"
+  >
 
-<button (click)="guardar()">Guardar cambios</button>
+  <label>Observaciones:</label>
+  <textarea 
+    [(ngModel)]="p.Observaciones"
+    [readonly]="!puedeEditar()"
+  ></textarea>
+
+  <label>Estado:</label>
+  <select 
+    [(ngModel)]="p.Estado"
+    [disabled]="!puedeEditar()"
+  >
+    <option value="pedido">Pedido</option>
+    <option value="en preparación">En preparación</option>
+    <option value="entregado">Entregado</option>
+  </select>
+
+  <hr>
+
+  <h3>Detalles del pedido</h3>
+
+  <table>
+    <tr>
+      <th>ID Producto</th>
+      <th>Cantidad</th>
+      <th>Precio unitario</th>
+    </tr>
+
+    <tr *ngFor="let d of detalles">
+      <td>{{ d.IdProducto }}</td>
+
+      <td>
+        <input 
+          type="number" 
+          [(ngModel)]="d.Cantidad"
+          [readonly]="!puedeEditar()"
+        >
+      </td>
+
+      <td>
+        <input 
+          type="number" 
+          [(ngModel)]="d.PrecioUnitario"
+          [readonly]="!puedeEditar()"
+        >
+      </td>
+    </tr>
+  </table>
+
+  <button 
+    (click)="guardar()" 
+    [disabled]="!puedeEditar()"
+  >
+    Guardar cambios
+  </button>
+
+</div>

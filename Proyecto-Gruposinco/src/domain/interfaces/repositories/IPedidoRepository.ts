@@ -1,5 +1,6 @@
 import { CrearPedidoDto } from '../../dtos/CrearPedidoDto';
 import { clsPedido } from '../../entities/clsPedido';
+import { CrearPedidoDto } from '../../dtos/CrearPedidoDto';
 
 export interface IPedidoRepository {
   getListaPedidos(): Promise<clsPedido[]>;
