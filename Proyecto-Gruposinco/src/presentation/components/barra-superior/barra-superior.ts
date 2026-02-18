@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [RouterLink, CommonModule],
   templateUrl: './barra-superior.html',
-  styleUrls: ['./barra-superior.css'],
+  styleUrl: './barra-superior.css',
 })
 export class BarraSuperior {
   menuAbierto = false;
@@ -25,5 +25,6 @@ export class BarraSuperior {
 
   logout() {
     this.auth.logout();
+    this.cerrarMenu(); // Cerramos el menú al salir
   }
 }
