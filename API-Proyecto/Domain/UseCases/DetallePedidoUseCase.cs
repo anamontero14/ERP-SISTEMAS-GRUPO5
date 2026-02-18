@@ -12,14 +12,16 @@ namespace UseCases
     public class DetallePedidoUseCase : IDetallesPedidoUseCase
     {
         private readonly IDetallesPedidoRepository _detallePedidoRepository;
+        private readonly IPedidoRepository _pedidoRepository;
 
         /// <summary>
         /// Constructor del caso de uso DetallePedido.
         /// </summary>
         /// <param name="detallePedidoRepository">Repositorio de detalles de pedido</param>
-        public DetallePedidoUseCase(IDetallesPedidoRepository detallePedidoRepository)
+        public DetallePedidoUseCase(IDetallesPedidoRepository detallePedidoRepository, IPedidoRepository pedidoRepository)
         {
             _detallePedidoRepository = detallePedidoRepository;
+            _pedidoRepository = pedidoRepository;
         }
 
         /// <summary>
@@ -71,6 +73,11 @@ namespace UseCases
         /// <returns>Número de filas afectadas</returns>
         public int ActualizarDetallePedido(int idPedido, int idProducto, DetallePedido detallePedido)
         {
+            Pedido? pedido = _pedidoRepository.GetPedidoPorId(idPedido);
+
+            if (pedido == null) return 0;
+            if (pedido.Estado != "pedido") return -1;
+
             return _detallePedidoRepository.ActualizarDetallePedido(idPedido, idProducto, detallePedido);
         }
     }

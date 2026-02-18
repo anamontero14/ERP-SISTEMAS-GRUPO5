@@ -193,6 +193,44 @@ namespace Data.Repositories.AzureRepositories
             }
         }
 
+        /// <summary>
+        /// Crea un nuevo pedido y devuelve el ID autogenerado.
+        /// </summary>
+        /// <param name="pedidoNuevo">Pedido a crear</param>
+        /// <returns>ID del pedido creado</returns>
+        public int CrearPedidoYObtenerID(Pedido pedidoNuevo)
+        {
+            SqlConnection? miConexion = null;
+            SqlCommand? miComando = null;
+            Connection connection = new();
+
+            try
+            {
+                miConexion = connection.getConnection();
+
+                miComando = new SqlCommand(
+                    "INSERT INTO PEDIDO (idUsuario, idProveedor, fechaPedido, estado, observaciones, archivado) " +
+                    "VALUES (@idUsuario, @idProveedor, @fechaPedido, @estado, @observaciones, @archivado); " +
+                    "SELECT CAST(SCOPE_IDENTITY() AS INT);",
+                    miConexion
+                );
+
+                miComando.Parameters.AddWithValue("@idUsuario", pedidoNuevo.IdUsuario);
+                miComando.Parameters.AddWithValue("@idProveedor", pedidoNuevo.IdProveedor);
+                miComando.Parameters.AddWithValue("@fechaPedido", pedidoNuevo.FechaPedido);
+                miComando.Parameters.AddWithValue("@estado", pedidoNuevo.Estado);
+                miComando.Parameters.AddWithValue("@observaciones", pedidoNuevo.Observaciones ?? "");
+                miComando.Parameters.AddWithValue("@archivado", pedidoNuevo.Archivado);
+
+                object? result = miComando.ExecuteScalar();
+                return result != null ? Convert.ToInt32(result) : 0;
+            }
+            finally
+            {
+                if (miConexion != null) connection.closeConnection(ref miConexion);
+            }
+        }
+
         public int ActualizarPedido(int idPedido, Pedido pedido)
         {
             SqlConnection? miConexion = null;
