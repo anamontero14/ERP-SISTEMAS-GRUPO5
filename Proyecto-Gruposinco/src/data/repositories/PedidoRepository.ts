@@ -64,24 +64,8 @@ export class PedidoRepository implements IPedidoRepository {
   }
 
   // CREATE
-  async crearPedido(pedidoNuevo: CrearPedidoDto): Promise<number> {
-    const pedido = pedidoNuevo.pedido;
-    const response = await this.api.crearPedido<number>({
-      pedido: {
-        idUsuario: pedido.IdUsuario,
-        idProveedor: pedido.IdProveedor,
-        fechaPedido: pedido.FechaPedido,
-        estado: pedido.Estado,
-        observaciones: pedido.Observaciones,
-        archivado: pedido.Archivado
-      },
-      detalles: pedidoNuevo.detalles.map(detalle => ({
-        idPedido: detalle.IdPedido,
-        idProducto: detalle.IdProducto,
-        cantidad: detalle.Cantidad,
-        precioUnitario: detalle.PrecioUnitario
-      }))
-    });
+  async crearPedido(dto: CrearPedidoDto): Promise<number> {
+    const response = await this.api.crearPedido<number>(dto);
 
     return response.success ? 1 : 0;
   }
