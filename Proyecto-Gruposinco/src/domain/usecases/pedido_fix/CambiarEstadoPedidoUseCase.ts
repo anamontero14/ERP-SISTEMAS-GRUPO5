@@ -1,5 +1,5 @@
 import { IPedidoRepository } from '../../interfaces/repositories/IPedidoRepository';
-import { ICambiarEstadoPedidoUseCase } from '../../interfaces/usecases/pedido/ICambiarEstadoPedidoUseCase';
+import { ICambiarEstadoPedidoUseCase } from '../../interfaces/usecases/pedido_fix/ICambiarEstadoPedidoUseCase';
 
 import { Injectable } from '@angular/core';
 import { PedidoRepository } from '../../../data/repositories/PedidoRepository';
