@@ -53,6 +53,12 @@ export const routes: Routes = [
         m => m.ArchivadosScreen
       ),
   },
+  {
+    path: 'construccion',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./views/en-construccion/en-construccion').then(m => m.EnConstruccionComponent),
+  },
   { path: '', pathMatch: 'full', redirectTo: 'welcome' },
   { path: '**', redirectTo: 'welcome' },
 ];
