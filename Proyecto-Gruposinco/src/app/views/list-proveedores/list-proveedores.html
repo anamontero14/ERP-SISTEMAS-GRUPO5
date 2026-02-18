@@ -1,0 +1,10 @@
+<h2>Listado de proveedores</h2>
+
+<div *ngIf="vm.loading()">Cargando proveedores...</div>
+
+<div *ngIf="!vm.loading()">
+  <app-proveedor-item
+    *ngFor="let p of vm.proveedores()"
+    [proveedor]="p">
+  </app-proveedor-item>
+</div>

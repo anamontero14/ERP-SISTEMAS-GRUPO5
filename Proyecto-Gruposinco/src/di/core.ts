@@ -18,14 +18,14 @@ import { IUsuarioRepository } from "../domain/interfaces/repositories/IUsuarioRe
 import { IDetallesPedidoRepository } from "../domain/interfaces/repositories/IDetallesPedidoRepository";
 
 // UseCases
-import { IGetProductosUseCase } from "../domain/interfaces/usecases/Producto/IGetProductosUseCase";
+import { IGetProductosUseCase } from "../domain/interfaces/usecases/producto/IGetProductosUseCase";
 import { IGetProveedoresUseCase } from "../domain/interfaces/usecases/proveedor/IGetProveedoresUseCase";
 
-import { IGetPedidosUseCase } from "../domain/interfaces/usecases/Pedido/IGetPedidosUseCase";
-import { ICreatePedidoUseCase } from "../domain/interfaces/usecases/Pedido/ICreatePedidoUseCase";
-import { IUpdatePedidoUseCase } from "../domain/interfaces/usecases/Pedido/IUpdatePedidoUseCase";
-import { ICambiarEstadoPedidoUseCase } from "../domain/interfaces/usecases/Pedido/ICambiarEstadoPedidoUseCase";
-import { IDeletePedidoUseCase } from "../domain/interfaces/usecases/Pedido/IDeletePedidoUseCase";
+import { IGetPedidosUseCase } from "../domain/interfaces/usecases/pedido/IGetPedidosUseCase";
+import { ICreatePedidoUseCase } from "../domain/interfaces/usecases/pedido/ICreatePedidoUseCase";
+import { IUpdatePedidoUseCase } from "../domain/interfaces/usecases/pedido/IUpdatePedidoUseCase";
+import { ICambiarEstadoPedidoUseCase } from "../domain/interfaces/usecases/pedido/ICambiarEstadoPedidoUseCase";
+import { IDeletePedidoUseCase } from "../domain/interfaces/usecases/pedido/IDeletePedidoUseCase";
 
 import { IGetDetallesPedidoUseCase } from "../domain/interfaces/usecases/detallePedido/IGetDetallesPedidoUseCase";
 import { ICreateDetallePedidoUseCase } from "../domain/interfaces/usecases/detallePedido/ICreateDetallePedidoUseCase";
