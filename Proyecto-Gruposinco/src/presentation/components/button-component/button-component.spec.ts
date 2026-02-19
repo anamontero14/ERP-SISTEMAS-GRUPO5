@@ -22,6 +22,7 @@ describe('ButtonComponent', () => {
   it('debería avisar cuando se hace clic', () => {
     let seHizoClic = 0;
 
+    // Nos suscribimos y sumamos 1 si el evento ocurre
     component.clicked.subscribe(() => {
       seHizoClic = 1;
     });

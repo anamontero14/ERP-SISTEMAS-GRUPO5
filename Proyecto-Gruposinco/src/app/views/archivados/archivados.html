@@ -2,12 +2,12 @@
 
   <header class="list-header">
     <div class="titulo-wrapper">
-      <h2 class="titulo-pagina">Archivados</h2>
+      <h2 class="titulo-pagina">Pedidos Archivados</h2>
       <div class="subrayado-artístico"></div>
     </div>
 
     <div *ngIf="vm.loading()" class="loading-state">
-      <div class="mini-spinner"></div> Cargando archivados...
+      <div class="mini-spinner"></div> Cargando historial...
     </div>
 
     <div *ngIf="!vm.loading() && vm.archivados().length === 0" class="empty-state">

@@ -7,6 +7,7 @@ describe('BarraSuperior', () => {
   let component: BarraSuperior;
   let fixture: ComponentFixture<BarraSuperior>;
 
+  // Mock manual simple
   const authMock = { logout: () => {} };
 
   beforeEach(async () => {

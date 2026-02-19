@@ -1,8 +1,9 @@
 import { Injectable, signal, computed } from '@angular/core';
-import { GetPedidosUseCase } from '../../domain/usecases/pedido_fix/GetPedidosUseCase';
+import { GetPedidosUseCase } from '../../domain/usecases/pedido/GetPedidosUseCase';
 import { GetDetallesPedidoUseCase } from '../../domain/usecases/detallePedido/GetDetallesPedidoUseCase';
 import { UpdateDetallePedidoUseCase } from '../../domain/usecases/detallePedido/UpdateDetallePedidoUseCase';
-import { DeletePedidoUseCase } from '../../domain/usecases/pedido_fix/DeletePedidoUseCase';
+import { UpdatePedidoUseCase } from '../../domain/usecases/pedido/UpdatePedidoUseCase';
+import { DeletePedidoUseCase } from '../../domain/usecases/pedido/DeletePedidoUseCase';
 
 import { clsPedido } from '../../domain/entities/clsPedido';
 import { clsDetallePedido } from '../../domain/entities/clsDetallePedido';
@@ -25,6 +26,7 @@ export class UpdatePedidosProveedoresVM {
     private getPedidoUC: GetPedidosUseCase,
     private getDetallesUC: GetDetallesPedidoUseCase,
     private updateDetalleUC: UpdateDetallePedidoUseCase,
+    private updatePedidoUC: UpdatePedidoUseCase,
     private deletePedidoUC: DeletePedidoUseCase
   ) {}
 
@@ -40,6 +42,14 @@ export class UpdatePedidosProveedoresVM {
     this.loading.set(false);
   }
 
+  setObservaciones(valor: string) {
+    const p = this.pedido();
+    if (!p) return;
+
+    p.Observaciones = valor;
+    this.pedido.set(p);
+  }
+
   async guardarDetalles() {
     this.saving.set(true);
 
@@ -50,6 +60,11 @@ export class UpdatePedidosProveedoresVM {
           d.IdProducto,
           d
         );
+      }
+
+      const p = this.pedido();
+      if (p) {
+        await this.updatePedidoUC.actualizarPedido(p.IdPedido, p);
       }
 
       return true;

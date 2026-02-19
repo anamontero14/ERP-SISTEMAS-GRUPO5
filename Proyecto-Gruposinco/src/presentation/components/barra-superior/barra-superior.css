@@ -142,9 +142,9 @@
 }
 
 .drawer-links li a:hover {
-  background: var(--bg-soft) !important; 
-  color: var(--deep-pink) !important;  
-  padding-left: 24px; 
+  background: var(--bg-soft) !important;
+  color: var(--deep-pink) !important;
+  padding-left: 24px;
 }
 
 .separador {

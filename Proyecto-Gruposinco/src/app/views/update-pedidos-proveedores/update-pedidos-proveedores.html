@@ -13,16 +13,31 @@
 
   <div class="details-wrapper" *ngIf="!vm.loading() && vm.pedido() as p">
 
-    <div *ngIf="p.Archivado" class="archivado-banner">
-      <span class="icon">⚠️</span>
-      Este pedido ya está archivado y no permite modificaciones de productos.
-    </div>
-
-    <div *ngIf="!p.Archivado && (p.Estado === 'enviado' || p.Estado === 'entregado')" class="archivado-banner estado-bloqueado-banner">
+    <!-- Banner de bloqueo -->
+    <div *ngIf="vm.bloqueado()" class="archivado-banner">
       <span class="icon">🚫</span>
-      Este pedido está en estado <strong>{{ p.Estado }}</strong> y no permite modificaciones.
+      Este pedido está <strong>{{ p.Estado }}</strong> o archivado y no permite modificaciones.
     </div>
 
+    <!-- OBSERVACIONES -->
+    <div class="observaciones-section">
+      <h3 class="section-title">Observaciones del pedido</h3>
+
+      <textarea
+        class="observaciones-textarea"
+        [class.bloqueado]="vm.bloqueado()"
+        [disabled]="vm.bloqueado()"
+        [ngModel]="p.Observaciones"
+        (ngModelChange)="vm.setObservaciones($event)"
+        placeholder="Añade aquí las observaciones del pedido...">
+      </textarea>
+
+      <div class="observaciones-hint">
+        Puedes añadir notas internas sobre el pedido.
+      </div>
+    </div>
+
+    <!-- ARTÍCULOS -->
     <div class="productos-section">
       <h3 class="section-title">Modificar artículos del pedido</h3>
 
@@ -53,7 +68,7 @@
               *ngIf="!vm.bloqueado()"
               class="btn-delete-item"
               (click)="eliminar(i)">
-              Eliminar
+              Archivar
             </button>
             <span *ngIf="vm.bloqueado()" class="status-gray">Sin cambios</span>
           </div>

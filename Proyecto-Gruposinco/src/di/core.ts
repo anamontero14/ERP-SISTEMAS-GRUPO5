@@ -18,14 +18,14 @@ import { IUsuarioRepository } from "../domain/interfaces/repositories/IUsuarioRe
 import { IDetallesPedidoRepository } from "../domain/interfaces/repositories/IDetallesPedidoRepository";
 
 // UseCases
-import { IGetProductosUseCase } from "../domain/interfaces/usecases/producto_fix/IGetProductosUseCase";
+import { IGetProductosUseCase } from "../domain/interfaces/usecases/producto/IGetProductosUseCase";
 import { IGetProveedoresUseCase } from "../domain/interfaces/usecases/proveedor/IGetProveedoresUseCase";
 
-import { IGetPedidosUseCase } from "../domain/interfaces/usecases/pedido_fix/IGetPedidosUseCase";
-import { ICreatePedidoUseCase } from "../domain/interfaces/usecases/pedido_fix/ICreatePedidoUseCase";
-import { IUpdatePedidoUseCase } from "../domain/interfaces/usecases/pedido_fix/IUpdatePedidoUseCase";
-import { ICambiarEstadoPedidoUseCase } from "../domain/interfaces/usecases/pedido_fix/ICambiarEstadoPedidoUseCase";
-import { IDeletePedidoUseCase } from "../domain/interfaces/usecases/pedido_fix/IDeletePedidoUseCase";
+import { IGetPedidosUseCase } from "../domain/interfaces/usecases/pedido/IGetPedidosUseCase";
+import { ICreatePedidoUseCase } from "../domain/interfaces/usecases/pedido/ICreatePedidoUseCase";
+import { IUpdatePedidoUseCase } from "../domain/interfaces/usecases/pedido/IUpdatePedidoUseCase";
+import { ICambiarEstadoPedidoUseCase } from "../domain/interfaces/usecases/pedido/ICambiarEstadoPedidoUseCase";
+import { IDeletePedidoUseCase } from "../domain/interfaces/usecases/pedido/IDeletePedidoUseCase";
 
 import { IGetDetallesPedidoUseCase } from "../domain/interfaces/usecases/detallePedido/IGetDetallesPedidoUseCase";
 import { ICreateDetallePedidoUseCase } from "../domain/interfaces/usecases/detallePedido/ICreateDetallePedidoUseCase";
@@ -33,20 +33,29 @@ import { IUpdateDetallePedidoUseCase } from "../domain/interfaces/usecases/detal
 import { IDeleteDetallePedidoUseCase } from "../domain/interfaces/usecases/detallePedido/IDeleteDetallePedidoUseCase";
 
 
-import { GetProductosUseCase } from "../domain/usecases/producto_fix/GetProductosUseCase";
+import { GetProductosUseCase } from "../domain/usecases/producto/GetProductosUseCase";
 import { GetProveedoresUseCase } from "../domain/usecases/proveedor/GetProveedoresUseCase";
 
-import { GetPedidosUseCase } from "../domain/usecases/pedido_fix/GetPedidosUseCase";
-import { CreatePedidoUseCase } from "../domain/usecases/pedido_fix/CreatePedidoUseCase";
-import { UpdatePedidoUseCase } from "../domain/usecases/pedido_fix/UpdatePedidoUseCase";
-import { CambiarEstadoPedidoUseCase } from "../domain/usecases/pedido_fix/CambiarEstadoPedidoUseCase";
-import { DeletePedidoUseCase } from "../domain/usecases/pedido_fix/DeletePedidoUseCase";
+import { GetPedidosUseCase } from "../domain/usecases/pedido/GetPedidosUseCase";
+import { CreatePedidoUseCase } from "../domain/usecases/pedido/CreatePedidoUseCase";
+import { UpdatePedidoUseCase } from "../domain/usecases/pedido/UpdatePedidoUseCase";
+import { CambiarEstadoPedidoUseCase } from "../domain/usecases/pedido/CambiarEstadoPedidoUseCase";
+import { DeletePedidoUseCase } from "../domain/usecases/pedido/DeletePedidoUseCase";
 
 import { GetDetallesPedidoUseCase } from "../domain/usecases/detallePedido/GetDetallesPedidoUseCase";
 import { CreateDetallePedidoUseCase } from "../domain/usecases/detallePedido/CreateDetallePedidoUseCase";
 import { UpdateDetallePedidoUseCase } from "../domain/usecases/detallePedido/UpdateDetallePedidoUseCase";
 import { DeleteDetallePedidoUseCase } from "../domain/usecases/detallePedido/DeleteDetallePedidoUseCase";
 
+// Viewmodels
+/**
+ * import { LoginVM } from "../presentation/viewmodels/LoginVM";
+ * import { ListadoPedidosProveedoresVM } from "../presentation/viewmodels/ListadoPedidosProveedoresVM";
+ * import { CreatePedidosProveedoresVM } from "../presentation/viewmodels/CreatePedidosProveedoresVM";
+ * import { DetailsPedidosProveedoresVM } from "../presentation/viewmodels/DetailsPedidosProveedoresVM";
+ * import { UpdatePedidosProveedoresVM } from "../presentation/viewmodels/UpdatePedidosProveedoresVM";
+ * import { ArchivadosVM } from "../presentation/viewmodels/ArchivadosVM";
+ */
 
 const container = new Container();
 
@@ -95,5 +104,35 @@ container.bind<ICreateDetallePedidoUseCase>(TYPES.ICreateDetallePedidoUseCase)
   .to(CreateDetallePedidoUseCase);
 container.bind<IUpdateDetallePedidoUseCase>(TYPES.IUpdateDetallePedidoUseCase)
   .to(UpdateDetallePedidoUseCase);
+/*container.bind<IDeleteDetallePedidoUseCase>(TYPES.IDeleteDetallePedidoUseCase)
+  .to(DeleteDetallePedidoUseCase);*/
+
+
+// Bind Viewmodels
+/**
+ * container.bind(TYPES.LoginVM)
+ * .to(LoginVM)
+ * .inSingletonScope();
+ *
+ * container.bind(TYPES.ListadoPedidosProveedoresVM)
+ * .to(ListadoPedidosProveedoresVM)
+ * .inSingletonScope();
+ *
+ * container.bind(TYPES.CreatePedidosProveedoresVM)
+ * .to(CreatePedidosProveedoresVM)
+ * .inSingletonScope();
+ *
+ * container.bind(TYPES.DetailsPedidosProveedoresVM)
+ * .to(DetailsPedidosProveedoresVM)
+ * .inSingletonScope();
+ *
+ * container.bind(TYPES.UpdatePedidosProveedoresVM)
+ * .to(UpdatePedidosProveedoresVM)
+ * .inSingletonScope();
+ *
+ * container.bind(TYPES.ArchivadosVM)
+ * .to(ArchivadosVM)
+ * .inSingletonScope();
+ */
 
 export { container };

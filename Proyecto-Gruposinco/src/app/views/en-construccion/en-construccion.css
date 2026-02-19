@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 80vh; /* Para que no pegue al fondo de la pantalla */
   width: 100%;
 }
 
@@ -59,6 +59,7 @@ p {
   font-weight: 400;
 }
 
+/* Animación de los puntitos de espera */
 .dots-loader {
   display: flex;
   justify-content: center;
@@ -77,6 +78,7 @@ p {
 .dots-loader span:nth-child(2) { animation-delay: 0.2s; }
 .dots-loader span:nth-child(3) { animation-delay: 0.4s; }
 
+/* Keyframes */
 @keyframes floatingCard {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-15px); }
