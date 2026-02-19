@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { GetPedidosUseCase } from '../../domain/usecases/pedido_fix/GetPedidosUseCase';
+import { GetPedidosUseCase } from '../../domain/usecases/pedido/GetPedidosUseCase';
 import { clsPedido } from '../../domain/entities/clsPedido';
 
 @Injectable({ providedIn: 'root' })

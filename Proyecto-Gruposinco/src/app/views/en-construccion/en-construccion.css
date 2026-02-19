@@ -1,0 +1,90 @@
+.construction-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* Para que no pegue al fondo de la pantalla */
+  width: 100%;
+}
+
+.visual-card {
+  text-align: center;
+  padding: 50px;
+  border-radius: var(--radius-xl);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--white);
+  max-width: 400px;
+  animation: floatingCard 4s ease-in-out infinite;
+}
+
+.icon-container {
+  position: relative;
+  font-size: 70px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tools-emoji {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 10px 15px rgba(216, 27, 96, 0.15));
+}
+
+.glow-effect {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: var(--soft-pink);
+  filter: blur(40px);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+h1 {
+  font-family: var(--font-main);
+  font-weight: 700;
+  color: var(--text-main);
+  font-size: 24px;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+p {
+  font-family: var(--font-main);
+  color: #A08B93;
+  font-size: 15px;
+  margin-top: 10px;
+  font-weight: 400;
+}
+
+/* Animación de los puntitos de espera */
+.dots-loader {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 30px;
+}
+
+.dots-loader span {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-pink);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.dots-loader span:nth-child(2) { animation-delay: 0.2s; }
+.dots-loader span:nth-child(3) { animation-delay: 0.4s; }
+
+/* Keyframes */
+@keyframes floatingCard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}

@@ -10,7 +10,8 @@ import { clsPedido } from '../../../domain/entities/clsPedido';
   standalone: true,
   selector: 'app-create-pedidos-proveedores-screen',
   imports: [CommonModule, FormsModule],
-  templateUrl: './create-pedidos-proveedores.html'
+  templateUrl: './create-pedidos-proveedores.html',
+  styleUrl: './create-pedidos-proveedores.css',
 })
 export class CreatePedidosProveedoresScreen implements OnInit {
 

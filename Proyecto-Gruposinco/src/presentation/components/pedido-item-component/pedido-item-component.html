@@ -1,15 +1,28 @@
 <div class="pedido-card">
   <div class="pedido-info">
-    <h3 class="pedido-id">Pedido #{{ pedido.IdPedido }}</h3>
-    <p class="pedido-proveedor">Proveedor: {{ pedido.IdProveedor }}</p>
-    <p class="pedido-proveedor">Archivado: {{ pedido.Archivado }}</p>
-    <p class="pedido-estado" [ngClass]="pedido.Estado.replace(' ', '-').toLowerCase()">
-      Estado: {{ pedido.Estado }}
-    </p>
+    <div class="pedido-header">
+      <h3 class="pedido-id">Pedido #{{ pedido.IdPedido }}</h3>
+      <span class="estado-badge" [ngClass]="pedido.Estado.replace(' ', '-').toLowerCase()">
+        {{ pedido.Estado }}
+      </span>
+    </div>
 
+    <div class="pedido-meta">
+      <div class="meta-row">
+        <span class="label">Proveedor ID:</span>
+        <span class="value">{{ pedido.IdProveedor }}</span>
+      </div>
+      <div class="meta-row">
+        <span class="label">Estado de archivo:</span>
+        <span class="value">{{ pedido.Archivado ? 'Archivado' : 'Activo' }}</span>
+      </div>
+    </div>
   </div>
 
-  <a class="pedido-link" [routerLink]="['/pedidos', pedido.IdPedido]">
-    Ver detalles →
-  </a>
+  <div class="pedido-actions">
+    <a class="pedido-link" [routerLink]="['/pedidos', pedido.IdPedido]">
+      Ver detalles
+      <span class="arrow">→</span>
+    </a>
+  </div>
 </div>

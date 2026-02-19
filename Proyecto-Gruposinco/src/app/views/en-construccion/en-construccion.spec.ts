@@ -1,23 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EnConstruccionComponent } from './en-construccion';
 
-import { EnConstruccion } from './en-construccion';
-
-describe('EnConstruccion', () => {
-  let component: EnConstruccion;
-  let fixture: ComponentFixture<EnConstruccion>;
+describe('EnConstruccionView', () => {
+  let component: EnConstruccionComponent;
+  let fixture: ComponentFixture<EnConstruccionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EnConstruccion]
-    })
-    .compileComponents();
+      imports: [EnConstruccionComponent]
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(EnConstruccion);
+    fixture = TestBed.createComponent(EnConstruccionComponent);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('debería crearse correctamente', () => {
     expect(component).toBeTruthy();
   });
 });

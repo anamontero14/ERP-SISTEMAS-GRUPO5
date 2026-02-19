@@ -1,20 +1,27 @@
 <div class="producto-card">
-  <div class="producto-info">
-    <h3 class="producto-nombre">{{ producto.NombreProducto }}</h3>
+  <div class="producto-header">
+    <div class="producto-main-info">
+      <h3 class="producto-nombre">{{ producto.NombreProducto }}</h3>
+      <span class="producto-id">ID: {{ producto.IdProducto }}</span>
+    </div>
+    <div class="producto-precio-badge">
+      {{ producto.PrecioProducto }}€
+    </div>
+  </div>
 
-    <p class="producto-id">ID: {{ producto.IdProducto }}</p>
-    <p class="producto-desc">{{ producto.DescripcionProducto }}</p>
+  <p class="producto-desc">{{ producto.DescripcionProducto }}</p>
 
-    <p class="producto-precio">
-      Precio: {{ producto.PrecioProducto }} €
-    </p>
-
-    <p class="producto-stock">
-      Stock: {{ producto.StockProducto }}
-    </p>
-
-    <p class="producto-procedencia">
-      Procedencia: {{ producto.ProcedenciaProducto }}
-    </p>
+  <div class="producto-footer">
+    <div class="meta-item">
+      <span class="label">Stock:</span>
+      <span class="value" [class.low-stock]="producto.StockProducto < 5">
+        {{ producto.StockProducto }} unidades
+      </span>
+    </div>
+    <div class="meta-separator">•</div>
+    <div class="meta-item">
+      <span class="label">Origen:</span>
+      <span class="value">{{ producto.ProcedenciaProducto }}</span>
+    </div>
   </div>
 </div>
