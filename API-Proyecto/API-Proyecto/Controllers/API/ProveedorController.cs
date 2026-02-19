@@ -12,11 +12,13 @@ namespace API_Proyecto.Controllers.API
     [ApiController]
     public class ProveedorController : ControllerBase
     {
-        // Caso de uso de proveedor inyectado por dependencias
+        /// <summary>
+        /// Atributo que almacena el caso de uso para poder usar sus métodos
+        /// </summary>
         private readonly IProveedorUseCase _proveedorUseCase;
 
         /// <summary>
-        /// Constructor del controlador de proveedores.
+        /// Inyección del caso de uso de proveedores
         /// </summary>
         /// <param name="proveedorUseCase">Caso de uso de proveedor</param>
         public ProveedorController(IProveedorUseCase proveedorUseCase)
@@ -25,19 +27,31 @@ namespace API_Proyecto.Controllers.API
         }
 
         /// <summary>
-        /// Obtiene la lista completa de proveedores.
+        /// Obtiene la lista completa de proveedores llamando al caso de uso.
+        /// Si ocurre una excepción, devuelve un error 500.
         /// </summary>
         /// <returns>Lista de proveedores</returns>
         // GET: api/Proveedor
         [HttpGet]
         public IActionResult GetListaProveedores()
         {
-            List<Proveedor> proveedores = _proveedorUseCase.GetListaProveedores();
-            return Ok(proveedores);
+            IActionResult resultado;
+            try
+            {
+                List<Proveedor> proveedores = _proveedorUseCase.GetListaProveedores();
+                resultado = Ok(proveedores);
+            }
+            catch (Exception ex)
+            {
+                resultado = StatusCode(500, $"Error interno al obtener la lista de proveedores: {ex.Message}");
+            }
+            return resultado;
         }
 
         /// <summary>
-        /// Obtiene un proveedor por su identificador.
+        /// Obtiene un proveedor por su identificador llamando al caso de uso.
+        /// Si no se encuentra el proveedor, devuelve 404.
+        /// Si ocurre una excepción, devuelve un error 500.
         /// </summary>
         /// <param name="idProveedor">ID del proveedor a buscar</param>
         /// <returns>Proveedor encontrado o 404 si no existe</returns>
@@ -45,9 +59,17 @@ namespace API_Proyecto.Controllers.API
         [HttpGet("{idProveedor}")]
         public IActionResult GetProveedorPorId(int idProveedor)
         {
-            Proveedor proveedor = _proveedorUseCase.GetProveedorPorId(idProveedor);
-            if (proveedor == null) return NotFound();
-            return Ok(proveedor);
+            IActionResult resultado;
+            try
+            {
+                Proveedor proveedor = _proveedorUseCase.GetProveedorPorId(idProveedor);
+                resultado = proveedor == null ? NotFound() : Ok(proveedor);
+            }
+            catch (Exception ex)
+            {
+                resultado = StatusCode(500, $"Error interno al obtener el proveedor: {ex.Message}");
+            }
+            return resultado;
         }
     }
 }

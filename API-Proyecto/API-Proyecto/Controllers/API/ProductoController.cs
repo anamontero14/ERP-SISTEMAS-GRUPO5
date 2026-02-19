@@ -12,11 +12,13 @@ namespace API_Proyecto.Controllers.API
     [ApiController]
     public class ProductoController : ControllerBase
     {
-        // Caso de uso de producto inyectado por dependencias
+        /// <summary>
+        /// Atributo que almacena el caso de uso para poder usar sus métodos
+        /// </summary>
         private readonly IProductoUseCase _productoUseCase;
 
         /// <summary>
-        /// Constructor del controlador de productos.
+        /// Inyección del caso de uso de productos
         /// </summary>
         /// <param name="productoUseCase">Caso de uso de producto</param>
         public ProductoController(IProductoUseCase productoUseCase)
@@ -25,19 +27,31 @@ namespace API_Proyecto.Controllers.API
         }
 
         /// <summary>
-        /// Obtiene la lista completa de productos.
+        /// Obtiene la lista completa de productos llamando al caso de uso.
+        /// Si ocurre una excepción, devuelve un error 500.
         /// </summary>
         /// <returns>Lista de productos</returns>
         // GET: api/Producto
         [HttpGet]
         public IActionResult GetListaProductos()
         {
-            List<Producto> productos = _productoUseCase.GetListaProductos();
-            return Ok(productos);
+            IActionResult resultado;
+            try
+            {
+                List<Producto> productos = _productoUseCase.GetListaProductos();
+                resultado = Ok(productos);
+            }
+            catch (Exception ex)
+            {
+                resultado = StatusCode(500, $"Error interno al obtener la lista de productos: {ex.Message}");
+            }
+            return resultado;
         }
 
         /// <summary>
-        /// Obtiene un producto por su identificador.
+        /// Obtiene un producto por su identificador llamando al caso de uso.
+        /// Si no se encuentra el producto, devuelve 404.
+        /// Si ocurre una excepción, devuelve un error 500.
         /// </summary>
         /// <param name="idProducto">ID del producto a buscar</param>
         /// <returns>Producto encontrado o 404 si no existe</returns>
@@ -45,9 +59,17 @@ namespace API_Proyecto.Controllers.API
         [HttpGet("{idProducto}")]
         public IActionResult GetProductoPorId(int idProducto)
         {
-            Producto producto = _productoUseCase.GetProductoPorId(idProducto);
-            if (producto == null) return NotFound();
-            return Ok(producto);
+            IActionResult resultado;
+            try
+            {
+                Producto producto = _productoUseCase.GetProductoPorId(idProducto);
+                resultado = producto == null ? NotFound() : Ok(producto);
+            }
+            catch (Exception ex)
+            {
+                resultado = StatusCode(500, $"Error interno al obtener el producto: {ex.Message}");
+            }
+            return resultado;
         }
     }
 }
