@@ -11,7 +11,6 @@
   align-items: center;
 }
 
-/* --- HEADER Y TÍTULO --- */
 .list-header {
   width: 100%;
   text-align: center;
@@ -55,20 +54,18 @@ h2.titulo-pagina {
   font-size: 0.9rem;
 }
 
-/* --- BOTÓN FLOTANTE (Estilo similar a tu btn-custom) --- */
 .btn-flotante {
   position: fixed;
   bottom: 35px;
   right: 35px;
   z-index: 1000;
 
-  /* Estilos de tu botón custom */
   padding: 14px 24px;
   background: linear-gradient(135deg, #EC407A 0%, var(--deep-pink) 100%);
   color: white;
   text-decoration: none;
   font-weight: 700;
-  border-radius: 50px; /* Estilo píldora */
+  border-radius: 50px;
   box-shadow: 0 10px 20px rgba(216, 27, 96, 0.25);
 
   display: flex;
@@ -88,7 +85,6 @@ h2.titulo-pagina {
   line-height: 1;
 }
 
-/* --- LISTA E ITEMS --- */
 .items-wrapper {
   width: 100%;
   display: flex;
@@ -117,3 +113,51 @@ h2.titulo-pagina {
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #FFF5F5;
+  border: 2px solid #FEB2B2;
+  color: #C53030;
+  padding: 20px 28px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 700px;
+  font-size: 0.95rem;
+}
+
+.error-banner span {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.error-banner strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.error-banner p {
+  margin: 0;
+  color: #E57373;
+}
+
+.btn-retry {
+  margin-left: auto;
+  flex-shrink: 0;
+  background: white;
+  color: #E53E3E;
+  border: 2px solid #FEB2B2;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-retry:hover {
+  background: #E53E3E;
+  color: white;
+  border-color: #E53E3E;
+}

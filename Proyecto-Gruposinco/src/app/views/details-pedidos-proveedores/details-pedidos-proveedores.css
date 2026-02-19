@@ -8,12 +8,10 @@
   align-items: center;
 }
 
-/* --- CABECERA --- */
-/* --- HEADER Y TÍTULO "GUAPO" --- */
 .list-header {
   width: 100%;
   text-align: center;
-  margin-bottom: 30px; /* Espacio compacto */
+  margin-bottom: 30px;
 }
 
 .titulo-wrapper {
@@ -32,7 +30,6 @@ h2.titulo-pagina {
   z-index: 2;
 }
 
-/* El efecto de pincelada rosa */
 .subrayado-artístico {
   position: absolute;
   bottom: 5px;
@@ -46,29 +43,27 @@ h2.titulo-pagina {
   transform: rotate(-1deg);
 }
 
-/* --- CONTENEDOR PRINCIPAL --- */
 .details-wrapper {
   width: 95%;
-  max-width: 1200px; /* ANCHO FIJO GRANDE */
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
 }
 
-/* --- TARJETA DE DATOS --- */
 .main-info-card {
   background: white;
   border-radius: 24px;
-  padding: 50px; /* Más padding para mayor amplitud */
+  padding: 50px;
   border: 1px solid #FCE4EC;
   box-shadow: 0 15px 50px rgba(0,0,0,0.03);
-  width: 100%; /* Ocupa todo el max-width del wrapper */
+  width: 100%;
 }
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columnas para aprovechar el ancho */
+  grid-template-columns: repeat(4, 1fr);
   gap: 40px;
 }
 
@@ -82,20 +77,19 @@ h2.titulo-pagina {
 }
 
 .dato-principal, .dato-secundario {
-  font-size: 1.4rem; /* Texto más grande */
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--text-main);
 }
 
 .observaciones-full {
-  grid-column: span 4; /* Ocupa toda la fila inferior */
+  grid-column: span 4;
   background: #FFF9FB;
   padding: 30px;
   border-radius: 18px;
   margin-top: 20px;
 }
 
-/* --- ESTADOS --- */
 .estado-badge {
   padding: 10px 22px;
   border-radius: 12px;
@@ -107,7 +101,6 @@ h2.titulo-pagina {
 .estado-badge.pedido { background: #FFF3E0; color: #EF6C00; }
 .estado-badge.enviado { background: #ebf4ff; color: #2894c6; }
 
-/* --- SECCIÓN PRODUCTOS --- */
 .productos-section {
   width: 100%;
 }
@@ -143,7 +136,7 @@ h2.titulo-pagina {
 
 .prod-values {
   display: flex;
-  gap: 80px; /* Mucho espacio entre columnas */
+  gap: 80px;
 }
 
 .val {
@@ -151,7 +144,6 @@ h2.titulo-pagina {
   font-weight: 700;
 }
 
-/* --- BOTÓN --- */
 .btn-edit {
   margin-top: 40px;
   width: 100%;
@@ -166,7 +158,6 @@ h2.titulo-pagina {
   box-shadow: 0 10px 30px rgba(216, 27, 96, 0.2);
 }
 
-/* --- ESTADO DE CARGA --- */
 .loading-state {
   display: flex;
   align-items: center;
@@ -190,4 +181,53 @@ h2.titulo-pagina {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #FFF5F5;
+  border: 2px solid #FEB2B2;
+  color: #C53030;
+  padding: 20px 28px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 700px;
+  font-size: 0.95rem;
+}
+
+.error-banner span {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.error-banner strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.error-banner p {
+  margin: 0;
+  color: #E57373;
+}
+
+.btn-retry {
+  margin-left: auto;
+  flex-shrink: 0;
+  background: white;
+  color: #E53E3E;
+  border: 2px solid #FEB2B2;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-retry:hover {
+  background: #E53E3E;
+  color: white;
+  border-color: #E53E3E;
 }

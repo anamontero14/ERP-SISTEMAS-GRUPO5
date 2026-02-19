@@ -11,7 +11,16 @@
     <div class="mini-spinner"></div> Cargando datos del pedido...
   </div>
 
-  <div class="details-wrapper" *ngIf="!vm.loading() && vm.pedido() as p">
+  <div *ngIf="vm.error()" class="error-banner">
+    <span>⚠️</span>
+    <div>
+      <strong>Error del servidor</strong>
+      <p>{{ vm.error() }}</p>
+    </div>
+    <button class="btn-retry" (click)="vm.cargarDatos(idPedido)">Reintentar</button>
+  </div>
+
+  <div class="details-wrapper" *ngIf="!vm.loading() && !vm.error() && vm.pedido() as p">
 
     <div *ngIf="vm.bloqueado()" class="archivado-banner">
       <span class="icon">🚫</span>
@@ -56,7 +65,7 @@
     </div>
 
     <div class="action-footer">
-      <button class="btn-final" (click)="guardar()" [disabled]="vm.saving() || vm.bloqueado()">
+      <button class="btn-final" (click)="pedirConfirmacion('guardar')" [disabled]="vm.saving() || vm.bloqueado()">
         <span *ngIf="!vm.saving()">Guardar cambios realizados</span>
         <span *ngIf="vm.saving()">Guardando...</span>
       </button>
@@ -67,7 +76,7 @@
         <strong>⚠️ Archivar pedido</strong>
         <span>Esta acción archivará el pedido de forma permanente.</span>
       </div>
-      <button class="btn-delete-item btn-danger-final" (click)="eliminar(0)">
+      <button class="btn-delete-item btn-danger-final" (click)="pedirConfirmacion('eliminar')">
         Archivar pedido
       </button>
     </div>
@@ -77,4 +86,18 @@
     </div>
 
   </div>
+
+¡  <div class="modal-overlay" *ngIf="modalVisible" (click)="cancelar()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <p class="modal-titulo">{{ modalConfig.titulo }}</p>
+      <p class="modal-desc">{{ modalConfig.desc }}</p>
+      <div class="modal-actions">
+        <button class="modal-btn-cancel" (click)="cancelar()">Cancelar</button>
+        <button class="modal-btn-confirm" [class.danger]="modalConfig.tipo === 'eliminar'" (click)="confirmar()">
+          {{ modalConfig.confirmarTexto }}
+        </button>
+      </div>
+    </div>
+  </div>
+
 </div>

@@ -14,7 +14,16 @@
     <div class="mini-spinner"></div> Cargando información...
   </div>
 
-  <div class="details-wrapper" *ngIf="!vm.loading()">
+  <div *ngIf="vm.error()" class="error-banner">
+    <span>⚠️</span>
+    <div>
+      <strong>Error del servidor</strong>
+      <p>{{ vm.error() }}</p>
+    </div>
+    <button class="btn-retry" (click)="vm.cargarDatos(idPedido)">Reintentar</button>
+  </div>
+
+  <div class="details-wrapper" *ngIf="!vm.loading() && !vm.error()">
 
     <div *ngIf="vm.pedido() as p" class="main-info-card">
       <div class="card-grid">

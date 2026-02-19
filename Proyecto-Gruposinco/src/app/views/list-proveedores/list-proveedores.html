@@ -10,10 +10,20 @@
     </div>
   </header>
 
-  <div class="items-wrapper" *ngIf="!vm.loading()">
+  <div *ngIf="vm.error()" class="error-banner">
+    <span>⚠️</span>
+    <div>
+      <strong>Error del servidor</strong>
+      <p>{{ vm.error() }}</p>
+    </div>
+    <button class="btn-retry" (click)="vm.cargarProveedores()">Reintentar</button>
+  </div>
+
+  <div class="items-wrapper" *ngIf="!vm.loading() && !vm.error()">
     <app-proveedor-item
       *ngFor="let p of vm.proveedores()"
       [proveedor]="p">
     </app-proveedor-item>
   </div>
+
 </div>
