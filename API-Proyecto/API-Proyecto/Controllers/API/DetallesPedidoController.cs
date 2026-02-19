@@ -34,8 +34,15 @@ namespace API_Proyecto.Controllers.API
         [HttpGet("pedido/{idPedido}")]
         public IActionResult GetListaDetallesPorPedido(int idPedido)
         {
-            List<DetallePedido> detalles = _detallesPedidoUseCase.GetListaDetallesPorPedido(idPedido);
-            return Ok(detalles);
+            try
+            {
+                List<DetallePedido> detalles = _detallesPedidoUseCase.GetListaDetallesPorPedido(idPedido);
+                return Ok(detalles);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al obtener los detalles del pedido: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -48,9 +55,16 @@ namespace API_Proyecto.Controllers.API
         [HttpGet("{idPedido}/{idProducto}")]
         public IActionResult GetDetallePedidoPorId(int idPedido, int idProducto)
         {
-            DetallePedido detalle = _detallesPedidoUseCase.GetDetallePedidoPorId(idPedido, idProducto);
-            if (detalle == null) return NotFound();
-            return Ok(detalle);
+            try
+            {
+                DetallePedido detalle = _detallesPedidoUseCase.GetDetallePedidoPorId(idPedido, idProducto);
+                if (detalle == null) return NotFound();
+                return Ok(detalle);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al obtener el detalle del pedido: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -64,10 +78,17 @@ namespace API_Proyecto.Controllers.API
         [HttpPatch("{idPedido}/{idProducto}")]
         public IActionResult ActualizarDetallePedido(int idPedido, int idProducto, [FromBody] DetallePedido detallePedido)
         {
-            int resultado = _detallesPedidoUseCase.ActualizarDetallePedido(idPedido, idProducto, detallePedido);
-            if (resultado == 0) return NotFound();
-            if (resultado == -1) return BadRequest("El pedido no se puede modificar porque ya fue enviado o entregado.");
-            return Ok();
+            try
+            {
+                int resultado = _detallesPedidoUseCase.ActualizarDetallePedido(idPedido, idProducto, detallePedido);
+                if (resultado == 0) return NotFound();
+                if (resultado == -1) return BadRequest("El pedido no se puede modificar porque ya fue enviado o entregado.");
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al actualizar el detalle del pedido: {ex.Message}");
+            }
         }
     }
 }

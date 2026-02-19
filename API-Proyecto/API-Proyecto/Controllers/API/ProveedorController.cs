@@ -32,8 +32,15 @@ namespace API_Proyecto.Controllers.API
         [HttpGet]
         public IActionResult GetListaProveedores()
         {
-            List<Proveedor> proveedores = _proveedorUseCase.GetListaProveedores();
-            return Ok(proveedores);
+            try
+            {
+                List<Proveedor> proveedores = _proveedorUseCase.GetListaProveedores();
+                return Ok(proveedores);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al obtener la lista de proveedores: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -45,9 +52,16 @@ namespace API_Proyecto.Controllers.API
         [HttpGet("{idProveedor}")]
         public IActionResult GetProveedorPorId(int idProveedor)
         {
-            Proveedor proveedor = _proveedorUseCase.GetProveedorPorId(idProveedor);
-            if (proveedor == null) return NotFound();
-            return Ok(proveedor);
+            try
+            {
+                Proveedor proveedor = _proveedorUseCase.GetProveedorPorId(idProveedor);
+                if (proveedor == null) return NotFound();
+                return Ok(proveedor);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al obtener el proveedor: {ex.Message}");
+            }
         }
     }
 }
