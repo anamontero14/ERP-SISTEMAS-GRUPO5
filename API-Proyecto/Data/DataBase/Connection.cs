@@ -7,34 +7,38 @@ using System.Threading.Tasks;
 
 namespace Data.DataBase
 {
+    /// <summary>
+    /// Clase que gestiona la conexión con la base de datos SQL Server en Azure.
+    /// Contiene los datos de conexión y métodos para abrir y cerrar conexiones.
+    /// </summary>
     public class Connection
     {
-
-        // Esta clase contiene los métodos necesarios para trabajar con el acceso a una base de datos SQL Server
-        //PROPIEDADES
-        //   _server: cadena 
-        //   _database: cadena, básica. Consultable/modificable.
-        //   _user: cadena, básica. Consultable/modificable.
-        //   _pass: cadena, básica. Consultable/modificable.
-
-        // MÉTODOS
-        //   Function getConnection() As SqlConnection
-        //       Este método abre una conexión con la base de datos. Lanza excepciones de tipo: SqlExcepion, InvalidOperationException y Exception.
-        //   
-        //   Sub closeConnection(ByRef connection As SqlConnection)
-        //       Este método cierra una conexión con la base de datos. Lanza excepciones de tipo: SqlExcepion, InvalidOperationException y Exception.
-        //
-
-        //return "server=montero.database.windows.net;database=PersonaDB;uid=prueba;pwd=.1234abcde;trustServerCertificate = true;";
-
         #region ATRIBUTOS
+        /// <summary>
+        /// Dirección del servidor de base de datos
+        /// </summary>
         public String server { get; set; }
+
+        /// <summary>
+        /// Nombre de la base de datos
+        /// </summary>
         public String dataBase { get; set; }
+
+        /// <summary>
+        /// Usuario de acceso a la base de datos
+        /// </summary>
         public String user { get; set; }
+
+        /// <summary>
+        /// Contraseña de acceso a la base de datos
+        /// </summary>
         public String pass { get; set; }
         #endregion
 
         #region CONSTRUCTORES
+        /// <summary>
+        /// Constructor por defecto. Inicializa la conexión con los datos del servidor Azure.
+        /// </summary>
         public Connection()
         {
             this.server = "duque.database.windows.net";
@@ -42,7 +46,14 @@ namespace Data.DataBase
             this.user = "prueba5";
             this.pass = "Abcd1234!";
         }
-        //Con parámetros por si quisiera cambiar las conexiones
+
+        /// <summary>
+        /// Constructor con parámetros para personalizar la conexión.
+        /// </summary>
+        /// <param name="server">Dirección del servidor</param>
+        /// <param name="database">Nombre de la base de datos</param>
+        /// <param name="user">Usuario de acceso</param>
+        /// <param name="pass">Contraseña de acceso</param>
         public Connection(String server, String database, String user, String pass)
         {
             this.server = server;
@@ -51,7 +62,7 @@ namespace Data.DataBase
             this.pass = pass;
         }
         #endregion
-        
+
         #region METODOS
         /// <summary>
         /// Método que abre una conexión con la base de datos

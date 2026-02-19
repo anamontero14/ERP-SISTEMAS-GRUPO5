@@ -17,6 +17,7 @@ namespace UseCases
         /// Constructor del caso de uso Pedido.
         /// </summary>
         /// <param name="pedidoRepository">Repositorio de pedidos</param>
+        /// <param name="detallesPedidoRepository">Repositorio de detalles de pedido</param>
         public PedidoUseCase(IPedidoRepository pedidoRepository, IDetallesPedidoRepository detallesPedidoRepository)
         {
             _pedidoRepository = pedidoRepository;
@@ -63,23 +64,25 @@ namespace UseCases
         }
 
         /// <summary>
-        /// Crea un nuevo pedido en el sistema.
+        /// Crea un nuevo pedido en el sistema junto con sus detalles.
         /// Inicializa el estado como "pedido" y Archivado como false automáticamente.
         /// </summary>
-        /// <param name="pedidoNuevo">Pedido a crear</param>
-        /// <returns>Número de filas afectadas</returns>
+        /// <param name="dto">DTO con el pedido y sus detalles a crear</param>
+        /// <returns>ID del pedido creado, 0 si hubo error</returns>
         public int CrearPedido(CrearPedidoDto dto)
         {
             dto.Pedido.Estado = "pedido";
             dto.Pedido.Archivado = false;
 
             int idPedido = _pedidoRepository.CrearPedidoYObtenerID(dto.Pedido);
-            if (idPedido == 0) return 0;
 
-            foreach (var detalle in dto.Detalles)
+            if (idPedido != 0)
             {
-                detalle.IdPedido = idPedido;
-                _detallesPedidoRepository.CrearDetallePedido(detalle);
+                foreach (var detalle in dto.Detalles)
+                {
+                    detalle.IdPedido = idPedido;
+                    _detallesPedidoRepository.CrearDetallePedido(detalle);
+                }
             }
 
             return idPedido;
@@ -94,14 +97,23 @@ namespace UseCases
         /// <returns>1 si se actualizó, 0 si no existe, -1 si el estado no permite actualizar</returns>
         public int ActualizarPedido(int idPedido, Pedido pedido)
         {
+            int resultado;
             Pedido? pedidoActual = _pedidoRepository.GetPedidoPorId(idPedido);
 
-            if (pedidoActual == null) return 0;
+            if (pedidoActual == null)
+            {
+                resultado = 0;
+            }
+            else if (pedidoActual.Estado != "pedido")
+            {
+                resultado = -1;
+            }
+            else
+            {
+                resultado = _pedidoRepository.ActualizarPedido(idPedido, pedido);
+            }
 
-            // Solo se puede actualizar si el estado es "pedido"
-            if (pedidoActual.Estado != "pedido") return -1;
-
-            return _pedidoRepository.ActualizarPedido(idPedido, pedido);
+            return resultado;
         }
 
         /// <summary>
@@ -112,11 +124,19 @@ namespace UseCases
         /// <returns>1 si se cambió, 0 si no existe</returns>
         public int CambiarEstadoPedido(int idPedido, string nuevoEstado)
         {
+            int resultado;
             Pedido? pedidoActual = _pedidoRepository.GetPedidoPorId(idPedido);
 
-            if (pedidoActual == null) return 0;
+            if (pedidoActual == null)
+            {
+                resultado = 0;
+            }
+            else
+            {
+                resultado = _pedidoRepository.CambiarEstadoPedido(idPedido, nuevoEstado);
+            }
 
-            return _pedidoRepository.CambiarEstadoPedido(idPedido, nuevoEstado);
+            return resultado;
         }
 
         /// <summary>
@@ -127,14 +147,23 @@ namespace UseCases
         /// <returns>1 si se archivó, 0 si no existe, -1 si ya estaba archivado</returns>
         public int EliminarPedido(int idPedido)
         {
+            int resultado;
             Pedido? pedidoActual = _pedidoRepository.GetPedidoPorId(idPedido);
 
-            if (pedidoActual == null) return 0;
+            if (pedidoActual == null)
+            {
+                resultado = 0;
+            }
+            else if (pedidoActual.Archivado)
+            {
+                resultado = -1;
+            }
+            else
+            {
+                resultado = _pedidoRepository.EliminarPedido(idPedido);
+            }
 
-            // No se puede archivar un pedido que ya está archivado
-            if (pedidoActual.Archivado) return -1;
-
-            return _pedidoRepository.EliminarPedido(idPedido);
+            return resultado;
         }
     }
 }
