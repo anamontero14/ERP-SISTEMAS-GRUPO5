@@ -14,11 +14,20 @@
     <span class="plus">+</span> Pedido
   </a>
 
+  <div *ngIf="vm.error()" class="error-banner">
+    <span>⚠️</span>
+    <div>
+      <strong>Error del servidor</strong>
+      <p>{{ vm.error() }}</p>
+    </div>
+    <button class="btn-retry" (click)="vm.cargarPedidos()">Reintentar</button>
+  </div>
+
   <div *ngIf="vm.loading()" class="loading-state">
     <div class="mini-spinner"></div> Cargando pedidos...
   </div>
 
-  <div class="items-wrapper" *ngIf="!vm.loading()">
+  <div class="items-wrapper" *ngIf="!vm.loading() && !vm.error()">
     <app-pedido-item
       *ngFor="let p of vm.pedidos()"
       [pedido]="p">
