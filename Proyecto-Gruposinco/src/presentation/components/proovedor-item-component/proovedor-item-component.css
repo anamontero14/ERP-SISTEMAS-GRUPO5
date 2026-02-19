@@ -1,19 +1,31 @@
+:host {
+  display: block;
+  width: 95%;
+  max-width: 100%;
+  margin: 0 auto 16px auto; 
+}
+
 .proveedor-card {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 16px 20px;
-  margin-bottom: 14px;
-  background: #ffffff;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 26px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(252, 228, 236, 0.7);
+  box-shadow: 0 2px 10px rgba(216, 27, 96, 0.02);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%; 
 }
 
 .proveedor-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transform: scale(1.015);
+  background: var(--white);
+  border-color: var(--accent-pink);
+  box-shadow: 0 6px 20px rgba(216, 27, 96, 0.06);
 }
 
 .proveedor-info {
@@ -24,15 +36,28 @@
 
 .proveedor-nombre {
   margin: 0;
-  font-size: 18px;
+  font-family: var(--font-main);
+  font-size: 1.05rem;
   font-weight: 700;
-  color: #1e1e2f;
+  color: var(--text-main);
 }
 
-.proveedor-id,
-.proveedor-tlf,
-.proveedor-email {
-  margin: 0;
-  font-size: 14px;
-  color: #444;
+.proveedor-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: #8E7D84;
+  font-weight: 400;
+}
+
+.proveedor-id {
+  font-family: var(--font-main);
+  background: var(--bg-soft);
+  color: var(--deep-pink);
+  padding: 5px 12px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(216, 27, 96, 0.1);
 }

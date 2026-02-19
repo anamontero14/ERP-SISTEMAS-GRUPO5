@@ -1,10 +1,25 @@
-<h2>Pedidos archivados</h2>
+<div class="list-page-container fade-in">
 
-<div *ngIf="vm.loading">Cargando...</div>
+  <header class="list-header">
+    <div class="titulo-wrapper">
+      <h2 class="titulo-pagina">Pedidos Archivados</h2>
+      <div class="subrayado-artístico"></div>
+    </div>
 
-<div *ngIf="!vm.loading">
-  <app-pedido-item
-    *ngFor="let p of vm.archivados"
-    [pedido]="p">
-  </app-pedido-item>
+    <div *ngIf="vm.loading()" class="loading-state">
+      <div class="mini-spinner"></div> Cargando historial...
+    </div>
+
+    <div *ngIf="!vm.loading() && vm.archivados().length === 0" class="empty-state">
+      No hay pedidos en el archivo.
+    </div>
+  </header>
+
+  <div class="items-wrapper" *ngIf="!vm.loading()">
+    <app-pedido-item
+      *ngFor="let p of vm.archivados()"
+      [pedido]="p">
+    </app-pedido-item>
+  </div>
+
 </div>

@@ -5,15 +5,16 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   selector: 'app-button',
   imports: [CommonModule],
-  template: `
-    <button (click)="clicked.emit()" [disabled]="disabled">
-      {{ label }}
-    </button>
-  `,
+  templateUrl: './button-component.html',
+  styleUrl: './button-component.css'
 })
 export class ButtonComponent {
-  @Input() label = '';
-  @Input() disabled = false;
+  @Input() label: string = 'Entrar';
+  @Input() disabled: boolean = false;
 
   @Output() clicked = new EventEmitter<void>();
+
+  onButtonClick(): void {
+    this.clicked.emit();
+  }
 }

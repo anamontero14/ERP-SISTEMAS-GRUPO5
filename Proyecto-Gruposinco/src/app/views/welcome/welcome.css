@@ -1,20 +1,96 @@
-.titulo-bienvenida {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 24px;
-  color: #1e1e2f;
-  text-align: center;
-}
-
-.menu {
+.welcome-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  max-width: 300px;
-  margin: 0 auto;
-  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 100px);
+  padding: 20px;
+  animation: fadeIn 0.8s ease-out;
 }
 
-.menu a {
+.header-welcome {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.titulo-bienvenida {
+  font-family: var(--font-main); /* Lexend */
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+}
+
+.subtitulo {
+  color: #8E7D84;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Tarjetas de menú profesionales */
+.menu-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(252, 228, 236, 0.6);
+  border-radius: var(--radius-xl);
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
   text-decoration: none;
+}
+
+.menu-card:hover {
+  transform: translateY(-8px);
+  background: white;
+  box-shadow: 0 15px 30px rgba(216, 27, 96, 0.1);
+  border-color: var(--accent-pink);
+}
+
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  background: var(--bg-soft);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  transition: transform 0.3s ease;
+}
+
+.menu-card:hover .icon-circle {
+  transform: scale(1.1) rotate(5deg);
+  background: var(--soft-pink);
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.card-desc {
+  font-size: 0.9rem;
+  color: #A08B93;
+  margin: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }

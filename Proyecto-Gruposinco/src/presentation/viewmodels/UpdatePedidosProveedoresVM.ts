@@ -1,8 +1,9 @@
-import { Injectable, signal } from '@angular/core';
-import { GetPedidosUseCase } from '../../domain/usecases/pedido_fix/GetPedidosUseCase';
+import { Injectable, signal, computed } from '@angular/core';
+import { GetPedidosUseCase } from '../../domain/usecases/pedido/GetPedidosUseCase';
 import { GetDetallesPedidoUseCase } from '../../domain/usecases/detallePedido/GetDetallesPedidoUseCase';
 import { UpdateDetallePedidoUseCase } from '../../domain/usecases/detallePedido/UpdateDetallePedidoUseCase';
-import { DeletePedidoUseCase } from '../../domain/usecases/pedido_fix/DeletePedidoUseCase';
+import { UpdatePedidoUseCase } from '../../domain/usecases/pedido/UpdatePedidoUseCase';
+import { DeletePedidoUseCase } from '../../domain/usecases/pedido/DeletePedidoUseCase';
 
 import { clsPedido } from '../../domain/entities/clsPedido';
 import { clsDetallePedido } from '../../domain/entities/clsDetallePedido';
@@ -15,10 +16,17 @@ export class UpdatePedidosProveedoresVM {
   loading = signal(true);
   saving = signal(false);
 
+  bloqueado = computed(() => {
+    const p = this.pedido();
+    if (!p) return false;
+    return p.Archivado || p.Estado === 'enviado' || p.Estado === 'entregado';
+  });
+
   constructor(
     private getPedidoUC: GetPedidosUseCase,
     private getDetallesUC: GetDetallesPedidoUseCase,
     private updateDetalleUC: UpdateDetallePedidoUseCase,
+    private updatePedidoUC: UpdatePedidoUseCase,
     private deletePedidoUC: DeletePedidoUseCase
   ) {}
 
@@ -34,6 +42,14 @@ export class UpdatePedidosProveedoresVM {
     this.loading.set(false);
   }
 
+  setObservaciones(valor: string) {
+    const p = this.pedido();
+    if (!p) return;
+
+    p.Observaciones = valor;
+    this.pedido.set(p);
+  }
+
   async guardarDetalles() {
     this.saving.set(true);
 
@@ -46,6 +62,11 @@ export class UpdatePedidosProveedoresVM {
         );
       }
 
+      const p = this.pedido();
+      if (p) {
+        await this.updatePedidoUC.actualizarPedido(p.IdPedido, p);
+      }
+
       return true;
 
     } finally {
@@ -54,12 +75,20 @@ export class UpdatePedidosProveedoresVM {
   }
 
   async eliminarPedidoDesdeDetalle(index: number) {
-    const detalle = this.detalles()[index];
+  const p = this.pedido();
+  if (!p) return false;
 
-    await this.deletePedidoUC.eliminarPedido(detalle.IdPedido);
-
-    this.pedido.set(null);
-    this.detalles.set([]);
-    return true;
+  if (p.Estado !== 'entregado') {
+    return false;
   }
+
+  const detalle = this.detalles()[index];
+
+  await this.deletePedidoUC.eliminarPedido(detalle.IdPedido);
+
+  this.pedido.set(null);
+  this.detalles.set([]);
+  return true;
+}
+
 }

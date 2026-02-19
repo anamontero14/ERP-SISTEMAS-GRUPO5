@@ -8,7 +8,8 @@ import { UpdatePedidosProveedoresVM } from '../../../presentation/viewmodels/Upd
   standalone: true,
   selector: 'app-update-pedidos-proveedores-screen',
   imports: [CommonModule, FormsModule],
-  templateUrl: './update-pedidos-proveedores.html'
+  templateUrl: './update-pedidos-proveedores.html',
+  styleUrl: './update-pedidos-proveedores.css'
 })
 export class UpdatePedidosProveedoresScreen implements OnInit {
 

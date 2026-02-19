@@ -1,23 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { WelcomeComponent } from './welcome';
+import { RouterTestingModule } from '@angular/router/testing';
 
-import { Welcome } from './welcome';
-
-describe('Welcome', () => {
-  let component: Welcome;
-  let fixture: ComponentFixture<Welcome>;
+describe('WelcomeComponent', () => {
+  let component: WelcomeComponent;
+  let fixture: ComponentFixture<WelcomeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Welcome]
-    })
-    .compileComponents();
+      imports: [WelcomeComponent, RouterTestingModule]
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(Welcome);
+    fixture = TestBed.createComponent(WelcomeComponent);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('debería crearse el componente de bienvenida', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('debería mostrar el título de la empresa', () => {
+    const el = fixture.nativeElement.querySelector('.titulo-bienvenida');
+    expect(el.textContent).toContain('Gruposinco');
   });
 });

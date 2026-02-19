@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { GetProductosUseCase } from '../../domain/usecases/producto_fix/GetProductosUseCase';
+import { GetProductosUseCase } from '../../domain/usecases/producto/GetProductosUseCase';
 import { clsProducto } from '../../domain/entities/clsProducto';
 
 @Injectable({ providedIn: 'root' })

@@ -7,7 +7,8 @@ import { ProveedorItemComponent } from '../../../presentation/components/prooved
   standalone: true,
   selector: 'app-list-proveedores-screen',
   imports: [CommonModule, ProveedorItemComponent],
-  templateUrl: './list-proveedores.html'
+  templateUrl: './list-proveedores.html',
+  styleUrl: './list-proveedores.css'
 })
 export class ListProveedoresScreen implements OnInit {
 

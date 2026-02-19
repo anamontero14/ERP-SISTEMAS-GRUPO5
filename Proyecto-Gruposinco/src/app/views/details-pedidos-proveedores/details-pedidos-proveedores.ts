@@ -8,6 +8,7 @@ import { DetailsPedidosProveedoresVM } from '../../../presentation/viewmodels/De
   selector: 'app-details-pedidos-proveedores-screen',
   imports: [CommonModule, RouterModule],
   templateUrl: './details-pedidos-proveedores.html',
+  styleUrl: './details-pedidos-proveedores.css'
 })
 export class DetailsPedidosProveedoresScreen implements OnInit {
 

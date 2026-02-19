@@ -1,8 +1,14 @@
 <div class="proveedor-card">
   <div class="proveedor-info">
     <h3 class="proveedor-nombre">{{ proveedor.NombreProveedor }}</h3>
-    <p class="proveedor-id">ID: {{ proveedor.IdProveedor }}</p>
-    <p class="proveedor-tlf">Teléfono: {{ proveedor.TelefonoProveedor }}</p>
-    <p class="proveedor-email">Email: {{ proveedor.EmailProveedor }}</p>
+    <div class="proveedor-meta">
+      <span>{{ proveedor.EmailProveedor }}</span>
+      <span style="color: var(--soft-pink)">•</span>
+      <span>{{ proveedor.TelefonoProveedor }}</span>
+    </div>
+  </div>
+
+  <div class="proveedor-id">
+    ID-{{ proveedor.IdProveedor }}
   </div>
 </div>
