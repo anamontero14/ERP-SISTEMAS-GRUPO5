@@ -18,6 +18,7 @@ namespace UseCases
         /// Constructor del caso de uso DetallePedido.
         /// </summary>
         /// <param name="detallePedidoRepository">Repositorio de detalles de pedido</param>
+        /// <param name="pedidoRepository">Repositorio de pedidos</param>
         public DetallePedidoUseCase(IDetallesPedidoRepository detallePedidoRepository, IPedidoRepository pedidoRepository)
         {
             _detallePedidoRepository = detallePedidoRepository;
@@ -66,19 +67,31 @@ namespace UseCases
 
         /// <summary>
         /// Actualiza un detalle de pedido existente.
+        /// Solo permite actualizar si el pedido está en estado "pedido".
         /// </summary>
         /// <param name="idPedido">ID del pedido</param>
         /// <param name="idProducto">ID del producto</param>
         /// <param name="detallePedido">Datos actualizados del detalle</param>
-        /// <returns>Número de filas afectadas</returns>
+        /// <returns>1 si se actualizó, 0 si no existe, -1 si el estado no permite actualizar</returns>
         public int ActualizarDetallePedido(int idPedido, int idProducto, DetallePedido detallePedido)
         {
+            int resultado;
             Pedido? pedido = _pedidoRepository.GetPedidoPorId(idPedido);
 
-            if (pedido == null) return 0;
-            if (pedido.Estado != "pedido") return -1;
+            if (pedido == null)
+            {
+                resultado = 0;
+            }
+            else if (pedido.Estado != "pedido")
+            {
+                resultado = -1;
+            }
+            else
+            {
+                resultado = _detallePedidoRepository.ActualizarDetallePedido(idPedido, idProducto, detallePedido);
+            }
 
-            return _detallePedidoRepository.ActualizarDetallePedido(idPedido, idProducto, detallePedido);
+            return resultado;
         }
     }
 }

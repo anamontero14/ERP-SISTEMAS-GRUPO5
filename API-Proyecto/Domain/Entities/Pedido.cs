@@ -27,7 +27,7 @@
         public DateTime FechaPedido { get; set; }
 
         /// <summary>
-        /// Estado actual del pedido (ej: Pendiente, Procesado, Entregado)
+        /// Estado actual del pedido (pedido/enviado/entregado)
         /// </summary>
         public string Estado { get; set; } = string.Empty;
 
