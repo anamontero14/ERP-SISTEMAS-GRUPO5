@@ -13,16 +13,13 @@
 
   <div class="details-wrapper" *ngIf="!vm.loading() && vm.pedido() as p">
 
-    <!-- Banner de bloqueo -->
     <div *ngIf="vm.bloqueado()" class="archivado-banner">
       <span class="icon">🚫</span>
       Este pedido está <strong>{{ p.Estado }}</strong> o archivado y no permite modificaciones.
     </div>
 
-    <!-- OBSERVACIONES -->
     <div class="observaciones-section">
       <h3 class="section-title">Observaciones del pedido</h3>
-
       <textarea
         class="observaciones-textarea"
         [class.bloqueado]="vm.bloqueado()"
@@ -31,48 +28,29 @@
         (ngModelChange)="vm.setObservaciones($event)"
         placeholder="Añade aquí las observaciones del pedido...">
       </textarea>
-
-      <div class="observaciones-hint">
-        Puedes añadir notas internas sobre el pedido.
-      </div>
+      <div class="observaciones-hint">Puedes añadir notas internas sobre el pedido.</div>
     </div>
 
-    <!-- ARTÍCULOS -->
     <div class="productos-section">
       <h3 class="section-title">Modificar artículos del pedido</h3>
 
       <div class="detalles-lista">
         <div class="lista-header-labels">
-          <span class="col-prod">Producto</span>
-          <span class="col-cant">Cantidad</span>
-          <span class="col-precio">Precio Unit.</span>
-          <span class="col-accion">Acción</span>
+          <span>Producto</span>
+          <span>Cantidad</span>
+          <span>Precio Unit.</span>
         </div>
 
         <div *ngFor="let d of vm.detalles(); let i = index" class="detalle-fila-edit">
-
           <div class="col-prod">
             <span class="prod-id-tag">#{{ d.IdProducto }}</span>
           </div>
-
           <div class="col-cant">
             <input type="number" class="custom-input-table" [(ngModel)]="d.Cantidad" min="1" [disabled]="vm.bloqueado()">
           </div>
-
           <div class="col-precio">
             <div class="readonly-field">{{ d.PrecioUnitario }} €</div>
           </div>
-
-          <div class="col-accion">
-            <button
-              *ngIf="!vm.bloqueado()"
-              class="btn-delete-item"
-              (click)="eliminar(i)">
-              Archivar
-            </button>
-            <span *ngIf="vm.bloqueado()" class="status-gray">Sin cambios</span>
-          </div>
-
         </div>
       </div>
     </div>
@@ -82,6 +60,20 @@
         <span *ngIf="!vm.saving()">Guardar cambios realizados</span>
         <span *ngIf="vm.saving()">Guardando...</span>
       </button>
+    </div>
+
+    <div class="danger-zone" *ngIf="p.Estado === 'entregado'">
+      <div class="danger-text">
+        <strong>⚠️ Archivar pedido</strong>
+        <span>Esta acción archivará el pedido de forma permanente.</span>
+      </div>
+      <button class="btn-delete-item btn-danger-final" (click)="eliminar(0)">
+        Archivar pedido
+      </button>
+    </div>
+
+    <div class="no-eliminable" *ngIf="p.Estado !== 'entregado'">
+      🔒 Solo eliminable en estado <strong>entregado</strong>. Actual: <strong>{{ p.Estado }}</strong>
     </div>
 
   </div>

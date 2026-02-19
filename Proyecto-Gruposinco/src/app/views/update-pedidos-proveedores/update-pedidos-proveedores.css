@@ -108,15 +108,21 @@ h2.titulo-pagina {
 
 .productos-section { width: 100%; }
 
-.section-title { 
-  font-size: 1.8rem; 
-  font-weight: 900; 
-  margin-bottom: 25px; 
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 25px;
+}
+
+.detalles-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .lista-header-labels {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   padding: 0 40px 15px 40px;
   font-weight: 800;
   color: #A08B93;
@@ -126,11 +132,10 @@ h2.titulo-pagina {
 
 .detalle-fila-edit {
   background: white;
-  margin-bottom: 15px;
   padding: 25px 40px;
   border-radius: 20px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   border: 1px solid #F5F0F2;
   box-shadow: 0 4px 15px rgba(0,0,0,0.02);
@@ -178,14 +183,14 @@ h2.titulo-pagina {
   transition: 0.2s;
 }
 
-.btn-delete-item:hover { 
-  background: #FF4D6D; 
-  color: white; 
+.btn-delete-item:hover {
+  background: #FF4D6D;
+  color: white;
 }
 
-.action-footer { 
-  margin-top: 30px; 
-  width: 100%; 
+.action-footer {
+  margin-top: 30px;
+  width: 100%;
 }
 
 .btn-final {
@@ -201,12 +206,57 @@ h2.titulo-pagina {
   box-shadow: 0 10px 30px rgba(216, 27, 96, 0.2);
 }
 
-.btn-final:disabled { 
-  background: #E0E0E0; 
-  cursor: not-allowed; 
-  box-shadow: none; 
+.btn-final:disabled {
+  background: #E0E0E0;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
+/* ZONA DE PELIGRO */
+.danger-zone {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 28px;
+  border-radius: 18px;
+  border: 2px dashed #FEB2B2;
+  background: #FFF8F8;
+  flex-wrap: wrap;
+}
+
+.danger-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #C53030;
+  font-size: 0.95rem;
+}
+
+.danger-text strong {
+  font-size: 1rem;
+}
+
+.btn-danger-final {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.no-eliminable {
+  text-align: center;
+  padding: 14px 20px;
+  border-radius: 14px;
+  background: #F7F7F7;
+  color: #A08B93;
+  font-size: 0.9rem;
+  border: 1px dashed #E0D5D8;
+}
+
+.no-eliminable strong {
+  color: var(--deep-pink);
+}
+
+/* LOADING */
 .loading-state {
   display: flex;
   flex-direction: column;
@@ -225,6 +275,6 @@ h2.titulo-pagina {
   animation: spin 0.8s linear infinite;
 }
 
-@keyframes spin { 
-  to { transform: rotate(360deg); } 
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }

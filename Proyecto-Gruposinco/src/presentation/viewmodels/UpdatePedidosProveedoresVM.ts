@@ -75,12 +75,20 @@ export class UpdatePedidosProveedoresVM {
   }
 
   async eliminarPedidoDesdeDetalle(index: number) {
-    const detalle = this.detalles()[index];
+  const p = this.pedido();
+  if (!p) return false;
 
-    await this.deletePedidoUC.eliminarPedido(detalle.IdPedido);
-
-    this.pedido.set(null);
-    this.detalles.set([]);
-    return true;
+  if (p.Estado !== 'entregado') {
+    return false;
   }
+
+  const detalle = this.detalles()[index];
+
+  await this.deletePedidoUC.eliminarPedido(detalle.IdPedido);
+
+  this.pedido.set(null);
+  this.detalles.set([]);
+  return true;
+}
+
 }
