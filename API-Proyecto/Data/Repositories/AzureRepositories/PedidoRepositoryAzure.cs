@@ -5,20 +5,41 @@ using Microsoft.Data.SqlClient;
 
 namespace Data.Repositories.AzureRepositories
 {
+    /// <summary>
+    /// Repositorio de Pedido con conexión a Azure SQL.
+    /// Implementa la interfaz IPedidoRepository.
+    /// </summary>
     public class PedidoRepositoryAzure : IPedidoRepository
     {
-        #region MÉTODOS CRUD
+        #region MÉTODOS AUXILIARES
 
+        /// <summary>
+        /// Obtiene un valor booleano de una columna del lector, manejando nulos.
+        /// </summary>
+        /// <param name="reader">Lector de datos SQL</param>
+        /// <param name="column">Nombre de la columna</param>
+        /// <returns>Valor booleano o false si es nulo</returns>
         private bool GetBool(SqlDataReader reader, string column)
         {
             return reader[column] != DBNull.Value && Convert.ToBoolean(reader[column]);
         }
 
+        /// <summary>
+        /// Obtiene un valor string de una columna del lector, manejando nulos.
+        /// </summary>
+        /// <param name="reader">Lector de datos SQL</param>
+        /// <param name="column">Nombre de la columna</param>
+        /// <returns>Valor string o cadena vacía si es nulo</returns>
         private string GetString(SqlDataReader reader, string column)
         {
             return reader[column] == DBNull.Value ? "" : reader[column].ToString()!;
         }
 
+        /// <summary>
+        /// Mapea una fila del lector SQL a un objeto Pedido.
+        /// </summary>
+        /// <param name="miLector">Lector de datos SQL posicionado en una fila</param>
+        /// <returns>Objeto Pedido con los datos de la fila</returns>
         private Pedido MapPedido(SqlDataReader miLector)
         {
             return new Pedido
@@ -33,6 +54,14 @@ namespace Data.Repositories.AzureRepositories
             };
         }
 
+        #endregion
+
+        #region MÉTODOS CRUD
+
+        /// <summary>
+        /// Obtiene la lista completa de pedidos.
+        /// </summary>
+        /// <returns>Lista de pedidos</returns>
         public List<Pedido> GetListaPedidos()
         {
             List<Pedido> listaPedidos = new();
@@ -64,6 +93,11 @@ namespace Data.Repositories.AzureRepositories
             return listaPedidos;
         }
 
+        /// <summary>
+        /// Obtiene la lista de pedidos realizados por un usuario.
+        /// </summary>
+        /// <param name="idUsuario">ID del usuario</param>
+        /// <returns>Lista de pedidos del usuario</returns>
         public List<Pedido> GetListaPedidosPorUsuario(int idUsuario)
         {
             List<Pedido> listaPedidos = new();
@@ -97,6 +131,11 @@ namespace Data.Repositories.AzureRepositories
             return listaPedidos;
         }
 
+        /// <summary>
+        /// Obtiene la lista de pedidos asociados a un proveedor.
+        /// </summary>
+        /// <param name="idProveedor">ID del proveedor</param>
+        /// <returns>Lista de pedidos del proveedor</returns>
         public List<Pedido> GetListaPedidosPorProveedor(int idProveedor)
         {
             List<Pedido> listaPedidos = new();
@@ -130,6 +169,11 @@ namespace Data.Repositories.AzureRepositories
             return listaPedidos;
         }
 
+        /// <summary>
+        /// Obtiene un pedido por su identificador.
+        /// </summary>
+        /// <param name="idPedido">ID del pedido a buscar</param>
+        /// <returns>Pedido encontrado o null si no existe</returns>
         public Pedido? GetPedidoPorId(int idPedido)
         {
             Pedido? pedido = null;
@@ -163,6 +207,11 @@ namespace Data.Repositories.AzureRepositories
             return pedido;
         }
 
+        /// <summary>
+        /// Crea un nuevo pedido en la base de datos.
+        /// </summary>
+        /// <param name="pedidoNuevo">Pedido a crear</param>
+        /// <returns>Número de filas afectadas</returns>
         public int CrearPedido(Pedido pedidoNuevo)
         {
             SqlConnection? miConexion = null;
@@ -195,9 +244,10 @@ namespace Data.Repositories.AzureRepositories
 
         /// <summary>
         /// Crea un nuevo pedido y devuelve el ID autogenerado.
+        /// Utiliza SCOPE_IDENTITY() para obtener el ID asignado por la BBDD.
         /// </summary>
         /// <param name="pedidoNuevo">Pedido a crear</param>
-        /// <returns>ID del pedido creado</returns>
+        /// <returns>ID del pedido creado, 0 si hubo error</returns>
         public int CrearPedidoYObtenerID(Pedido pedidoNuevo)
         {
             SqlConnection? miConexion = null;
@@ -231,6 +281,12 @@ namespace Data.Repositories.AzureRepositories
             }
         }
 
+        /// <summary>
+        /// Actualiza un pedido existente en la base de datos.
+        /// </summary>
+        /// <param name="idPedido">ID del pedido a actualizar</param>
+        /// <param name="pedido">Datos actualizados del pedido</param>
+        /// <returns>Número de filas afectadas</returns>
         public int ActualizarPedido(int idPedido, Pedido pedido)
         {
             SqlConnection? miConexion = null;
@@ -261,6 +317,12 @@ namespace Data.Repositories.AzureRepositories
             }
         }
 
+        /// <summary>
+        /// Cambia el estado de un pedido en la base de datos.
+        /// </summary>
+        /// <param name="idPedido">ID del pedido</param>
+        /// <param name="nuevoEstado">Nuevo estado (pedido/enviado/entregado)</param>
+        /// <returns>Número de filas afectadas</returns>
         public int CambiarEstadoPedido(int idPedido, string nuevoEstado)
         {
             SqlConnection? miConexion = null;
@@ -287,6 +349,12 @@ namespace Data.Repositories.AzureRepositories
             }
         }
 
+        /// <summary>
+        /// Archiva un pedido (soft delete). No lo elimina físicamente,
+        /// sino que actualiza el campo archivado a true.
+        /// </summary>
+        /// <param name="idPedido">ID del pedido a archivar</param>
+        /// <returns>Número de filas afectadas</returns>
         public int EliminarPedido(int idPedido)
         {
             SqlConnection? miConexion = null;
