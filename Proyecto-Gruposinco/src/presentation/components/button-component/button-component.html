@@ -1,0 +1,12 @@
+<button
+  class="btn-custom"
+  [disabled]="disabled"
+  (click)="onButtonClick()"
+  [class.is-loading]="disabled">
+
+  <div class="btn-content">
+    <span *ngIf="!disabled">{{ label }}</span>
+    <span *ngIf="disabled" class="loading-text">Cargando...</span>
+    <div *ngIf="disabled" class="spinner"></div>
+  </div>
+</button>

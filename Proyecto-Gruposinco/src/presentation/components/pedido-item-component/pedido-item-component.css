@@ -1,0 +1,111 @@
+:host {
+  display: block;
+  width: 95%;
+  max-width: 100%;
+  margin: 0 auto 16px auto;
+}
+
+.pedido-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 28px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(252, 228, 236, 0.7);
+  box-shadow: 0 2px 10px rgba(216, 27, 96, 0.02);
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+.pedido-card:hover {
+  transform: scale(1.015);
+  background: var(--white);
+  border-color: var(--accent-pink);
+  box-shadow: 0 6px 20px rgba(216, 27, 96, 0.06);
+}
+
+.pedido-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.pedido-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.pedido-id {
+  margin: 0;
+  font-family: var(--font-main);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+/* --- BADGES DE ESTADO DINÁMICOS --- */
+.estado-badge {
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--bg-soft); /* Gris suave por defecto */
+  color: #8E7D84;
+}
+
+/* Colores según el estado (Asegúrate que coincidan con tus strings de la DB) */
+.estado-badge.entregado { background: #E8F5E9; color: #2E7D32; }
+.estado-badge.pedido { background: #FFF3E0; color: #EF6C00; }
+.estado-badge.enviado { background: #ebf4ff; color: #2894c6; }
+
+/* Meta data */
+.pedido-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meta-row {
+  font-size: 0.85rem;
+  color: #7A6970;
+}
+
+.meta-row .label {
+  font-weight: 400;
+  margin-right: 5px;
+}
+
+.meta-row .value {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* --- ENLACE A DETALLES --- */
+.pedido-actions {
+  margin-left: 20px;
+}
+
+.pedido-link {
+  text-decoration: none;
+  color: var(--deep-pink);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: gap 0.2s;
+}
+
+.pedido-link:hover {
+  gap: 10px; /* Pequeño efecto animado en la flecha */
+}
+
+.pedido-link .arrow {
+  font-size: 1.1rem;
+}

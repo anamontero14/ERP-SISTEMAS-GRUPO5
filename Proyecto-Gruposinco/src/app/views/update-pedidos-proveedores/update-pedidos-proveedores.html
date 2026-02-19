@@ -1,0 +1,68 @@
+<div class="list-page-container fade-in">
+
+  <header class="list-header">
+    <div class="titulo-wrapper">
+      <h2 class="titulo-pagina">Actualizar Pedido</h2>
+      <div class="subrayado-artístico"></div>
+    </div>
+  </header>
+
+  <div *ngIf="vm.loading()" class="loading-state">
+    <div class="mini-spinner"></div> Cargando datos del pedido...
+  </div>
+
+  <div class="details-wrapper" *ngIf="!vm.loading() && vm.pedido() as p">
+
+    <div *ngIf="p.Archivado" class="archivado-banner">
+      <span class="icon">⚠️</span>
+      Este pedido ya está archivado y no permite modificaciones de productos.
+    </div>
+
+    <div class="productos-section">
+      <h3 class="section-title">Modificar artículos del pedido</h3>
+
+      <div class="detalles-lista">
+        <div class="lista-header-labels">
+          <span class="col-prod">Producto</span>
+          <span class="col-cant">Cantidad</span>
+          <span class="col-precio">Precio Unit.</span>
+          <span class="col-accion">Acción</span>
+        </div>
+
+        <div *ngFor="let d of vm.detalles(); let i = index" class="detalle-fila-edit">
+
+          <div class="col-prod">
+            <span class="prod-id-tag">#{{ d.IdProducto }}</span>
+          </div>
+
+          <div class="col-cant">
+            <input type="number" class="custom-input-table" [(ngModel)]="d.Cantidad" min="1" [disabled]="p.Archivado">
+          </div>
+
+          <div class="col-precio">
+            <div class="readonly-field">{{ d.PrecioUnitario }} €</div>
+          </div>
+
+          <div class="col-accion">
+            <button
+              *ngIf="!p.Archivado"
+              class="btn-delete-item"
+              (click)="eliminar(i)">
+              Eliminar
+            </button>
+            <span *ngIf="p.Archivado" class="status-gray">Sin cambios</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="action-footer">
+      <button class="btn-final" (click)="guardar()" [disabled]="vm.saving() || p.Archivado">
+        <span *ngIf="!vm.saving()">Guardar cambios realizados</span>
+        <span *ngIf="vm.saving()">Guardando...</span>
+      </button>
+    </div>
+
+  </div>
+</div>

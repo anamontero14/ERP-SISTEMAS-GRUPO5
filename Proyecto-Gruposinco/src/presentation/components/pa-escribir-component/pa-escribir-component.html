@@ -1,0 +1,15 @@
+<div class="input-group">
+  <label class="input-label" *ngIf="label">{{ label }}</label>
+
+  <div class="input-wrapper">
+    <input
+      class="input-field"
+      [type]="type"
+      [value]="value"
+      (input)="onInput($event)"
+      (blur)="onTouched()"
+      [placeholder]="label"
+    />
+    <div class="input-glow"></div>
+  </div>
+</div>

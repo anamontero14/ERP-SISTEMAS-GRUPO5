@@ -1,0 +1,28 @@
+<div class="list-page-container fade-in">
+
+  <header class="list-header">
+    <div class="titulo-wrapper">
+      <h2 class="titulo-pagina">Pedidos a proveedores</h2>
+      <div class="subrayado-artístico"></div>
+    </div>
+
+    <span class="proveedores-count" *ngIf="!vm.loading()">
+    </span>
+  </header>
+
+  <a routerLink="/pedidos/create" class="btn-flotante">
+    <span class="plus">+</span> Pedido
+  </a>
+
+  <div *ngIf="vm.loading()" class="loading-state">
+    <div class="mini-spinner"></div> Cargando pedidos...
+  </div>
+
+  <div class="items-wrapper" *ngIf="!vm.loading()">
+    <app-pedido-item
+      *ngFor="let p of vm.pedidos()"
+      [pedido]="p">
+    </app-pedido-item>
+  </div>
+
+</div>

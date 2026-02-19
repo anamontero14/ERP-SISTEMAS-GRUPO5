@@ -1,0 +1,178 @@
+/* Barra Superior */
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.85); /* Translucidez */
+  backdrop-filter: blur(12px);
+  color: var(--text-main);
+  box-shadow: 0 4px 15px rgba(216, 27, 96, 0.04);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(252, 228, 236, 0.6);
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  color: var(--deep-pink);
+  font-family: var(--font-main);
+}
+
+/* Botón Hamburguesa */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  background: var(--bg-soft);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.hamburger:hover {
+  background: var(--soft-pink);
+  transform: scale(1.05);
+}
+
+.hamburger span {
+  display: block;
+  height: 2.5px;
+  width: 100%;
+  background: var(--deep-pink);
+  border-radius: 4px;
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hamburger.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; transform: scale(0); }
+.hamburger.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(94, 75, 82, 0.15);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Drawer Lateral (Estilo Flotante) */
+.drawer {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  height: calc(100vh - 30px);
+  width: 280px;
+  background: white;
+  z-index: 300;
+  transform: translateX(-110%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 15px 0 40px rgba(216, 27, 96, 0.08);
+  border-radius: var(--radius-xl); /* 30px */
+  border: 1px solid var(--soft-pink);
+  overflow: hidden;
+}
+
+.drawer.abierto {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  padding: 30px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-gradient);
+  color: var(--deep-pink);
+}
+
+.drawer-header span {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.cerrar-btn {
+  background: white;
+  border: none;
+  color: var(--deep-pink);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(216, 27, 96, 0.1);
+  transition: transform 0.2s;
+}
+
+.cerrar-btn:hover { transform: rotate(90deg); }
+
+/* Enlaces */
+.drawer-links {
+  list-style: none;
+  padding: 20px 15px;
+  margin: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.drawer-links li a, .logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: var(--radius-md); /* 15px */
+  transition: all 0.2s ease;
+  width: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.drawer-links li a:hover {
+  background: var(--bg-soft) !important; /* El rosa más clarito de tu paleta */
+  color: var(--deep-pink) !important;   /* El rosa oscuro para el texto */
+  padding-left: 24px; /* Efecto de desplazamiento suave */
+}
+
+.separador {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--soft-pink), transparent);
+  margin: 15px 20px;
+}
+
+.logout-btn {
+  color: #d32f2f;
+  margin-top: 10px;
+}
+
+.logout-btn:hover {
+  background: #FFF5F5 !important;
+  color: #e53935 !important;
+}
+
+.icon {
+  font-size: 1.2rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

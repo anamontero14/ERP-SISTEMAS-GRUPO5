@@ -1,0 +1,78 @@
+<div class="list-page-container fade-in">
+
+  <header class="list-header">
+    <div class="titulo-wrapper">
+      <h2 class="titulo-pagina">Detalles del Pedido</h2>
+      <div class="subrayado-artístico"></div>
+    </div>
+    <div class="pedido-id-centrado">
+      Referencia: #{{ idPedido }}
+    </div>
+  </header>
+
+  <div *ngIf="vm.loading()" class="loading-state">
+    <div class="mini-spinner"></div> Cargando información...
+  </div>
+
+  <div class="details-wrapper" *ngIf="!vm.loading()">
+
+    <div *ngIf="vm.pedido() as p" class="main-info-card">
+      <div class="card-grid">
+        <div class="info-item">
+          <label>Proveedor</label>
+          <span class="dato-principal">{{ p.IdProveedor }}</span>
+        </div>
+        <div class="info-item">
+          <label>Fecha Emisión</label>
+          <span class="dato-secundario">{{ p.FechaPedido | date:'dd/MM/yyyy' }}</span>
+        </div>
+        <div class="info-item">
+          <label>Estado Actual</label>
+          <span class="estado-badge" [ngClass]="p.Estado.toLowerCase()">
+            {{ p.Estado }}
+          </span>
+        </div>
+        <div class="info-item">
+          <label>Usuario</label>
+          <span class="dato-secundario">{{ p.IdUsuario }}</span>
+        </div>
+
+        <div class="info-item observaciones-full">
+          <label>Observaciones</label>
+          <div class="obs-content">
+            {{ p.Observaciones || 'Sin observaciones adicionales para este pedido.' }}
+          </div>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button class="btn-edit" [routerLink]="['/pedidos', idPedido, 'edit']">
+          Actualizar datos del pedido
+        </button>
+      </div>
+    </div>
+
+    <div class="productos-section">
+      <h3 class="section-title">Artículos en el pedido</h3>
+
+      <div class="detalles-lista">
+        <div *ngFor="let d of vm.detalles()" class="detalle-fila">
+          <div class="prod-info">
+            <span class="prod-id-tag">PRODUCTO #{{ d.IdProducto }}</span>
+          </div>
+          <div class="prod-values">
+            <div class="val-group">
+              <label>Cantidad </label>
+              <span class="val">{{ d.Cantidad }}</span>
+            </div>
+            <div class="val-group">
+              <label>Precio Unit. </label>
+              <span class="val">{{ d.PrecioUnitario }} €</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

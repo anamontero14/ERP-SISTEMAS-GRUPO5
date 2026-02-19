@@ -1,0 +1,21 @@
+<div class="list-page-container fade-in">
+
+  <header class="list-header">
+    <div class="titulo-wrapper">
+      <h2 class="titulo-pagina">Productos</h2>
+      <div class="subrayado-artístico"></div>
+    </div>
+
+    <div *ngIf="vm.loading()" class="loading-state">
+      <div class="mini-spinner"></div> Cargando productos...
+    </div>
+  </header>
+
+  <div class="items-wrapper" *ngIf="!vm.loading()">
+    <app-producto-item
+      *ngFor="let p of vm.productos()"
+      [producto]="p">
+    </app-producto-item>
+  </div>
+
+</div>
