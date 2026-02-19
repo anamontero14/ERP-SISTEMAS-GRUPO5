@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 import { GetPedidosUseCase } from '../../domain/usecases/pedido_fix/GetPedidosUseCase';
 import { GetDetallesPedidoUseCase } from '../../domain/usecases/detallePedido/GetDetallesPedidoUseCase';
 import { UpdateDetallePedidoUseCase } from '../../domain/usecases/detallePedido/UpdateDetallePedidoUseCase';
@@ -14,6 +14,13 @@ export class UpdatePedidosProveedoresVM {
   detalles = signal<clsDetallePedido[]>([]);
   loading = signal(true);
   saving = signal(false);
+
+  /** Bloquea toda edición si el pedido está Archivado, Enviado o Entregado */
+  bloqueado = computed(() => {
+    const p = this.pedido();
+    if (!p) return false;
+    return p.Archivado || p.Estado === 'enviado' || p.Estado === 'entregado';
+  });
 
   constructor(
     private getPedidoUC: GetPedidosUseCase,

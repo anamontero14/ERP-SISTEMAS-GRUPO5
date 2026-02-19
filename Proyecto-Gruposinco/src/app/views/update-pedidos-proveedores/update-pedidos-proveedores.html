@@ -1,52 +1,75 @@
-<h2>Actualizar pedido</h2>
+<div class="list-page-container fade-in">
 
-<div *ngIf="vm.loading()">Cargando...</div>
+  <header class="list-header">
+    <div class="titulo-wrapper">
+      <h2 class="titulo-pagina">Actualizar Pedido</h2>
+      <div class="subrayado-artístico"></div>
+    </div>
+  </header>
 
-<div *ngIf="!vm.loading() && vm.pedido() as p">
-
-  <h3>Detalles del pedido</h3>
-
-  <!-- Mensaje si el pedido está archivado -->
-  <div *ngIf="p.Archivado" style="color: red; font-weight: bold; margin-bottom: 10px;">
-    Este pedido ya está archivado
+  <div *ngIf="vm.loading()" class="loading-state">
+    <div class="mini-spinner"></div> Cargando datos del pedido...
   </div>
 
-  <table>
-    <tr>
-      <th>Producto</th>
-      <th>Cantidad</th>
-      <th>Precio</th>
-      <th>Eliminar pedido</th>
-    </tr>
+  <div class="details-wrapper" *ngIf="!vm.loading() && vm.pedido() as p">
 
-    <tr *ngFor="let d of vm.detalles(); let i = index">
-      <td>{{ d.IdProducto }}</td>
+    <!-- Banner: Archivado -->
+    <div *ngIf="p.Archivado" class="archivado-banner">
+      <span class="icon">⚠️</span>
+      Este pedido ya está archivado y no permite modificaciones de productos.
+    </div>
 
-      <td>
-        <input type="number" [(ngModel)]="d.Cantidad" min="1">
-      </td>
+    <!-- Banner: Enviado o Entregado -->
+    <div *ngIf="!p.Archivado && (p.Estado === 'enviado' || p.Estado === 'entregado')" class="archivado-banner estado-bloqueado-banner">
+      <span class="icon">🚫</span>
+      Este pedido está en estado <strong>{{ p.Estado }}</strong> y no permite modificaciones.
+    </div>
 
-      <td>
-        <input type="number" [ngModel]="d.PrecioUnitario" readonly>
-      </td>
+    <div class="productos-section">
+      <h3 class="section-title">Modificar artículos del pedido</h3>
 
-      <td>
-        <!-- Botón solo si NO está archivado -->
-        <button 
-          *ngIf="!p.Archivado"
-          (click)="eliminar(i)">
-          Eliminar pedido
-        </button>
+      <div class="detalles-lista">
+        <div class="lista-header-labels">
+          <span class="col-prod">Producto</span>
+          <span class="col-cant">Cantidad</span>
+          <span class="col-precio">Precio Unit.</span>
+          <span class="col-accion">Acción</span>
+        </div>
 
-        <!-- Texto si está archivado -->
-        <span *ngIf="p.Archivado" style="color: gray;">
-          Archivado
-        </span>
-      </td>
+        <div *ngFor="let d of vm.detalles(); let i = index" class="detalle-fila-edit">
 
-    </tr>
-  </table>
+          <div class="col-prod">
+            <span class="prod-id-tag">#{{ d.IdProducto }}</span>
+          </div>
 
-  <button (click)="guardar()" [disabled]="vm.saving()">Guardar cambios</button>
+          <div class="col-cant">
+            <input type="number" class="custom-input-table" [(ngModel)]="d.Cantidad" min="1" [disabled]="vm.bloqueado()">
+          </div>
 
+          <div class="col-precio">
+            <div class="readonly-field">{{ d.PrecioUnitario }} €</div>
+          </div>
+
+          <div class="col-accion">
+            <button
+              *ngIf="!vm.bloqueado()"
+              class="btn-delete-item"
+              (click)="eliminar(i)">
+              Eliminar
+            </button>
+            <span *ngIf="vm.bloqueado()" class="status-gray">Sin cambios</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="action-footer">
+      <button class="btn-final" (click)="guardar()" [disabled]="vm.saving() || vm.bloqueado()">
+        <span *ngIf="!vm.saving()">Guardar cambios realizados</span>
+        <span *ngIf="vm.saving()">Guardando...</span>
+      </button>
+    </div>
+
+  </div>
 </div>

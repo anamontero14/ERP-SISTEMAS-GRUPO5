@@ -1,0 +1,119 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.list-page-container {
+  width: 100%;
+  padding: 25px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- HEADER Y TÍTULO --- */
+.list-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.titulo-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+h2.titulo-pagina {
+  font-family: var(--font-main);
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--text-main);
+  margin: 0;
+  letter-spacing: -1.5px;
+  position: relative;
+  z-index: 2;
+}
+
+.subrayado-artístico {
+  position: absolute;
+  bottom: 5px;
+  left: -10px;
+  width: calc(100% + 20px);
+  height: 18px;
+  background: linear-gradient(90deg, var(--soft-pink) 0%, var(--accent-pink) 100%);
+  z-index: 1;
+  opacity: 0.6;
+  border-radius: 20% 5% 20% 5% / 100% 80% 80% 100%;
+  transform: rotate(-1.2deg);
+}
+
+.proveedores-count {
+  display: block;
+  margin-top: 5px;
+  color: #8E7D84;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* --- BOTÓN FLOTANTE (Estilo similar a tu btn-custom) --- */
+.btn-flotante {
+  position: fixed;
+  bottom: 35px;
+  right: 35px;
+  z-index: 1000;
+
+  /* Estilos de tu botón custom */
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #EC407A 0%, var(--deep-pink) 100%);
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 50px; /* Estilo píldora */
+  box-shadow: 0 10px 20px rgba(216, 27, 96, 0.25);
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-flotante:hover {
+  transform: translateY(-4px) scale(1.05);
+  filter: brightness(1.1);
+  box-shadow: 0 15px 30px rgba(216, 27, 96, 0.4);
+}
+
+.btn-flotante .plus {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+/* --- LISTA E ITEMS --- */
+.items-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--deep-pink);
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.mini-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--soft-pink);
+  border-top-color: var(--deep-pink);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }

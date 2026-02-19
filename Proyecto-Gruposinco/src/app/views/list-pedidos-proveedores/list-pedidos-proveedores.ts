@@ -9,19 +9,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   selector: 'app-list-pedidos-proveedores',
   imports: [CommonModule, PedidoItemComponent, RouterLink],
-  template: `
-    <div class="list-pedidos">
-      <h2>Pedidos a proveedores</h2>
-      <a routerLink="/pedidos/create">Crear nuevo pedido</a>
-
-      <div *ngIf="vm.loading()">Cargando...</div>
-
-      <app-pedido-item
-        *ngFor="let p of vm.pedidos()"
-        [pedido]="p"
-      ></app-pedido-item>
-    </div>
-  `,
+  templateUrl: './list-pedidos-proveedores.html',
+  styleUrl: './list-pedidos-proveedores.css',
 })
 export class ListPedidosProveedores implements OnInit {
   constructor(public vm: ListadoPedidosProveedoresVM) {}

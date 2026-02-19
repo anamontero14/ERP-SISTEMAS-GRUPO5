@@ -66,7 +66,7 @@ export class CreatePedidosProveedoresVM {
   ),
   detalles: this.detalles().map(d =>
     new clsDetallePedido(
-      0, // idPedido lo asigna el backend
+      0,
       d.IdProducto,
       d.Cantidad,
       d.PrecioUnitario

@@ -1,0 +1,193 @@
+:host { display: block; width: 100%; }
+
+.list-page-container {
+  width: 100%;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- CABECERA --- */
+/* --- HEADER Y TÍTULO "GUAPO" --- */
+.list-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px; /* Espacio compacto */
+}
+
+.titulo-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+h2.titulo-pagina {
+  font-family: var(--font-main);
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--text-main);
+  margin: 0;
+  letter-spacing: -1px;
+  position: relative;
+  z-index: 2;
+}
+
+/* El efecto de pincelada rosa */
+.subrayado-artístico {
+  position: absolute;
+  bottom: 5px;
+  left: -10px;
+  width: calc(100% + 20px);
+  height: 18px;
+  background: linear-gradient(90deg, var(--soft-pink) 0%, var(--accent-pink) 100%);
+  z-index: 1;
+  opacity: 0.6;
+  border-radius: 20% 5% 20% 5% / 100% 80% 80% 100%;
+  transform: rotate(-1deg);
+}
+
+/* --- CONTENEDOR PRINCIPAL --- */
+.details-wrapper {
+  width: 95%;
+  max-width: 1200px; /* ANCHO FIJO GRANDE */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* --- TARJETA DE DATOS --- */
+.main-info-card {
+  background: white;
+  border-radius: 24px;
+  padding: 50px; /* Más padding para mayor amplitud */
+  border: 1px solid #FCE4EC;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.03);
+  width: 100%; /* Ocupa todo el max-width del wrapper */
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas para aprovechar el ancho */
+  gap: 40px;
+}
+
+.info-item label {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #A08B93;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.dato-principal, .dato-secundario {
+  font-size: 1.4rem; /* Texto más grande */
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.observaciones-full {
+  grid-column: span 4; /* Ocupa toda la fila inferior */
+  background: #FFF9FB;
+  padding: 30px;
+  border-radius: 18px;
+  margin-top: 20px;
+}
+
+/* --- ESTADOS --- */
+.estado-badge {
+  padding: 10px 22px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.estado-badge.entregado { background: #E8F5E9; color: #2E7D32; }
+.estado-badge.pedido { background: #FFF3E0; color: #EF6C00; }
+.estado-badge.enviado { background: #ebf4ff; color: #2894c6; }
+
+/* --- SECCIÓN PRODUCTOS --- */
+.productos-section {
+  width: 100%;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  font-weight: 900;
+}
+
+.detalles-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detalle-fila {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #F5F0F2;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+}
+
+.prod-id-tag {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--deep-pink);
+}
+
+.prod-values {
+  display: flex;
+  gap: 80px; /* Mucho espacio entre columnas */
+}
+
+.val {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+/* --- BOTÓN --- */
+.btn-edit {
+  margin-top: 40px;
+  width: 100%;
+  padding: 22px;
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, #EC407A 0%, var(--deep-pink) 100%);
+  color: white;
+  border: none;
+  border-radius: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(216, 27, 96, 0.2);
+}
+
+/* --- ESTADO DE CARGA --- */
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  color: var(--deep-pink);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.mini-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--soft-pink);
+  border-top-color: var(--deep-pink);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

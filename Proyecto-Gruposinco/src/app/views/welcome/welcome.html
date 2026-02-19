@@ -1,13 +1,24 @@
-<h1 class="titulo-bienvenida">Bienvenido a Gruposinco</h1>
+<div class="welcome-container">
+  <header class="header-welcome">
+    <h1 class="titulo-bienvenida">Bienvenido a GrupoSincoERP</h1>
+    <p class="subtitulo">¿Qué deseas visualizar?</p>
+  </header>
 
-<button 
-  routerLink="/proveedores" 
-  style="margin-top: 20px; padding: 10px 20px; font-size: 16px;">
-  Ver proveedores
-</button>
+  <div class="menu-grid">
+    <a routerLink="/proveedores" class="menu-card">
+      <div class="icon-circle">🏢</div>
+      <div class="text-group">
+        <h3 class="card-title">Proveedores</h3>
+        <p class="card-desc">Contactos y empresas.</p>
+      </div>
+    </a>
 
-<button 
-  routerLink="/productos" 
-  style="margin-top: 20px; padding: 10px 20px; font-size: 16px;">
-  Ver productos
-</button>
+    <a routerLink="/productos" class="menu-card">
+      <div class="icon-circle">🍎</div>
+      <div class="text-group">
+        <h3 class="card-title">Productos</h3>
+        <p class="card-desc">Catálogo y control de existencias.</p>
+      </div>
+    </a>
+  </div>
+</div>

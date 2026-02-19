@@ -1,10 +1,19 @@
-<h2>Listado de proveedores</h2>
+<div class="list-page-container fade-in">
 
-<div *ngIf="vm.loading()">Cargando proveedores...</div>
+  <header class="list-header">
+    <div class="titulo-wrapper">
+      <h2 class="titulo-pagina">Proveedores</h2>
+      <div class="subrayado-artístico"></div>
+    </div>
+    <div *ngIf="vm.loading()" class="loading-state">
+      <div class="mini-spinner"></div> Cargando...
+    </div>
+  </header>
 
-<div *ngIf="!vm.loading()">
-  <app-proveedor-item
-    *ngFor="let p of vm.proveedores()"
-    [proveedor]="p">
-  </app-proveedor-item>
+  <div class="items-wrapper" *ngIf="!vm.loading()">
+    <app-proveedor-item
+      *ngFor="let p of vm.proveedores()"
+      [proveedor]="p">
+    </app-proveedor-item>
+  </div>
 </div>

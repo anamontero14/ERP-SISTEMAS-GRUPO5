@@ -7,7 +7,8 @@ import { ProductoItemComponent } from '../../../presentation/components/producto
   standalone: true,
   selector: 'app-list-productos-screen',
   imports: [CommonModule, ProductoItemComponent],
-  templateUrl: './list-productos.html'
+  templateUrl: './list-productos.html',
+  styleUrl: './list-productos.css'
 })
 export class ListProductosScreen implements OnInit {
 
