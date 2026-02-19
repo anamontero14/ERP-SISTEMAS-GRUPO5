@@ -8,6 +8,7 @@ import { clsDetallePedido } from '../../domain/entities/clsDetallePedido';
 export class DetailsPedidosProveedoresVM {
 
   loading = signal(true);
+  error = signal<string | null>(null);
   pedido = signal<clsPedido | null>(null);
   detalles = signal<clsDetallePedido[]>([]);
 
@@ -18,13 +19,16 @@ export class DetailsPedidosProveedoresVM {
 
   async cargarDatos(idPedido: number) {
     this.loading.set(true);
-
-    const p = await this.getPedidoUC.getPedidoPorId(idPedido);
-    const d = await this.getDetallesUC.getListaDetallesPorPedido(idPedido);
-
-    this.pedido.set(p);
-    this.detalles.set(d);
-
-    this.loading.set(false);
+    this.error.set(null);
+    try {
+      const p = await this.getPedidoUC.getPedidoPorId(idPedido);
+      const d = await this.getDetallesUC.getListaDetallesPorPedido(idPedido);
+      this.pedido.set(p);
+      this.detalles.set(d);
+    } catch (e: any) {
+      this.error.set('No se pudieron cargar los datos del pedido. Inténtalo de nuevo.');
+    } finally {
+      this.loading.set(false);
+    }
   }
 }

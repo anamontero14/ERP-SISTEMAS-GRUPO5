@@ -4,7 +4,6 @@ import { GetDetallesPedidoUseCase } from '../../domain/usecases/detallePedido/Ge
 import { UpdateDetallePedidoUseCase } from '../../domain/usecases/detallePedido/UpdateDetallePedidoUseCase';
 import { UpdatePedidoUseCase } from '../../domain/usecases/pedido/UpdatePedidoUseCase';
 import { DeletePedidoUseCase } from '../../domain/usecases/pedido/DeletePedidoUseCase';
-
 import { clsPedido } from '../../domain/entities/clsPedido';
 import { clsDetallePedido } from '../../domain/entities/clsDetallePedido';
 
@@ -15,6 +14,7 @@ export class UpdatePedidosProveedoresVM {
   detalles = signal<clsDetallePedido[]>([]);
   loading = signal(true);
   saving = signal(false);
+  error = signal<string | null>(null);
 
   bloqueado = computed(() => {
     const p = this.pedido();
@@ -32,63 +32,51 @@ export class UpdatePedidosProveedoresVM {
 
   async cargarDatos(idPedido: number) {
     this.loading.set(true);
-
-    const p = await this.getPedidoUC.getPedidoPorId(idPedido);
-    const dets = await this.getDetallesUC.getListaDetallesPorPedido(idPedido);
-
-    this.pedido.set(p);
-    this.detalles.set(dets);
-
-    this.loading.set(false);
+    this.error.set(null);
+    try {
+      const p = await this.getPedidoUC.getPedidoPorId(idPedido);
+      const dets = await this.getDetallesUC.getListaDetallesPorPedido(idPedido);
+      this.pedido.set(p);
+      this.detalles.set(dets);
+    } catch (e: any) {
+      this.error.set('No se pudieron cargar los datos del pedido. Inténtalo de nuevo.');
+    } finally {
+      this.loading.set(false);
+    }
   }
 
   setObservaciones(valor: string) {
     const p = this.pedido();
     if (!p) return;
-
     p.Observaciones = valor;
     this.pedido.set(p);
   }
 
   async guardarDetalles() {
     this.saving.set(true);
-
     try {
       for (const d of this.detalles()) {
-        await this.updateDetalleUC.actualizarDetallePedido(
-          d.IdPedido,
-          d.IdProducto,
-          d
-        );
+        await this.updateDetalleUC.actualizarDetallePedido(d.IdPedido, d.IdProducto, d);
       }
-
       const p = this.pedido();
       if (p) {
         await this.updatePedidoUC.actualizarPedido(p.IdPedido, p);
       }
-
       return true;
-
     } finally {
       this.saving.set(false);
     }
   }
 
   async eliminarPedidoDesdeDetalle(index: number) {
-  const p = this.pedido();
-  if (!p) return false;
+    const p = this.pedido();
+    if (!p) return false;
+    if (p.Estado !== 'entregado') return false;
 
-  if (p.Estado !== 'entregado') {
-    return false;
+    const detalle = this.detalles()[index];
+    await this.deletePedidoUC.eliminarPedido(detalle.IdPedido);
+    this.pedido.set(null);
+    this.detalles.set([]);
+    return true;
   }
-
-  const detalle = this.detalles()[index];
-
-  await this.deletePedidoUC.eliminarPedido(detalle.IdPedido);
-
-  this.pedido.set(null);
-  this.detalles.set([]);
-  return true;
-}
-
 }

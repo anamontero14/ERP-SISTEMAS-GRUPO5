@@ -13,6 +13,10 @@ import { UpdatePedidosProveedoresVM } from '../../../presentation/viewmodels/Upd
 })
 export class UpdatePedidosProveedoresScreen implements OnInit {
 
+  idPedido!: number;
+  modalVisible = false;
+  modalConfig = { tipo: '', titulo: '', desc: '', confirmarTexto: '' };
+
   constructor(
     public vm: UpdatePedidosProveedoresVM,
     private route: ActivatedRoute,
@@ -20,17 +24,29 @@ export class UpdatePedidosProveedoresScreen implements OnInit {
   ) {}
 
   async ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    await this.vm.cargarDatos(id);
+    this.idPedido = Number(this.route.snapshot.paramMap.get('id'));
+    await this.vm.cargarDatos(this.idPedido);
   }
 
-  async guardar() {
-    const ok = await this.vm.guardarDetalles();
-    if (ok) this.router.navigate(['/pedidos']);
+  pedirConfirmacion(tipo: 'guardar' | 'eliminar') {
+    this.modalConfig = tipo === 'guardar'
+      ? { tipo, titulo: '¿Guardar cambios?', desc: 'Se actualizarán los datos del pedido.', confirmarTexto: 'Sí, guardar' }
+      : { tipo, titulo: '¿Archivar pedido?', desc: 'Esta acción es permanente y no se puede deshacer.', confirmarTexto: 'Sí, archivar' };
+    this.modalVisible = true;
   }
 
-  async eliminar(index: number) {
-    const ok = await this.vm.eliminarPedidoDesdeDetalle(index);
-    if (ok) this.router.navigate(['/pedidos']);
+  async confirmar() {
+    this.modalVisible = false;
+    if (this.modalConfig.tipo === 'guardar') {
+      const ok = await this.vm.guardarDetalles();
+      if (ok) this.router.navigate(['/pedidos']);
+    } else {
+      const ok = await this.vm.eliminarPedidoDesdeDetalle(0);
+      if (ok) this.router.navigate(['/pedidos']);
+    }
+  }
+
+  cancelar() {
+    this.modalVisible = false;
   }
 }
