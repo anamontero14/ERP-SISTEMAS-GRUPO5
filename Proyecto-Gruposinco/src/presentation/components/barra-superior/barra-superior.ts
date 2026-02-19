@@ -25,6 +25,6 @@ export class BarraSuperior {
 
   logout() {
     this.auth.logout();
-    this.cerrarMenu(); // Cerramos el menú al salir
+    this.cerrarMenu();
   }
 }

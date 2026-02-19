@@ -9,5 +9,3 @@ import { BarraSuperior } from '../presentation/components/barra-superior/barra-s
   templateUrl: './app.html'
 })
 export class AppComponent {}
-
-// Comentario resurrector

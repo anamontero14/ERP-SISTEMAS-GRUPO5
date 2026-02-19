@@ -13,13 +13,11 @@
 
   <div class="details-wrapper" *ngIf="!vm.loading() && vm.pedido() as p">
 
-    <!-- Banner: Archivado -->
     <div *ngIf="p.Archivado" class="archivado-banner">
       <span class="icon">⚠️</span>
       Este pedido ya está archivado y no permite modificaciones de productos.
     </div>
 
-    <!-- Banner: Enviado o Entregado -->
     <div *ngIf="!p.Archivado && (p.Estado === 'enviado' || p.Estado === 'entregado')" class="archivado-banner estado-bloqueado-banner">
       <span class="icon">🚫</span>
       Este pedido está en estado <strong>{{ p.Estado }}</strong> y no permite modificaciones.

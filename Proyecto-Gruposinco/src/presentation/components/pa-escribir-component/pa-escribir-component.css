@@ -37,7 +37,6 @@
   box-shadow: inset 0 2px 5px rgba(216, 27, 96, 0.03);
 }
 
-/* Efecto de foco profesional */
 .input-field:focus {
   outline: none;
   background-color: var(--white);
@@ -46,7 +45,6 @@
   transform: translateY(-1px);
 }
 
-/* Glow sutil debajo del input */
 .input-glow {
   position: absolute;
   top: 0;

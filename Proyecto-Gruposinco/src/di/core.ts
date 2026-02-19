@@ -47,15 +47,6 @@ import { CreateDetallePedidoUseCase } from "../domain/usecases/detallePedido/Cre
 import { UpdateDetallePedidoUseCase } from "../domain/usecases/detallePedido/UpdateDetallePedidoUseCase";
 import { DeleteDetallePedidoUseCase } from "../domain/usecases/detallePedido/DeleteDetallePedidoUseCase";
 
-// Viewmodels
-/**
- * import { LoginVM } from "../presentation/viewmodels/LoginVM";
- * import { ListadoPedidosProveedoresVM } from "../presentation/viewmodels/ListadoPedidosProveedoresVM";
- * import { CreatePedidosProveedoresVM } from "../presentation/viewmodels/CreatePedidosProveedoresVM";
- * import { DetailsPedidosProveedoresVM } from "../presentation/viewmodels/DetailsPedidosProveedoresVM";
- * import { UpdatePedidosProveedoresVM } from "../presentation/viewmodels/UpdatePedidosProveedoresVM";
- * import { ArchivadosVM } from "../presentation/viewmodels/ArchivadosVM";
- */
 
 const container = new Container();
 
@@ -104,35 +95,5 @@ container.bind<ICreateDetallePedidoUseCase>(TYPES.ICreateDetallePedidoUseCase)
   .to(CreateDetallePedidoUseCase);
 container.bind<IUpdateDetallePedidoUseCase>(TYPES.IUpdateDetallePedidoUseCase)
   .to(UpdateDetallePedidoUseCase);
-/*container.bind<IDeleteDetallePedidoUseCase>(TYPES.IDeleteDetallePedidoUseCase)
-  .to(DeleteDetallePedidoUseCase);*/
-
-
-// Bind Viewmodels
-/**
- * container.bind(TYPES.LoginVM)
- * .to(LoginVM)
- * .inSingletonScope();
- *
- * container.bind(TYPES.ListadoPedidosProveedoresVM)
- * .to(ListadoPedidosProveedoresVM)
- * .inSingletonScope();
- *
- * container.bind(TYPES.CreatePedidosProveedoresVM)
- * .to(CreatePedidosProveedoresVM)
- * .inSingletonScope();
- *
- * container.bind(TYPES.DetailsPedidosProveedoresVM)
- * .to(DetailsPedidosProveedoresVM)
- * .inSingletonScope();
- *
- * container.bind(TYPES.UpdatePedidosProveedoresVM)
- * .to(UpdatePedidosProveedoresVM)
- * .inSingletonScope();
- *
- * container.bind(TYPES.ArchivadosVM)
- * .to(ArchivadosVM)
- * .inSingletonScope();
- */
 
 export { container };

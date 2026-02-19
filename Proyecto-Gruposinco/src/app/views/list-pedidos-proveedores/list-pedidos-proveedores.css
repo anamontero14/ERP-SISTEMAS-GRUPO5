@@ -11,7 +11,6 @@
   align-items: center;
 }
 
-/* --- HEADER Y TÍTULO --- */
 .list-header {
   width: 100%;
   text-align: center;
@@ -55,20 +54,18 @@ h2.titulo-pagina {
   font-size: 0.9rem;
 }
 
-/* --- BOTÓN FLOTANTE (Estilo similar a tu btn-custom) --- */
 .btn-flotante {
   position: fixed;
   bottom: 35px;
   right: 35px;
   z-index: 1000;
 
-  /* Estilos de tu botón custom */
   padding: 14px 24px;
   background: linear-gradient(135deg, #EC407A 0%, var(--deep-pink) 100%);
   color: white;
   text-decoration: none;
   font-weight: 700;
-  border-radius: 50px; /* Estilo píldora */
+  border-radius: 50px;
   box-shadow: 0 10px 20px rgba(216, 27, 96, 0.25);
 
   display: flex;
@@ -88,7 +85,6 @@ h2.titulo-pagina {
   line-height: 1;
 }
 
-/* --- LISTA E ITEMS --- */
 .items-wrapper {
   width: 100%;
   display: flex;

@@ -15,7 +15,6 @@ export class UpdatePedidosProveedoresVM {
   loading = signal(true);
   saving = signal(false);
 
-  /** Bloquea toda edición si el pedido está Archivado, Enviado o Entregado */
   bloqueado = computed(() => {
     const p = this.pedido();
     if (!p) return false;

@@ -47,7 +47,6 @@
   color: var(--text-main);
 }
 
-/* --- BADGES DE ESTADO DINÁMICOS --- */
 .estado-badge {
   padding: 4px 12px;
   border-radius: 8px;
@@ -55,16 +54,14 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  background: var(--bg-soft); /* Gris suave por defecto */
+  background: var(--bg-soft);
   color: #8E7D84;
 }
 
-/* Colores según el estado (Asegúrate que coincidan con tus strings de la DB) */
 .estado-badge.entregado { background: #E8F5E9; color: #2E7D32; }
 .estado-badge.pedido { background: #FFF3E0; color: #EF6C00; }
 .estado-badge.enviado { background: #ebf4ff; color: #2894c6; }
 
-/* Meta data */
 .pedido-meta {
   display: flex;
   flex-direction: column;
@@ -86,7 +83,6 @@
   color: var(--text-main);
 }
 
-/* --- ENLACE A DETALLES --- */
 .pedido-actions {
   margin-left: 20px;
 }
@@ -103,7 +99,7 @@
 }
 
 .pedido-link:hover {
-  gap: 10px; /* Pequeño efecto animado en la flecha */
+  gap: 10px;
 }
 
 .pedido-link .arrow {

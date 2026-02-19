@@ -1,11 +1,10 @@
-/* Barra Superior */
 .navbar {
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 0 24px;
   height: 70px;
-  background: rgba(255, 255, 255, 0.85); /* Translucidez */
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   color: var(--text-main);
   box-shadow: 0 4px 15px rgba(216, 27, 96, 0.04);
@@ -23,7 +22,6 @@
   font-family: var(--font-main);
 }
 
-/* Botón Hamburguesa */
 .hamburger {
   display: flex;
   flex-direction: column;
@@ -57,7 +55,6 @@
 .hamburger.active span:nth-child(2) { opacity: 0; transform: scale(0); }
 .hamburger.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-/* Overlay */
 .overlay {
   position: fixed;
   inset: 0;
@@ -67,7 +64,6 @@
   animation: fadeIn 0.3s ease;
 }
 
-/* Drawer Lateral (Estilo Flotante) */
 .drawer {
   position: fixed;
   top: 15px;
@@ -120,7 +116,6 @@
 
 .cerrar-btn:hover { transform: rotate(90deg); }
 
-/* Enlaces */
 .drawer-links {
   list-style: none;
   padding: 20px 15px;
@@ -138,7 +133,7 @@
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
-  border-radius: var(--radius-md); /* 15px */
+  border-radius: var(--radius-md);
   transition: all 0.2s ease;
   width: 100%;
   border: none;
@@ -147,9 +142,9 @@
 }
 
 .drawer-links li a:hover {
-  background: var(--bg-soft) !important; /* El rosa más clarito de tu paleta */
-  color: var(--deep-pink) !important;   /* El rosa oscuro para el texto */
-  padding-left: 24px; /* Efecto de desplazamiento suave */
+  background: var(--bg-soft) !important; 
+  color: var(--deep-pink) !important;  
+  padding-left: 24px; 
 }
 
 .separador {

@@ -1,9 +1,8 @@
 :host {
   display: block;
-  /* Importante: para que el margin auto funcione, el ancho debe ser menor al 100% */
   width: 95%;
-  max-width: 100%; /* <--- Ajusta aquí la largura máxima que quieras (500px, 600px...) */
-  margin: 0 auto 16px auto; /* Centra el item horizontalmente */
+  max-width: 100%;
+  margin: 0 auto 16px auto; 
 }
 
 .proveedor-card {
@@ -19,16 +18,13 @@
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   box-sizing: border-box;
-  width: 100%; /* La tarjeta llena el host */
+  width: 100%; 
 }
 
-/* --- HOVER DISCRETO Y PROFESIONAL --- */
 .proveedor-card:hover {
-  /* Incremento casi imperceptible pero elegante */
   transform: scale(1.015);
   background: var(--white);
   border-color: var(--accent-pink);
-  /* Sombra mucho más suave */
   box-shadow: 0 6px 20px rgba(216, 27, 96, 0.06);
 }
 

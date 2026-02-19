@@ -2,7 +2,7 @@
   width: 100%;
   padding: 16px;
   border: none;
-  border-radius: var(--radius-md); /* 15px según tu styles.css */
+  border-radius: var(--radius-md);
   background: linear-gradient(135deg, #EC407A 0%, var(--deep-pink) 100%);
   color: white;
   font-size: 16px;

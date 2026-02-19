@@ -27,7 +27,6 @@
   box-shadow: 0 6px 20px rgba(216, 27, 96, 0.06);
 }
 
-/* Cabecera: Nombre y Precio */
 .producto-header {
   display: flex;
   justify-content: space-between;
@@ -59,19 +58,17 @@
   border: 1px solid rgba(216, 27, 96, 0.1);
 }
 
-/* Descripción */
 .producto-desc {
   margin: 0;
   font-size: 0.9rem;
   color: #7A6970;
   line-height: 1.4;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Corta a 2 líneas si es muy larga */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* Footer: Stock y Procedencia */
 .producto-footer {
   display: flex;
   align-items: center;
@@ -95,7 +92,7 @@
 }
 
 .meta-item .value.low-stock {
-  color: #d32f2f; /* Rojo si hay poco stock */
+  color: #d32f2f; 
 }
 
 .meta-separator {
