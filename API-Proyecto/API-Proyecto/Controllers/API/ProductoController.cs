@@ -32,8 +32,15 @@ namespace API_Proyecto.Controllers.API
         [HttpGet]
         public IActionResult GetListaProductos()
         {
-            List<Producto> productos = _productoUseCase.GetListaProductos();
-            return Ok(productos);
+            try
+            {
+                List<Producto> productos = _productoUseCase.GetListaProductos();
+                return Ok(productos);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al obtener la lista de productos: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -45,9 +52,16 @@ namespace API_Proyecto.Controllers.API
         [HttpGet("{idProducto}")]
         public IActionResult GetProductoPorId(int idProducto)
         {
-            Producto producto = _productoUseCase.GetProductoPorId(idProducto);
-            if (producto == null) return NotFound();
-            return Ok(producto);
+            try
+            {
+                Producto producto = _productoUseCase.GetProductoPorId(idProducto);
+                if (producto == null) return NotFound();
+                return Ok(producto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al obtener el producto: {ex.Message}");
+            }
         }
     }
 }

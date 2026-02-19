@@ -32,8 +32,15 @@ namespace API_Proyecto.Controllers.API
         [HttpGet]
         public IActionResult GetListaUsuarios()
         {
-            List<Usuario> usuarios = _usuarioUseCase.GetListaUsuarios();
-            return Ok(usuarios);
+            try
+            {
+                List<Usuario> usuarios = _usuarioUseCase.GetListaUsuarios();
+                return Ok(usuarios);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al obtener la lista de usuarios: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -45,9 +52,16 @@ namespace API_Proyecto.Controllers.API
         [HttpGet("{idUsuario}")]
         public IActionResult GetUsuarioPorId(int idUsuario)
         {
-            Usuario usuario = _usuarioUseCase.GetUsuarioPorId(idUsuario);
-            if (usuario == null) return NotFound();
-            return Ok(usuario);
+            try
+            {
+                Usuario usuario = _usuarioUseCase.GetUsuarioPorId(idUsuario);
+                if (usuario == null) return NotFound();
+                return Ok(usuario);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al obtener el usuario: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -59,9 +73,16 @@ namespace API_Proyecto.Controllers.API
         [HttpGet("validar/{nombre}")]
         public IActionResult ValidarCredenciales(string nombre)
         {
-            Usuario usuario = _usuarioUseCase.ValidarCredenciales(nombre);
-            if (usuario == null) return NotFound();
-            return Ok(usuario);
+            try
+            {
+                Usuario usuario = _usuarioUseCase.ValidarCredenciales(nombre);
+                if (usuario == null) return NotFound();
+                return Ok(usuario);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al validar las credenciales: {ex.Message}");
+            }
         }
     }
 }

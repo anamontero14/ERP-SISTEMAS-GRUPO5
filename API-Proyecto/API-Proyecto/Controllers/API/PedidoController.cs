@@ -34,8 +34,15 @@ namespace API_Proyecto.Controllers.API
         [HttpGet]
         public IActionResult GetListaPedidos()
         {
-            List<Pedido> pedidos = _pedidoUseCase.GetListaPedidos();
-            return Ok(pedidos);
+            try
+            {
+                List<Pedido> pedidos = _pedidoUseCase.GetListaPedidos();
+                return Ok(pedidos);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al obtener la lista de pedidos: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -47,9 +54,16 @@ namespace API_Proyecto.Controllers.API
         [HttpGet("{idPedido}")]
         public IActionResult GetPedidoPorId(int idPedido)
         {
-            Pedido pedido = _pedidoUseCase.GetPedidoPorId(idPedido);
-            if (pedido == null) return NotFound();
-            return Ok(pedido);
+            try
+            {
+                Pedido pedido = _pedidoUseCase.GetPedidoPorId(idPedido);
+                if (pedido == null) return NotFound();
+                return Ok(pedido);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al obtener el pedido: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -61,8 +75,15 @@ namespace API_Proyecto.Controllers.API
         [HttpGet("usuario/{idUsuario}")]
         public IActionResult GetListaPedidosPorUsuario(int idUsuario)
         {
-            List<Pedido> pedidos = _pedidoUseCase.GetListaPedidosPorUsuario(idUsuario);
-            return Ok(pedidos);
+            try
+            {
+                List<Pedido> pedidos = _pedidoUseCase.GetListaPedidosPorUsuario(idUsuario);
+                return Ok(pedidos);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al obtener los pedidos del usuario: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -74,8 +95,15 @@ namespace API_Proyecto.Controllers.API
         [HttpGet("proveedor/{idProveedor}")]
         public IActionResult GetListaPedidosPorProveedor(int idProveedor)
         {
-            List<Pedido> pedidos = _pedidoUseCase.GetListaPedidosPorProveedor(idProveedor);
-            return Ok(pedidos);
+            try
+            {
+                List<Pedido> pedidos = _pedidoUseCase.GetListaPedidosPorProveedor(idProveedor);
+                return Ok(pedidos);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al obtener los pedidos del proveedor: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -87,10 +115,17 @@ namespace API_Proyecto.Controllers.API
         [HttpPost]
         public IActionResult CrearPedido([FromBody] CrearPedidoDto pedidoNuevo)
         {
-            if (pedidoNuevo == null) return BadRequest("Pedido vacío.");
-            int resultado = _pedidoUseCase.CrearPedido(pedidoNuevo);
-            if (resultado == 0) return BadRequest("No se pudo crear el pedido.");
-            return Created("", pedidoNuevo);
+            try
+            {
+                if (pedidoNuevo == null) return BadRequest("Pedido vacío.");
+                int resultado = _pedidoUseCase.CrearPedido(pedidoNuevo);
+                if (resultado == 0) return BadRequest("No se pudo crear el pedido.");
+                return Created("", pedidoNuevo);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al crear el pedido: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -103,11 +138,18 @@ namespace API_Proyecto.Controllers.API
         [HttpPatch("{idPedido}")]
         public IActionResult ActualizarPedido(int idPedido, [FromBody] Pedido pedido)
         {
-            if (pedido == null) return BadRequest("Pedido vacío.");
-            int resultado = _pedidoUseCase.ActualizarPedido(idPedido, pedido);
-            if (resultado == 0) return NotFound();
-            if (resultado == -1) return BadRequest("El pedido no se puede modificar porque ya fue enviado o entregado.");
-            return Ok();
+            try
+            {
+                if (pedido == null) return BadRequest("Pedido vacío.");
+                int resultado = _pedidoUseCase.ActualizarPedido(idPedido, pedido);
+                if (resultado == 0) return NotFound();
+                if (resultado == -1) return BadRequest("El pedido no se puede modificar porque ya fue enviado o entregado.");
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al actualizar el pedido: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -120,9 +162,16 @@ namespace API_Proyecto.Controllers.API
         [HttpPatch("{idPedido}/estado/{nuevoEstado}")]
         public IActionResult CambiarEstadoPedido(int idPedido, string nuevoEstado)
         {
-            int resultado = _pedidoUseCase.CambiarEstadoPedido(idPedido, nuevoEstado);
-            if (resultado == 0) return NotFound();
-            return Ok();
+            try
+            {
+                int resultado = _pedidoUseCase.CambiarEstadoPedido(idPedido, nuevoEstado);
+                if (resultado == 0) return NotFound();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al cambiar el estado del pedido: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -134,10 +183,17 @@ namespace API_Proyecto.Controllers.API
         [HttpDelete("{idPedido}")]
         public IActionResult EliminarPedido(int idPedido)
         {
-            int resultado = _pedidoUseCase.EliminarPedido(idPedido);
-            if (resultado == 0) return NotFound();
-            if (resultado == -1) return BadRequest("El pedido ya está archivado.");
-            return Ok();
+            try
+            {
+                int resultado = _pedidoUseCase.EliminarPedido(idPedido);
+                if (resultado == 0) return NotFound();
+                if (resultado == -1) return BadRequest("El pedido ya está archivado.");
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno al eliminar el pedido: {ex.Message}");
+            }
         }
     }
 }
